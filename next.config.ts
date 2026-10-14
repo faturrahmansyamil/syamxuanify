@@ -1,9 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
+  },
   experimental: {
     agentFeedback: true,
+    serverActions: {
+      bodySizeLimit: "5mb",
+    },
   },
   cacheComponents: true,
   partialPrefetching: true,

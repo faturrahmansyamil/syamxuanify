@@ -13,7 +13,7 @@ export async function IsiFooter() {
   const wa = situs.no_wa ? tautanWhatsApp(situs.no_wa, `Halo admin ${situs.nama_situs}`) : null;
 
   return (
-    <div className="mx-auto w-full max-w-[1440px] px-4 py-12 md:px-10">
+    <div className="mx-auto w-full max-w-[1200px] px-4 py-12 md:px-10">
       <div className="grid grid-cols-3 gap-4 md:gap-8">
         <div>
           <h2 className="text-sm font-semibold text-hof">Tentang</h2>

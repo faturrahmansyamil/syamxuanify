@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function HalamanAturSandi() {
   return (
-    <section className="mx-auto w-full max-w-md rounded-[12px] border border-bebe bg-card p-5 shadow-sm sm:p-8">
+    <section className="mx-auto w-full max-w-md rounded-[12px] border border-bebe bg-card p-5 sm:p-8">
       <h1 className="text-2xl font-semibold tracking-tight">Kata sandi baru</h1>
       <div className="mt-6">
         <Suspense fallback={<p className="text-sm text-hof">Memuat formulir...</p>}>

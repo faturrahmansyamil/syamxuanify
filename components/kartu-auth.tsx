@@ -17,7 +17,7 @@ export function KartuAuth({
           alt=""
           className="pointer-events-none absolute -top-10 right-2 h-24 w-24 object-contain sm:-top-12 sm:right-4 sm:h-28 sm:w-28"
         />
-        <h1 className="pr-20 text-3xl font-extrabold leading-tight text-accent sm:pr-24 sm:text-4xl">{judul}</h1>
+        <h1 className="max-w-[15.5rem] text-3xl font-extrabold leading-tight text-accent sm:max-w-[17rem] sm:text-4xl">{judul}</h1>
         <div className="mt-6">{anak}</div>
         <div className="mt-6 text-sm font-bold">{bawah}</div>
       </div>

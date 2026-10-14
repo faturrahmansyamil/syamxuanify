@@ -1,50 +1,83 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #3c3c3c;
-  --hof: #3c3c3c;
-  --foggy: #777777;
-  --grey-500: #a3a3a3;
-  --bebe: #e5e5e5;
-  --deco: #f3f4f6;
-  --faint: #ffffff;
-  --card: #ffffff;
-  --fill: #3c3c3c;
-  --fill-pressed: #2a2a2a;
-  --on-fill: #ffffff;
-  --accent: #2563eb;
+  --color-syam-blue: #2563eb;
+  --color-sky-outline: #93c5fd;
+  --color-ice-blue: #dbeafe;
+  --color-macaw-blue: #1cb0f6;
+  --color-eel-dark-blue: #042c60;
+  --color-midnight: #000437;
+  --color-graphite: #3c3c3c;
+  --color-ash: #777777;
+  --color-charcoal: #4b4b4b;
+  --color-paper: #ffffff;
+  --color-ink: #000000;
+
+  --background: var(--color-paper);
+  --foreground: var(--color-charcoal);
+  --hof: var(--color-graphite);
+  --foggy: var(--color-ash);
+  --grey-500: var(--color-ash);
+  --bebe: var(--color-graphite);
+  --deco: var(--color-ice-blue);
+  --faint: var(--color-paper);
+  --card: var(--color-paper);
+  --fill: var(--color-graphite);
+  --fill-pressed: var(--color-eel-dark-blue);
+  --on-fill: var(--color-paper);
+  --accent: var(--color-syam-blue);
   --accent-pressed: #1d4ed8;
   --tepi: #1e40af;
-  --langit: #dbeafe;
-  --garis: #e5e5e5;
+  --langit: var(--color-ice-blue);
+  --garis: var(--color-graphite);
+  --eel: var(--color-eel-dark-blue);
+  --sky: var(--color-sky-outline);
+  --macaw: var(--color-macaw-blue);
   --shadow-subtle: none;
   color-scheme: light;
 }
 
 .dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  --hof: #f8fafc;
-  --foggy: #cbd5e1;
-  --grey-500: #94a3b8;
-  --bebe: #475569;
-  --deco: #1e293b;
-  --faint: #0f172a;
-  --card: #1e293b;
-  --fill: #e2e8f0;
-  --fill-pressed: #cbd5e1;
-  --on-fill: #0f172a;
-  --accent: #2563eb;
+  --background: var(--color-midnight);
+  --foreground: var(--color-paper);
+  --hof: var(--color-paper);
+  --foggy: var(--color-sky-outline);
+  --grey-500: var(--color-sky-outline);
+  --bebe: var(--color-charcoal);
+  --deco: var(--color-eel-dark-blue);
+  --faint: var(--color-midnight);
+  --card: var(--color-eel-dark-blue);
+  --fill: var(--color-paper);
+  --fill-pressed: var(--color-ice-blue);
+  --on-fill: var(--color-midnight);
+  --accent: var(--color-syam-blue);
   --accent-pressed: #1d4ed8;
   --tepi: #1e40af;
-  --langit: #1e3a5f;
-  --garis: #475569;
+  --langit: var(--color-ice-blue);
+  --garis: var(--color-charcoal);
+  --eel: var(--color-eel-dark-blue);
+  --sky: var(--color-sky-outline);
+  --macaw: var(--color-macaw-blue);
   --shadow-subtle: none;
   color-scheme: dark;
 }
 
 @theme inline {
+  --color-syam-blue: #2563eb;
+  --color-sky-outline: #93c5fd;
+  --color-ice-blue: #dbeafe;
+  --color-macaw-blue: #1cb0f6;
+  --color-eel-dark-blue: #042c60;
+  --color-midnight: #000437;
+  --color-graphite: #3c3c3c;
+  --color-ash: #777777;
+  --color-charcoal: #4b4b4b;
+  --color-paper: #ffffff;
+  --color-ink: #000000;
+  --color-eel: var(--eel);
+  --color-sky: var(--sky);
+  --color-macaw: var(--macaw);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
@@ -62,7 +95,47 @@
   --color-fill-pressed: var(--fill-pressed);
   --color-on-fill: var(--on-fill);
   --color-garis: var(--garis);
-  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+
+  --font-din-round: var(--font-nunito), "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-feather: var(--font-nunito), "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-nunito), "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  --text-caption: 13px;
+  --leading-caption: 1.23;
+  --tracking-caption: 0.053em;
+  --text-body: 15px;
+  --leading-body: 1.47;
+  --tracking-body: 0.053em;
+  --text-heading-sm: 19px;
+  --leading-heading-sm: 1.33;
+  --tracking-heading-sm: 0.053em;
+  --text-heading: 32px;
+  --leading-heading: 1.21;
+  --tracking-heading: -0.02em;
+  --text-display: 64px;
+  --leading-display: 1.2;
+  --tracking-display: -0.02em;
+
+  /* Skala jarak DESIGN.md. Prefiks "token" supaya tidak menimpa h-12, p-8, gap-4, dan ukuran Tailwind lain. */
+  --spacing-token-8: 8px;
+  --spacing-token-12: 12px;
+  --spacing-token-16: 16px;
+  --spacing-token-24: 24px;
+  --spacing-token-32: 32px;
+  --spacing-token-40: 40px;
+  --spacing-token-48: 48px;
+  --spacing-token-64: 64px;
+  --spacing-token-80: 80px;
+  --spacing-token-96: 96px;
+
+  --radius-xs: 12px;
+  --radius-sm: 12px;
+  --radius-md: 12px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --radius-3xl: 12px;
+  --radius-4xl: 12px;
 }
 
 body {
@@ -72,7 +145,7 @@ body {
   font-size: 15px;
   font-weight: 500;
   line-height: 1.47;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.053em;
 }
 
 h1,
@@ -83,25 +156,36 @@ h3 {
   line-height: 1.2;
 }
 
-.dark .bg-red-50 {
-  background-color: #3f1d1d;
+h1 {
+  font-weight: 900;
 }
 
-.dark .text-red-700,
-.dark .text-red-800 {
-  color: #fecaca;
+.shadow-sm,
+.shadow,
+.shadow-md,
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl {
+  box-shadow: none;
+}
+
+.rounded-\[10px\] {
+  border-radius: 12px;
 }
 
 button.rounded-full:not(.polos),
-a.rounded-full:not(.polos) {
+a.rounded-full:not(.polos),
+span.rounded-full:not([class*="h-"]) {
   border-radius: 12px;
   box-shadow: none;
 }
 
 a.bg-accent,
-button.bg-accent:not(.polos) {
+button.bg-accent:not(.polos),
+a.bg-fill,
+button.bg-fill {
   border-radius: 12px;
-  border-bottom: 4px solid var(--tepi);
+  border-bottom: 3px solid #1e40af;
   box-shadow: none;
   font-weight: 700;
 }
@@ -113,16 +197,18 @@ button.bg-accent:not(.polos):hover {
 
 a.bg-accent:active,
 button.bg-accent:not(.polos):active,
+a.bg-fill:active,
+button.bg-fill:active,
 .tombol-tekan:active,
 .chip-aktif:active {
-  transform: translateY(2px);
+  transform: translateY(3px);
   border-bottom-width: 0;
 }
 
 .tombol-tekan {
   border-radius: 12px;
-  border-bottom: 4px solid #1e40af;
-  font-weight: 800;
+  border-bottom: 3px solid #1e40af;
+  font-weight: 700;
 }
 
 .tombol-banner-isi {
@@ -131,12 +217,12 @@ button.bg-accent:not(.polos):active,
 }
 
 .tombol-banner-isi:hover {
-  background: #eff6ff;
+  background: #dbeafe;
 }
 
 .tombol-banner-garis {
   border: 2px solid #ffffff;
-  border-bottom-width: 4px;
+  border-bottom-width: 3px;
   background: transparent;
   color: #ffffff;
 }
@@ -147,10 +233,11 @@ button.bg-accent:not(.polos):active,
 
 .chip-aktif {
   border-style: solid;
-  border-width: 2px 2px 4px;
+  border-width: 2px 2px 3px;
   border-color: #2563eb #2563eb #1e40af;
   background: #2563eb;
   color: #ffffff;
+  border-radius: 12px;
 }
 
 button.bg-accent:disabled,
@@ -160,9 +247,26 @@ a.bg-accent[aria-disabled="true"] {
 
 input.border,
 textarea.border,
+select.border,
+input,
+textarea,
+select {
+  border-radius: 12px;
+}
+
+input.border,
+textarea.border,
 select.border {
   border-width: 2px;
-  border-radius: 12px;
+}
+
+.dark .bg-red-50 {
+  background-color: #3f1d1d;
+}
+
+.dark .text-red-700,
+.dark .text-red-800 {
+  color: #fecaca;
 }
 
 @keyframes auth-muncul {

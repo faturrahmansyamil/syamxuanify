@@ -1,25 +1,27 @@
 # Duolingo — Style Reference
 
-Penyesuaian Syamxuanify: hijau utama diganti biru `#2563eb` (hover `#1d4ed8`). Tepi tombol yang dipencet memakai `#1e40af`. Biru muda `#dbeafe` untuk aksen dan latar ringan. Huruf UI memakai Nunito. Kartu produk putih, garis abu 2px, sudut 16px, tanpa bayangan blur.
+Penyesuaian Syamxuanify: hijau utama diganti biru `#2563eb` (hover `#1d4ed8`). Tepi tombol yang dipencet memakai `#1e40af`. Biru muda `#dbeafe` untuk aksen dan latar ringan. Huruf UI memakai Nunito. Kartu produk putih, garis abu 2px, sudut 12px, tanpa bayangan blur.
 
-> Green playground with thick marker outlines
+**Aturan wajib Syamxuanify:** semua warna hijau di dokumen ini SUDAH diganti biru. Jangan pakai warna hijau sama sekali. Tombol utama: isi #2563eb, teks putih, border-bottom 3px #1e40af, tanpa box-shadow. Tetap pakai Nunito, ikon lucide, tanpa emoji, logo hanya di header dan baju maskot.
+
+> Blue playground with thick marker outlines
 
 **Theme:** light
 
 Source measurements are normalized; roles and recommendations are interpreted. Font summary lists are independent, not paired by position. HTML examples are reconstructions, not source components.
 
-Duolingo is a playful, gamified language-learning canvas: a white background dominated by a single saturated brand green that fills primary actions, with thick, colorful borders giving every interactive element a tactile, pressable quality. The interface pairs a friendly rounded sans-serif for body, nav, and links with a heavy display face for oversized feature headlines, creating a contrast between approachable daily-use type and confident, exclamation-point section headers. Color appears sparingly but decisively — green for primary actions and headings, blue for secondary highlights, and a lighter lime green used extensively as a link/button border for an outlined, glowing treatment. The visual mood is warm, educational, and game-like, with cartoon character illustrations that humanize every product surface.
+Duolingo is a playful, gamified language-learning canvas: a white background dominated by a single saturated brand blue that fills primary actions, with thick, colorful borders giving every interactive element a tactile, pressable quality. The interface pairs a friendly rounded sans-serif for body, nav, and links with a heavy display face for oversized feature headlines, creating a contrast between approachable daily-use type and confident, exclamation-point section headers. Color appears sparingly but decisively — blue for primary actions and headings, blue for secondary highlights, and a lighter blue used extensively as a link/button border for an outlined, glowing treatment. The visual mood is warm, educational, and game-like, with cartoon character illustrations that humanize every product surface.
 
 ## Tokens — Colors
 
 | Name | Value | Token | Role |
 |------|-------|-------|------|
-| Ecto Green | `#58cc02` | `--color-ecto-green` | Green outline accent for tags, dividers, and focused UI edges. Do not promote it to the primary CTA color |
-| Lingot Lime | `#a5ed6e` | `--color-lingot-lime` | Outlined-action border and link accent — used as the chromatic border on link and button elements in 256+ instances. The lighter green outline gives interactive elements a glowing, highlighter-pen quality against white backgrounds |
-| Eel Light | `#d7ffb8` | `--color-eel-light` | Soft highlight and pale border — lightest green used for card outlines, soft surface washes, and the bottom shadow border on filled green buttons to create a 3D pressable effect |
-| Macaw Blue | `#1cb0f6` | `--color-macaw-blue` | Secondary action accent — body borders, link text, and outlined button borders for secondary actions like language-specific CTAs. The cyan-blue sibling to the green system, signaling alternative or complementary actions |
-| Eel Dark Blue | `#042c60` | `--color-eel-dark-blue` | Deep heading text and border — navy blue used for emphasis headings and key border treatments, providing weight and contrast without competing with the green primary |
-| Midnight | `#000437` | `--color-midnight` | Dark surface and button text — near-black violet used for dark-surface sections and as button label text on green fills |
+| Syam Blue | `#2563eb` | `--color-syam-blue` | Primary brand blue: fill for all primary buttons and large display headings. Hover #1d4ed8, pressable bottom border #1e40af |
+| Sky Outline | `#93c5fd` | `--color-sky-outline` | Outlined-action border and link accent — used as the chromatic border on link and button elements in 256+ instances. The lighter blue outline gives interactive elements a glowing, highlighter-pen quality against white backgrounds |
+| Ice Blue | `#dbeafe` | `--color-ice-blue` | Soft highlight and pale border — lightest blue used for card outlines, soft surface washes, and the soft surface washes; the pressable bottom border on filled blue buttons is #1e40af to create a 3D pressable effect |
+| Macaw Blue | `#1cb0f6` | `--color-macaw-blue` | Secondary action accent — body borders, link text, and outlined button borders for secondary actions like language-specific CTAs. The cyan-blue sibling to the blue system, signaling alternative or complementary actions |
+| Eel Dark Blue | `#042c60` | `--color-eel-dark-blue` | Deep heading text and border — navy blue used for emphasis headings and key border treatments, providing weight and contrast without competing with the blue primary |
+| Midnight | `#000437` | `--color-midnight` | Dark surface and button text — near-black violet used for dark-surface sections and as button label text on blue fills |
 | Graphite | `#3c3c3c` | `--color-graphite` | Dominant neutral border — the workhorse gray used for hundreds of list and card borders throughout navigation, lists, and structural dividers. Not a background, a border system |
 | Ash | `#777777` | `--color-ash` | Secondary text and nav borders — medium gray for navigation chrome, secondary text labels, and subtle structural borders |
 | Charcoal | `#4b4b4b` | `--color-charcoal` | Body text and icon borders — darker gray for body copy and icon outlines, sitting between the lighter Ash and the darker structural Graphite |
@@ -96,17 +98,17 @@ Duolingo is a playful, gamified language-learning canvas: a white background dom
 ### Primary Filled Button
 **Role:** Main call-to-action (Get Started, Start Learning)
 
-Filled with Ecto Green #58cc02, white or Midnight #000437 label text, 12px radius, 16px vertical padding, weight 700 in din-round at 15px. Features a distinctive thick bottom border in Eel Light #d7ffb8 or a darker green shade to create a 3D pressable effect. No drop shadow — depth comes purely from the border offset.
+Filled with Syam Blue #2563eb, white or Midnight #000437 label text, 12px radius, 16px vertical padding, weight 700 in din-round at 15px. Features a distinctive thick bottom border in Ice Blue #dbeafe or a darker blue shade to create a 3D pressable effect. No drop shadow — depth comes purely from the border offset.
 
 ### Ghost/Outlined Secondary Button
 **Role:** Secondary action (I Already Have An Account, Certify Your English)
 
-White or transparent background, 2px border in Lingot Lime #a5ed6 or Macaw Blue #1cb0f6, label text in matching border color. 12px radius, 16px vertical padding, din-round weight 700 at 14-15px. The colored border IS the visual identity — no fill needed.
+White or transparent background, 2px border in Sky Outline #93c5fd or Macaw Blue #1cb0f6, label text in matching border color. 12px radius, 16px vertical padding, din-round weight 700 at 14-15px. The colored border IS the visual identity — no fill needed.
 
 ### Lingot Outlined Link
 **Role:** Inline text links and nav links throughout content
 
-Text in Lingot Lime #a5ed6 or Macaw Blue #1cb0f6 with a 2px underline/border in the same color. The distinctive lighter-green link treatment is the most repeated element in the system (256+ instances), creating a highlighter-pen effect.
+Text in Sky Outline #93c5fd or Macaw Blue #1cb0f6 with a 2px underline/border in the same color. The distinctive lighter-blue link treatment is the most repeated element in the system (256+ instances), creating a highlighter-pen effect.
 
 ### Language Selector Pill
 **Role:** Language/course picker in footer and nav
@@ -116,22 +118,22 @@ Horizontal pill with flag icon on the left, uppercase language name in din-round
 ### Section Heading Block
 **Role:** Large feature section headers
 
-Headline in feather weight 700 at 48-64px, tight letter-spacing -0.02em, in Ecto Green #58cc02 or Eel Dark Blue #042c60. The oversized green type is the most visually arresting element on the page — it carries brand identity through typography alone.
+Headline in feather weight 700 at 48-64px, tight letter-spacing -0.02em, in Syam Blue #2563eb or Eel Dark Blue #042c60. The oversized blue type is the most visually arresting element on the page — it carries brand identity through typography alone.
 
 ### Top Navigation Bar
 **Role:** Sticky header with logo and language switcher
 
-White background, Duolingo owl logo + wordmark in Ecto Green on the left, language selector in Ash #777 on the right. 64px height, subtle Graphite #3c3c3c bottom border. Clean, minimal, text-only navigation.
+White background, Duolingo owl logo + wordmark in Syam Blue on the left, language selector in Ash #777 on the right. 64px height, subtle Graphite #3c3c3c bottom border. Clean, minimal, text-only navigation.
 
 ### Feature Illustration Panel
 **Role:** Large character illustrations accompanying feature sections
 
-Full-color cartoon illustrations (Duo the owl, human characters, phones, carpets) rendered in flat shapes with no gradients. Colors pulled from the full chromatic palette including Ecto Green, Macaw Blue, yellow #ffe700, and pink. Illustrations float on white with no containment frame or card.
+Full-color cartoon illustrations (Duo the owl, human characters, phones, carpets) rendered in flat shapes with no gradients. Colors pulled from the full chromatic palette including Syam Blue, Macaw Blue, yellow #ffe700, and pink. Illustrations float on white with no containment frame or card.
 
 ### Hero CTA Stack
 **Role:** Primary action area on landing page
 
-Centered headline + subhead in din-round, followed by a vertical stack of two buttons: filled green primary on top, ghost-outlined secondary below. 16-24px gap between buttons. This stacked duo is the conversion pattern.
+Centered headline + subhead in din-round, followed by a vertical stack of two buttons: filled blue primary on top, ghost-outlined secondary below. 16-24px gap between buttons. This stacked duo is the conversion pattern.
 
 ### Course/Language Grid
 **Role:** Grid of language options with flags
@@ -151,11 +153,11 @@ Two-column layout: text on one side (headline + paragraph + optional ghost butto
 ## Do's and Don'ts
 
 ### Do
-- Use #58cc02 as the filled background for all primary action buttons and as the color for large display headings
-- Use #a5ed6 as the 2px border color for outlined/ghost links and secondary buttons — this lighter green outline is the system's most distinctive repeated element
+- Use #2563eb as the filled background for all primary action buttons and as the color for large display headings
+- Use #93c5fd as the 2px border color for outlined/ghost links and secondary buttons — this lighter blue outline is the system's most distinctive repeated element
 - Set border-radius to 12px on all buttons, links, and pills — this is the only radius in the system
 - Use feather at 48-64px weight 700 with -0.02em letter-spacing for section headlines, and din-round for everything else
-- Add a 2-3px solid bottom border in a darker shade to green filled buttons to create the pressable 3D effect — never use box-shadow
+- Add a 2-3px solid bottom border in a darker shade to blue filled buttons to create the pressable 3D effect — never use box-shadow
 - Use the wide letter-spacing of ~0.053em on all din-round text — the open, airy tracking is part of the brand voice
 - Pair every feature section with a flat cartoon illustration — the system expects character art as a content element, not decoration
 
@@ -165,24 +167,24 @@ Two-column layout: text on one side (headline + paragraph + optional ghost butto
 - Do not use card containers with background fills or box-shadows — sections are separated by white space alone
 - Do not set body radius below or above 12px — the system has exactly one radius value and it should be used uniformly
 - Do not use feather for body text or anything under 32px — it is exclusively a display face for oversized headlines
-- Do not introduce new accent colors outside the established palette of green, blue, dark blue, and midnight
-- Do not use the light green #a5ed6 as a filled background — it is exclusively a border/outline color
+- Do not introduce new accent colors outside the established palette of blue, blue, dark blue, and midnight
+- Do not use the light blue #93c5fd as a filled background — it is exclusively a border/outline color
 
 ## Surfaces
 
 | Level | Name | Value | Purpose |
 |-------|------|-------|---------|
 | 0 | Paper White | `#ffffff` | Base page canvas and all card surfaces — the entire site sits on pure white |
-| 1 | Ecto Green Surface | `#58cc02` | Primary CTA fill and large heading emphasis blocks |
-| 2 | Midnight Surface | `#100f3` | Dark mode sections and inverted hero panels |
+| 1 | Syam Blue Surface | `#2563eb` | Primary CTA fill and large heading emphasis blocks |
+| 2 | Midnight Surface | `#000437` | Dark mode sections and inverted hero panels |
 
 ## Elevation
 
-- **Primary Filled Button:** `2-3px solid bottom border in darker green (#58cc02 or #4cae02) with no box-shadow — depth is border-based, not shadow-based`
+- **Primary Filled Button:** `2-3px solid bottom border in darker blue (#2563eb or #1e40af) with no box-shadow — depth is border-based, not shadow-based`
 
 ## Imagery
 
-Illustrations are the dominant visual language — flat, vector-style cartoon characters rendered in solid colors with no gradients or complex shading. The mascot owl Duo appears prominently alongside diverse human characters in playful scenarios (flying carpets, phones, classrooms). Color palette in illustrations mirrors the brand system: Ecto Green, Macaw Blue, bright yellow #ffe700, pink, purple. Illustrations are always full-color and positioned beside text content rather than as backgrounds. No photography is used. Icons are minimal — mostly flag emojis and simple line icons in the navigation. The overall density is illustration-heavy on feature sections but text-dominant on navigation and footer.
+Illustrations are the dominant visual language — flat, vector-style cartoon characters rendered in solid colors with no gradients or complex shading. The mascot owl Duo appears prominently alongside diverse human characters in playful scenarios (flying carpets, phones, classrooms). Color palette in illustrations mirrors the brand system: Syam Blue, Macaw Blue, bright yellow #ffe700, pink, purple. Illustrations are always full-color and positioned beside text content rather than as backgrounds. No photography is used. Icons are minimal — mostly flag emojis and simple line icons in the navigation. The overall density is illustration-heavy on feature sections but text-dominant on navigation and footer.
 
 ## Layout
 
@@ -192,15 +194,15 @@ Full-bleed white page with no contained max-width frame — content blocks sit d
 
 **Quick Color Reference**
 - text: #3c3c3c (primary), #777777 (secondary), #4b4b4b (body)
-- Create an Outlined Primary Action: Transparent background, #a5ed6e border and text, 9999px radius, compact pill padding. Use it for the main CTA instead of a filled button.
-- border: #3c3c3c (structural), #a5ed6e (outlined action border), #1cb0f6 (secondary action border)
+- Create an Outlined Primary Action: Transparent background, #93c5fd border and text, 12px radius, compact pill padding. Use it for the main CTA instead of a filled button.
+- border: #3c3c3c (structural), #93c5fd (outlined action border), #1cb0f6 (secondary action border)
 - accent: #1cb0f6 (blue secondary)
-- primary action: #a5ed6e (outlined action border)
+- primary action: #93c5fd (outlined action border)
 
 **Example Component Prompts**
-1. Create a ghost outlined button: white background, 2px border in #a5ed6e, label text in #a5ed6e at 15px din-round weight 700, 12px radius, 16px vertical and 24px horizontal padding. No shadow, no fill — the border IS the visual identity.
+1. Create a ghost outlined button: white background, 2px border in #93c5fd, label text in #93c5fd at 15px din-round weight 700, 12px radius, 16px vertical and 24px horizontal padding. No shadow, no fill — the border IS the visual identity.
 
-2. Create a section heading: text in feather weight 700 at 48px, letter-spacing -0.02em, color #58cc02. No background, sits directly on white with 100px vertical space above and below.
+2. Create a section heading: text in feather weight 700 at 48px, letter-spacing -0.02em, color #2563eb. No background, sits directly on white with 100px vertical space above and below.
 
 3. Create a language selector pill: white background, 12px radius, 10px vertical and 16px horizontal padding. Left side: flag emoji. Right side: language name in din-round weight 700 at 13px, uppercase, color #4b4b4b. Subtle 1px border in #e5e5e5.
 
@@ -221,9 +223,9 @@ Full-bleed white page with no contained max-width frame — content blocks sit d
 ```css
 :root {
   /* Colors */
-  --color-ecto-green: #58cc02;
-  --color-lingot-lime: #a5ed6e;
-  --color-eel-light: #d7ffb8;
+  --color-syam-blue: #2563eb;
+  --color-sky-outline: #93c5fd;
+  --color-ice-blue: #dbeafe;
   --color-macaw-blue: #1cb0f6;
   --color-eel-dark-blue: #042c60;
   --color-midnight: #000437;
@@ -288,8 +290,8 @@ Full-bleed white page with no contained max-width frame — content blocks sit d
 
   /* Surfaces */
   --surface-paper-white: #ffffff;
-  --surface-ecto-green-surface: #58cc02;
-  --surface-midnight-surface: #100f3;
+  --surface-syam-blue-surface: #2563eb;
+  --surface-midnight-surface: #000437;
 }
 ```
 
@@ -298,9 +300,9 @@ Full-bleed white page with no contained max-width frame — content blocks sit d
 ```css
 @theme {
   /* Colors */
-  --color-ecto-green: #58cc02;
-  --color-lingot-lime: #a5ed6e;
-  --color-eel-light: #d7ffb8;
+  --color-syam-blue: #2563eb;
+  --color-sky-outline: #93c5fd;
+  --color-ice-blue: #dbeafe;
   --color-macaw-blue: #1cb0f6;
   --color-eel-dark-blue: #042c60;
   --color-midnight: #000437;

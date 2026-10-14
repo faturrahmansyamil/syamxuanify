@@ -11,7 +11,7 @@ import "./globals.css";
 const nunito = Nunito({
   variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["500", "700", "800"],
+  weight: ["500", "700", "800", "900"],
 });
 
 const deskripsiSitus =
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             />
           </Suspense>
         </header>
-        <main className="mx-auto w-full max-w-[1440px] flex-1 px-4 py-8 md:px-10">{children}</main>
+        <main className="mx-auto w-full max-w-[1200px] flex-1 px-4 py-8 md:px-10">{children}</main>
         <footer className="border-t-2 border-bebe bg-card">
           <Suspense fallback={<p className="px-4 py-12 text-sm font-bold">Memuat...</p>}>
             <IsiFooter />
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
 function KerangkaHeader() {
   return (
-    <div className="mx-auto grid w-full max-w-[1440px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 md:grid-cols-[auto_minmax(0,36rem)_auto] md:gap-6 md:px-10">
+    <div className="mx-auto grid w-full max-w-[1200px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 md:grid-cols-[auto_minmax(0,36rem)_auto] md:gap-6 md:px-10">
       <Link href="/" className="shrink-0">
         <img src="/logo.png" alt="Syamxuanify" className="h-9 w-9 rounded-full object-cover" />
       </Link>
@@ -104,7 +104,7 @@ async function IsiFooter() {
   const situs = await ambilSitus();
   const wa = situs.no_wa ? `https://wa.me/${situs.no_wa}` : null;
   return (
-    <div className="mx-auto w-full max-w-[1440px] px-4 py-10 text-hof md:px-10">
+    <div className="mx-auto w-full max-w-[1200px] px-4 py-10 text-hof md:px-10">
       <h2 className="text-3xl font-extrabold text-accent">Syamxuanify</h2>
       <div className="mt-6 flex max-w-xl flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
         <Link href="/tentang" className="text-accent hover:underline">

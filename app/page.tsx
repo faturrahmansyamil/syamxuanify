@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { KatalogProduk } from "@/components/katalog-produk";
 import { KerangkaProduk } from "@/components/kartu-produk";
+import { TokoPilihan } from "@/components/toko-pilihan";
 import { ambilSitus } from "@/lib/situs";
 
 export default function Home({
@@ -44,6 +45,23 @@ export default function Home({
       <Suspense fallback={<KerangkaProduk />}>
         <KatalogProduk searchParams={searchParams} />
       </Suspense>
+      <Suspense fallback={null}>
+        <TokoPilihan />
+      </Suspense>
+      <section className="mt-10 rounded-2xl border-2 border-bebe bg-langit px-5 py-8 md:px-10">
+        <h2 className="max-w-xl text-2xl font-extrabold leading-tight text-hof sm:text-4xl">
+          Punya usaha? Buka toko gratis di Syamxuanify.
+        </h2>
+        <p className="mt-3 max-w-xl text-sm font-bold leading-6 text-hof sm:text-lg">
+          Jualan ke teman sekampus, pembeli langsung chat WhatsApp kamu.
+        </p>
+        <Link
+          href="/daftar"
+          className="mt-5 inline-flex h-12 items-center justify-center bg-accent px-5 text-sm font-bold whitespace-nowrap text-white"
+        >
+          Buka toko
+        </Link>
+      </section>
     </div>
   );
 }

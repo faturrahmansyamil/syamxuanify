@@ -261,6 +261,43 @@ export async function penggunaMasuk() {
   return Boolean(data?.claims?.sub);
 }
 
+export type TokoPilihan = {
+  id: string;
+  nama_toko: string;
+  slug: string;
+  logo_url: string | null;
+  terverifikasi: boolean;
+  jumlah: number;
+};
+
+export async function ambilTokoPilihan(): Promise<TokoPilihan[]> {
+  const siap = await siapkan();
+  if (!siap.ok) return [];
+
+  const { data, error } = await siap.supabase
+    .from("shops")
+    .select("id, nama_toko, slug, logo_url, terverifikasi, products(status)")
+    .eq("status", "approved")
+    .order("created_at", { ascending: false })
+    .limit(6);
+
+  if (error || !data) return [];
+
+  return data.map((baris) => ({
+    id: baris.id,
+    nama_toko: baris.nama_toko,
+    slug: baris.slug,
+    logo_url: baris.logo_url,
+    terverifikasi: Boolean(baris.terverifikasi),
+    jumlah: hitungProdukDisetujui(baris.products),
+  }));
+}
+
+function hitungProdukDisetujui(produk: { status: string }[] | { status: string } | null) {
+  const daftar = !produk ? [] : Array.isArray(produk) ? produk : [produk];
+  return daftar.filter((item) => item.status === "approved").length;
+}
+
 async function siapkan() {
   await connection();
   if (!hasSupabaseEnv()) {

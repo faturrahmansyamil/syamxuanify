@@ -106,7 +106,7 @@ async function IsiFooter() {
   return (
     <div className="mx-auto w-full max-w-[1440px] px-4 py-10 text-hof md:px-10">
       <h2 className="text-3xl font-extrabold text-accent">Syamxuanify</h2>
-      <div className="mt-6 grid max-w-xl grid-cols-2 gap-x-6 gap-y-2 text-sm font-bold sm:grid-cols-3">
+      <div className="mt-6 flex max-w-xl flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
         <Link href="/tentang" className="text-accent hover:underline">
           Tentang
         </Link>
@@ -116,7 +116,7 @@ async function IsiFooter() {
         <Link href="/daftar" className="text-accent hover:underline">
           Jadi Penjual
         </Link>
-        <a href="mailto:syamxuanify@gmail.com" className="col-span-2 break-all text-accent hover:underline sm:col-span-1">
+        <a href="mailto:syamxuanify@gmail.com" className="text-accent hover:underline">
           syamxuanify@gmail.com
         </a>
         {wa ? (

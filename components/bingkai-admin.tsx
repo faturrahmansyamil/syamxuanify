@@ -57,7 +57,7 @@ export function BingkaiAdmin({
       <button
         type="button"
         onClick={() => setBuka(true)}
-        className="mb-4 inline-flex h-10 items-center rounded-full bg-fill px-4 text-sm font-medium text-on-fill md:hidden"
+        className="btn-duo mb-4 inline-flex items-center md:hidden"
       >
         Menu
       </button>

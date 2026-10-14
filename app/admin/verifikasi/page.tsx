@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { ubahVerifikasiToko } from "@/app/actions/admin";
+import { Muncul } from "@/components/muncul";
 import { TombolAksi } from "@/components/tombol-aksi";
 import { klienAdmin } from "@/lib/panel-admin";
 
 export const metadata: Metadata = { title: "Verifikasi Toko" };
 
-const tombol = "inline-flex h-10 items-center justify-center rounded-full bg-fill px-3 text-sm font-medium text-on-fill";
+const tombol = "btn-duo inline-flex items-center justify-center";
 
 export default function HalamanVerifikasi({ searchParams }: { searchParams: Promise<{ saring?: string }> }) {
   return (
@@ -41,8 +42,10 @@ async function Isi({ searchParams }: { searchParams: Promise<{ saring?: string }
       </div>
       <ul className="space-y-3">
         {(data ?? []).length === 0 ? <li className="rounded-[12px] bg-card p-4 text-sm text-foggy">Tidak ada toko di filter ini.</li> : null}
-        {(data ?? []).map((toko) => (
-          <li key={toko.id} className="flex flex-wrap items-center justify-between gap-3 rounded-[12px] border border-bebe bg-card p-4">
+        {(data ?? []).map((toko, indeks) => (
+          <li key={toko.id}>
+            <Muncul urut={indeks}>
+            <div className="card-duo flex flex-wrap items-center justify-between gap-3 p-4">
             <div>
               <p className="font-medium">{toko.nama_toko}</p>
               <Link href={`/toko/${toko.slug}`} className="text-sm text-foggy hover:underline">Lihat toko</Link>
@@ -54,6 +57,8 @@ async function Isi({ searchParams }: { searchParams: Promise<{ saring?: string }
             >
               {toko.terverifikasi ? "Cabut" : "Beri verifikasi"}
             </TombolAksi>
+            </div>
+            </Muncul>
           </li>
         ))}
       </ul>
@@ -63,7 +68,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ saring?: string }
 
 function Saring({ href, aktif, children }: { href: string; aktif: boolean; children: string }) {
   return (
-    <Link href={href} className={`inline-flex h-10 items-center rounded-full px-4 text-sm font-medium ${aktif ? "bg-fill text-on-fill" : "text-foggy"}`}>
+    <Link href={href} data-active={aktif ? "true" : "false"} className="chip-duo inline-flex items-center">
       {children}
     </Link>
   );

@@ -7,13 +7,13 @@ import { InputGambar } from "@/components/input-gambar";
 
 const awal: FormState = {};
 const bidang =
-  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof focus:ring-2 focus:ring-bebe";
+  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof";
 
 export function FormBukaToko() {
   const [state, action, pending] = useActionState(bukaToko, awal);
 
   return (
-    <form action={action} className="space-y-4 rounded-[12px] border border-bebe bg-card p-5">
+    <form action={action} className="card-duo space-y-4 p-5">
       <div>
         <h2 className="text-xl font-semibold">Buka toko</h2>
         <p className="mt-2 text-sm leading-6 text-foggy">
@@ -53,7 +53,7 @@ export function FormBukaToko() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center rounded-full bg-accent font-semibold text-white hover:bg-accent-pressed disabled:opacity-60"
+        className="btn-duo flex w-full items-center justify-center disabled:opacity-60"
       >
         {pending ? "Menyimpan..." : "Buka toko"}
       </button>

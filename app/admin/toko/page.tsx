@@ -7,7 +7,7 @@ import { kataCari, klienAdmin, labelStatus, statusAman } from "@/lib/panel-admin
 
 export const metadata: Metadata = { title: "Toko" };
 
-const tombol = "inline-flex h-9 items-center justify-center rounded-full bg-fill px-3 text-sm font-medium text-on-fill";
+const tombol = "btn-duo inline-flex items-center justify-center";
 const bidang = "h-10 rounded-lg border border-bebe bg-card px-3 text-sm outline-none";
 
 export default function HalamanToko({ searchParams }: { searchParams: Promise<{ q?: string; status?: string }> }) {

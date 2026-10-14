@@ -8,11 +8,7 @@ import { CariProduk } from "@/components/cari-produk";
 import { ambilSitus } from "@/lib/situs";
 import "./globals.css";
 
-const nunito = Nunito({
-  variable: "--font-nunito",
-  subsets: ["latin"],
-  weight: ["500", "700", "800", "900"],
-});
+const nunito = Nunito({ subsets: ["latin"], weight: ["500", "700", "800", "900"], variable: "--font-nunito" });
 
 const deskripsiSitus =
   "Etalase mahasiswa kampus. Hubungi penjual lewat WhatsApp dan bayar ke QRIS penjual.";
@@ -43,12 +39,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("tema");if(t==="gelap"||(t!=="terang"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})();`,
+            __html: `(function(){try{document.documentElement.classList.add("js")}catch(e){}})();`,
           }}
         />
       </head>
-      <body className="flex min-h-full flex-col overflow-x-clip bg-faint font-sans text-hof">
-        <header className="sticky top-0 z-20 border-b-2 border-bebe bg-card">
+      <body className={`${nunito.className} flex min-h-full flex-col overflow-x-clip bg-white font-medium text-[#3c3c3c]`}>
+        <header className="sticky top-0 z-20 border-b-2 border-[#e5e5e5] bg-white">
           <Suspense fallback={<KerangkaHeader />}>
             <BingkaiHeader
               logo={
@@ -57,7 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 </Suspense>
               }
               cari={
-                <Suspense fallback={<div className="h-14 rounded-xl border-2 border-bebe bg-deco" />}>
+                <Suspense fallback={<div className="h-14 rounded-xl border-2 border-[#e5e5e5] bg-[#f7f7f7]" />}>
                   <CariProduk />
                 </Suspense>
               }
@@ -86,7 +82,7 @@ function KerangkaHeader() {
       <Link href="/" className="shrink-0">
         <img src="/logo.png" alt="Syamxuanify" className="h-9 w-9 rounded-full object-cover" />
       </Link>
-      <div className="col-span-2 row-start-2 h-14 rounded-xl border-2 border-bebe bg-deco md:col-span-1 md:col-start-2 md:row-start-1" />
+      <div className="col-span-2 row-start-2 h-14 rounded-xl border-2 border-[#e5e5e5] bg-[#f7f7f7] md:col-span-1 md:col-start-2 md:row-start-1" />
     </div>
   );
 }
@@ -105,7 +101,7 @@ async function IsiFooter() {
   const wa = situs.no_wa ? `https://wa.me/${situs.no_wa}` : null;
   return (
     <div className="mx-auto w-full max-w-[1200px] px-4 py-10 text-hof md:px-10">
-      <h2 className="text-3xl font-extrabold text-accent">Syamxuanify</h2>
+      <h2 className="text-3xl font-black tracking-tight text-accent">Syamxuanify</h2>
       <div className="mt-6 flex max-w-xl flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
         <Link href="/tentang" className="text-accent hover:underline">
           Tentang

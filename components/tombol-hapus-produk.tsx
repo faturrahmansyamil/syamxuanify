@@ -11,7 +11,7 @@ export function TombolHapusProduk({ id }: { id: string }) {
       }}
     >
       <input type="hidden" name="id" value={id} />
-      <button type="submit" className="text-sm font-semibold text-red-700">
+      <button type="submit" className="btn-duo-white">
         Hapus
       </button>
     </form>

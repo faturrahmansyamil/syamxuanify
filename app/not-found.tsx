@@ -9,7 +9,7 @@ export default function TidakDitemukan() {
       </p>
       <Link
         href="/"
-        className="mt-5 inline-flex h-12 items-center justify-center rounded-full bg-accent px-4 text-sm font-semibold text-white hover:bg-accent-pressed"
+        className="btn-duo mt-5 inline-flex items-center justify-center"
       >
         Ke beranda
       </Link>

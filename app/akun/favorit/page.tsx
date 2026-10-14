@@ -36,7 +36,7 @@ async function Isi() {
     <div className="space-y-6">
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Favorit</h1>
-        <Link href="/akun" className="inline-block text-sm font-semibold text-hof hover:underline">
+        <Link href="/akun" className="btn-duo-white inline-flex items-center">
           Kembali ke akun
         </Link>
       </header>

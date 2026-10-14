@@ -2,6 +2,7 @@ import Link from "next/link";
 import { IkonKategori } from "@/components/ikon-kategori";
 import { ambilKatalog, bersihkanKata, slugAman, urutanAman, type UrutanKatalog } from "@/lib/katalog";
 import { KisiProduk } from "@/components/kisi-produk";
+import { Muncul } from "@/components/muncul";
 
 export async function KatalogProduk({
   searchParams,
@@ -19,6 +20,7 @@ export async function KatalogProduk({
   }
 
   return (
+    <Muncul>
     <div id="daftar-produk" className="scroll-mt-28 space-y-4">
       <div className="flex flex-wrap gap-2">
         <Filter href={tautanFilter("", kata, hasil.urutan)} aktif={!hasil.kategoriAktif} slug="semua">
@@ -41,7 +43,8 @@ export async function KatalogProduk({
           <Link
             key={item.id}
             href={tautanFilter(kategori, kata, item.id)}
-            className={`text-sm ${hasil.urutan === item.id ? "font-semibold text-hof" : "text-foggy hover:text-hof"}`}
+            data-active={hasil.urutan === item.id ? "true" : "false"}
+            className="chip-duo"
           >
             {item.nama}
           </Link>
@@ -57,6 +60,7 @@ export async function KatalogProduk({
         <KisiProduk produk={hasil.produk} kembali={tautanFilter(kategori, kata, hasil.urutan)} />
       )}
     </div>
+    </Muncul>
   );
 }
 
@@ -91,9 +95,8 @@ function Filter({
     <Link
       href={href}
       prefetch={true}
-      className={`inline-flex items-center gap-2 rounded-xl border-2 px-3 py-2 text-sm font-bold ${
-        aktif ? "chip-aktif" : "border-bebe bg-card text-hof hover:bg-deco"
-      }`}
+      data-active={aktif ? "true" : "false"}
+      className="chip-duo inline-flex items-center gap-2"
     >
       <IkonKategori slug={slug} className="h-4 w-4" />
       {children}
@@ -103,9 +106,11 @@ function Filter({
 
 function Kotak({ judul, children }: { judul: string; children: string }) {
   return (
-    <div className="rounded-2xl border-2 border-bebe bg-card px-4 py-5">
+    <Muncul>
+    <div className="card-duo p-5">
       <h3 className="text-sm font-semibold text-hof">{judul}</h3>
       <p className="mt-2 text-sm leading-6 text-foggy">{children}</p>
     </div>
+    </Muncul>
   );
 }

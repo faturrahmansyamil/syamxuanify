@@ -27,7 +27,7 @@ export function FormTolak({
       />
       <button
         type="submit"
-        className="flex h-10 w-full items-center justify-center rounded-full border border-hof bg-card px-4 text-sm font-medium text-hof hover:bg-card sm:w-auto"
+        className="btn-duo-white flex w-full items-center justify-center sm:w-auto"
       >
         Tolak
       </button>

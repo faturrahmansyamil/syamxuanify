@@ -10,7 +10,7 @@ export function GambarQris({ url }: { url: string }) {
       <button
         type="button"
         onClick={() => setTerbuka(true)}
-        className="inline-flex h-12 items-center rounded-xl border-2 border-accent bg-card px-4 text-sm font-bold text-accent"
+        className="btn-duo-white inline-flex items-center"
       >
         <span className="block text-base font-bold">Lihat QRIS</span>
       </button>
@@ -26,7 +26,7 @@ export function GambarQris({ url }: { url: string }) {
             <button
               type="button"
               onClick={() => setTerbuka(false)}
-              className="mt-4 h-11 w-full rounded-full bg-fill font-medium text-on-fill"
+              className="btn-duo mt-4 w-full"
             >
               Tutup
             </button>

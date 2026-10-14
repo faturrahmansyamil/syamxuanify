@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { Muncul } from "@/components/muncul";
 import { ambilSitus } from "@/lib/situs";
 
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ async function IsiTentang() {
           Pembayaran dilakukan ke QRIS penjual. {situs.nama_situs} tidak memproses pembayaran.
         </p>
       </header>
+      <Muncul>
       <section className="space-y-2 rounded-[12px] bg-card p-5">
         <h2 className="text-lg font-semibold">Kontak admin</h2>
         <p className="text-sm leading-6">
@@ -48,6 +50,7 @@ async function IsiTentang() {
           </p>
         ) : null}
       </section>
+      </Muncul>
     </article>
   );
 }

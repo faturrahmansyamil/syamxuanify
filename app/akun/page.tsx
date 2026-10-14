@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { keluar } from "@/app/actions/auth";
 import { FormBukaToko } from "@/components/form-buka-toko";
+import { Muncul } from "@/components/muncul";
 import { FormGantiSandi } from "@/components/form-ganti-sandi";
 import { FormHapusAkun } from "@/components/form-hapus-akun";
 import { FormProfil } from "@/components/form-profil";
@@ -15,7 +16,7 @@ import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Akun Saya" };
 
-const tombol = "h-10 rounded-full bg-fill px-4 text-sm font-medium text-on-fill hover:bg-fill-pressed";
+const tombol = "btn-duo";
 
 export default function HalamanAkun() {
   return (
@@ -46,6 +47,7 @@ async function Isi() {
 
       <FormProfil nama={profil.nama} noWa={profil.no_wa} foto={urlGambarAman(profil.foto_url)} />
 
+      <Muncul>
       <section className="rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Favorit</h2>
         <p className="mt-2 text-sm leading-6 text-foggy">Produk yang kamu simpan dengan tombol hati.</p>
@@ -53,7 +55,9 @@ async function Isi() {
           Lihat favorit
         </Link>
       </section>
+      </Muncul>
 
+      <Muncul urut={1}>
       <section className="space-y-3 rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Riwayat dilihat</h2>
         {riwayat.pesan ? <p className="text-sm leading-6 text-foggy">{riwayat.pesan}</p> : null}
@@ -69,7 +73,9 @@ async function Isi() {
           </ul>
         )}
       </section>
+      </Muncul>
 
+      <Muncul urut={2}>
       <section className="space-y-3 rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Laporan saya</h2>
         {laporan.pesan ? <p className="text-sm leading-6 text-foggy">{laporan.pesan}</p> : null}
@@ -87,14 +93,18 @@ async function Isi() {
           </ul>
         )}
       </section>
+      </Muncul>
 
       {peran === "buyer" ? (
+        <Muncul urut={3}>
         <section className="space-y-4">
           <h2 className="text-xl font-semibold">Mulai jualan</h2>
           <FormBukaToko />
         </section>
+        </Muncul>
       ) : null}
 
+      <Muncul urut={4}>
       <section className="space-y-4 rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Keamanan</h2>
         <FormGantiSandi />
@@ -104,6 +114,7 @@ async function Isi() {
           </button>
         </form>
       </section>
+      </Muncul>
 
       <FormHapusAkun />
     </div>

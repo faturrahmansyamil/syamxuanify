@@ -5,7 +5,7 @@ import { simpanSandiBaru, type AuthState } from "@/app/actions/auth";
 
 const awal: AuthState = {};
 const bidang =
-  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof focus:ring-2 focus:ring-bebe";
+  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof";
 
 export function FormAturSandi() {
   const [state, action, pending] = useActionState(simpanSandiBaru, awal);
@@ -50,7 +50,7 @@ export function FormAturSandi() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center rounded-full bg-accent text-base font-semibold text-white hover:bg-accent-pressed disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-duo flex w-full items-center justify-center disabled:cursor-not-allowed disabled:opacity-60"
       >
         {pending ? "Menyimpan..." : "Simpan kata sandi"}
       </button>

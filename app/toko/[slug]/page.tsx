@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { BlokLaporan } from "@/components/blok-laporan";
 import { KisiProduk } from "@/components/kisi-produk";
+import { Muncul } from "@/components/muncul";
 import { InisialToko } from "@/components/tampilan";
 import { ambilToko } from "@/lib/katalog";
 import { metadataBagikan, ringkasTeks } from "@/lib/og";
@@ -55,7 +56,8 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
             : "Toko ini belum tampil untuk pembeli. Statusnya masih menunggu persetujuan admin."}
         </p>
       ) : null}
-      <section className="rounded-[12px] border border-bebe bg-card p-5">
+      <Muncul>
+      <section className="card-duo p-5">
         <div className="flex items-start gap-4">
           {logo ? (
             <img src={logo} alt={`Foto ${toko.nama_toko}`} className="h-16 w-16 rounded-full object-cover" />
@@ -63,7 +65,7 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
             <InisialToko nama={toko.nama_toko} className="h-16 w-16 text-xl" />
           )}
           <div className="min-w-0">
-            <h1 className="break-words text-2xl font-semibold tracking-tight">{toko.nama_toko}</h1>
+            <h1 className="break-words text-2xl font-black tracking-tight">{toko.nama_toko}</h1>
             {toko.terverifikasi ? (
               <span className="mt-2 inline-flex rounded-full bg-faint px-2 py-1 text-xs font-medium text-hof">
                 Terverifikasi
@@ -79,15 +81,17 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
             href={whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-full bg-accent px-4 text-sm font-semibold text-white hover:bg-accent-pressed sm:w-auto"
+            className="btn-duo mt-4 inline-flex w-full items-center justify-center sm:w-auto"
           >
             Chat WhatsApp
           </a>
         ) : null}
       </section>
+      </Muncul>
       {toko.is_closed ? (
         <p className="rounded-[12px] bg-card px-4 py-3 text-sm leading-6 text-hof">Toko ini sedang tutup sementara.</p>
       ) : null}
+      <Muncul>
       <section className="space-y-3">
         <h2 className="text-xl font-semibold">Produk</h2>
         {hasil.produk.length === 0 ? (
@@ -98,8 +102,9 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
           <KisiProduk produk={hasil.produk} kembali={`/toko/${toko.slug}`} />
         )}
       </section>
+      </Muncul>
       <BlokLaporan shopId={toko.id} kembali={`/toko/${toko.slug}`} />
-      <Link href="/" className="inline-block text-sm font-semibold text-hof">
+      <Link href="/" className="btn-duo-white inline-flex items-center">
         Kembali ke beranda
       </Link>
     </div>

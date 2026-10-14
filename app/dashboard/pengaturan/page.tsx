@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { keluar } from "@/app/actions/auth";
 import { ubahTutupToko } from "@/app/actions/pengaturan";
 import { FormGantiSandi } from "@/components/form-ganti-sandi";
+import { Muncul } from "@/components/muncul";
 import { FormHapusAkun } from "@/components/form-hapus-akun";
 import { FormProfil } from "@/components/form-profil";
 import { FormUbahToko } from "@/components/form-ubah-toko";
@@ -16,7 +17,7 @@ import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Pengaturan Toko" };
 
-const tombol = "h-10 rounded-full bg-fill px-4 text-sm font-medium text-on-fill hover:bg-fill-pressed";
+const tombol = "btn-duo";
 
 export default function HalamanPengaturanToko() {
   return (
@@ -49,6 +50,7 @@ async function Isi() {
 
       <FormProfil nama={profil.nama} noWa={profil.no_wa} foto={urlGambarAman(profil.foto_url)} />
 
+      <Muncul>
       <section id="toko" className="scroll-mt-28 space-y-4">
         {hasil.toko ? (
           <>
@@ -70,7 +72,9 @@ async function Isi() {
           <p className="rounded-[12px] bg-card p-4 text-sm text-foggy">Kamu belum punya toko. Buka toko dari dashboard.</p>
         )}
       </section>
+      </Muncul>
 
+      <Muncul urut={1}>
       <section className="space-y-3 rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Notifikasi</h2>
         <p className="text-sm leading-6 text-foggy">Status toko dan produk, plus alasan kalau ditolak.</p>
@@ -83,7 +87,9 @@ async function Isi() {
           ))}
         </ul>
       </section>
+      </Muncul>
 
+      <Muncul urut={2}>
       <section className="space-y-4 rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Keamanan</h2>
         <FormGantiSandi />
@@ -96,6 +102,7 @@ async function Isi() {
           Kembali ke dashboard
         </Link>
       </section>
+      </Muncul>
 
       <FormHapusAkun />
     </div>

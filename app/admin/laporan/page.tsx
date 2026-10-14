@@ -7,7 +7,7 @@ import { klienAdmin, satu } from "@/lib/panel-admin";
 
 export const metadata: Metadata = { title: "Laporan" };
 
-const tombol = "inline-flex h-10 items-center justify-center rounded-full bg-fill px-3 text-sm font-medium text-on-fill";
+const tombol = "btn-duo inline-flex items-center justify-center";
 
 export default function HalamanLaporan({ searchParams }: { searchParams: Promise<{ saring?: string }> }) {
   return (
@@ -107,7 +107,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ saring?: string }
 
 function Saring({ href, aktif, children }: { href: string; aktif: boolean; children: string }) {
   return (
-    <Link href={href} className={`inline-flex h-10 items-center rounded-full px-4 text-sm font-medium ${aktif ? "bg-fill text-on-fill" : "text-foggy"}`}>
+    <Link href={href} data-active={aktif ? "true" : "false"} className="chip-duo inline-flex items-center">
       {children}
     </Link>
   );

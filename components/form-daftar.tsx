@@ -123,12 +123,11 @@ function KartuNiat({
       type="button"
       aria-pressed={aktif}
       onClick={onPilih}
-      className={`rounded-xl border-2 px-3 py-3 text-left ${
-        aktif ? "border-accent bg-langit text-accent" : "border-bebe bg-card text-hof"
-      }`}
+      data-active={aktif ? "true" : "false"}
+      className="chip-duo text-left"
     >
       <span className="block text-sm font-extrabold">{judul}</span>
-      <span className={`mt-1 block text-xs leading-5 ${aktif ? "text-hof" : "text-foggy"}`}>{teks}</span>
+      <span className={`mt-1 block text-xs leading-5 ${aktif ? "text-[#3c3c3c]" : "text-[#777777]"}`}>{teks}</span>
     </button>
   );
 }

@@ -12,7 +12,7 @@ export function CariProduk() {
       key={`${kata}:${kategori}`}
       action="/"
       method="get"
-      className="flex h-14 w-full items-center gap-1 rounded-xl border-2 border-bebe bg-card px-1.5"
+      className="flex h-14 w-full items-center gap-1 rounded-xl border-2 border-[#e5e5e5] bg-[#f7f7f7] px-1.5"
     >
       <label htmlFor="q" className="sr-only">
         Cari produk
@@ -28,7 +28,7 @@ export function CariProduk() {
       <button
         type="submit"
         aria-label="Cari"
-        className="polos flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-white hover:bg-accent-pressed"
+        className="btn-duo inline-flex shrink-0 items-center justify-center"
       >
         <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2.2">
           <circle cx="11" cy="11" r="6.5" />

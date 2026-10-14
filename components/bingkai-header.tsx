@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { ModeGelap } from "@/components/mode-gelap";
 
 export function BingkaiHeader({
   logo,
@@ -19,7 +18,6 @@ export function BingkaiHeader({
     return (
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-4 py-3 md:px-10">
         {logo}
-        <ModeGelap />
       </div>
     );
   }
@@ -29,7 +27,6 @@ export function BingkaiHeader({
       {logo}
       <div className="col-span-2 row-start-2 min-w-0 md:col-span-1 md:col-start-2 md:row-start-1">{cari}</div>
       <div className="col-start-2 row-start-1 flex items-center justify-end gap-1 md:col-start-3 md:gap-2">
-        <ModeGelap />
         {akun}
       </div>
     </div>

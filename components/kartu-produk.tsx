@@ -19,7 +19,7 @@ export function KartuProduk({
   const foto = fotoPenjual(produk.toko?.slug, produk.toko?.logo_url);
 
   return (
-    <article className="rounded-2xl border-2 border-bebe bg-card p-2">
+    <article className="card-duo h-full p-2">
       <div className="relative">
         <Link href={`/produk/${produk.slug}`} prefetch={true} className="block">
           {gambar ? (
@@ -69,7 +69,7 @@ export function KerangkaProduk() {
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-5">
       {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-        <div key={item} className="aspect-square animate-pulse rounded-2xl border-2 border-bebe bg-deco" />
+        <div key={item} className="card-duo aspect-square animate-pulse" />
       ))}
     </div>
   );

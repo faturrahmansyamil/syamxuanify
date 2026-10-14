@@ -12,7 +12,7 @@ export function BarisAksi({ children }: { children: ReactNode }) {
         aria-expanded={buka}
         aria-label="Aksi"
         onClick={() => setBuka((nilai) => !nilai)}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-fill text-lg leading-none text-on-fill sm:hidden"
+        className="btn-duo-white inline-flex items-center justify-center sm:hidden"
       >
         ···
       </button>

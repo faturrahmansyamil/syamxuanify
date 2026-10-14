@@ -14,7 +14,7 @@ export function Bagikan({ judul }: { judul: string }) {
             setPesan("Tautan disalin");
           });
         }}
-        className="inline-flex h-9 items-center rounded-full border border-bebe bg-card px-3 text-sm font-medium text-hof"
+        className="btn-duo-white inline-flex items-center"
       >
         {pesan ? "Disalin" : "Salin"}
       </button>
@@ -25,7 +25,7 @@ export function Bagikan({ judul }: { judul: string }) {
           const teks = `${judul} ${window.location.href}`;
           window.open(`https://wa.me/?text=${encodeURIComponent(teks)}`, "_blank", "noopener,noreferrer");
         }}
-        className="inline-flex h-9 items-center rounded-full border border-bebe bg-card px-3 text-sm font-medium text-hof"
+        className="btn-duo inline-flex items-center"
       >
         WA
       </a>

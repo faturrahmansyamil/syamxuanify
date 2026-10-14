@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { tambahProduk, ubahKetersediaan } from "@/app/actions/produk-toko";
 import { FormBukaToko } from "@/components/form-buka-toko";
+import { Muncul } from "@/components/muncul";
 import { FormProduk } from "@/components/form-produk";
 import { FormUbahToko } from "@/components/form-ubah-toko";
 import { SalinTautan } from "@/components/salin-tautan";
@@ -54,7 +55,8 @@ async function IsiDasbor() {
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Dashboard</h1>
         <p className="mt-2 text-sm leading-6 text-foggy">Kelola toko dan produkmu dari sini.</p>
       </div>
-      <section className="space-y-4 rounded-[12px] border border-bebe bg-card p-5">
+      <Muncul>
+      <section className="card-duo space-y-4 p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
             {logo ? (
@@ -96,22 +98,26 @@ async function IsiDasbor() {
           <Link
             href={`/toko/${toko.slug}`}
             prefetch={true}
-            className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-4 text-sm font-semibold text-white hover:bg-accent-pressed"
+            className="btn-duo inline-flex items-center justify-center"
           >
             Lihat toko saya
           </Link>
           <SalinTautan path={`/toko/${toko.slug}`} />
         </div>
       </section>
+      </Muncul>
       <FormUbahToko toko={toko} />
+      <Muncul>
       <section className="space-y-3">
         <h2 className="text-xl font-semibold">Produk saya</h2>
         {hasil.produk.length === 0 ? (
           <p className="rounded-[12px] bg-card p-4 text-sm text-foggy">Belum ada produk.</p>
         ) : (
           <ul className="space-y-3">
-            {hasil.produk.map((produk) => (
-              <li key={produk.id} className="rounded-[12px] border border-bebe bg-card p-4">
+            {hasil.produk.map((produk, indeks) => (
+              <li key={produk.id}>
+                <Muncul urut={indeks}>
+                <div className="card-duo p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="break-words font-semibold">{produk.judul}</p>
@@ -132,20 +138,23 @@ async function IsiDasbor() {
                   <form action={ubahKetersediaan}>
                     <input type="hidden" name="id" value={produk.id} />
                     <input type="hidden" name="tersedia" value={produk.is_available ? "tidak" : "ya"} />
-                    <button type="submit" className="text-sm font-semibold text-hof">
+                    <button type="submit" className="btn-duo-white">
                       {produk.is_available ? "Tandai habis" : "Tandai tersedia"}
                     </button>
                   </form>
-                  <Link href={`/dashboard/produk/${produk.id}`} prefetch={true} className="text-sm font-semibold text-hof">
+                  <Link href={`/dashboard/produk/${produk.id}`} prefetch={true} className="btn-duo inline-flex items-center">
                     Ubah
                   </Link>
                   <TombolHapusProduk id={produk.id} />
                 </div>
+                </div>
+                </Muncul>
               </li>
             ))}
           </ul>
         )}
       </section>
+      </Muncul>
       <FormProduk aksi={tambahProduk} kategori={hasil.kategori} utama={false} />
     </div>
   );

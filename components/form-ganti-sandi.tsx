@@ -5,7 +5,7 @@ import { gantiKataSandi, type AuthState } from "@/app/actions/auth";
 
 const awal: AuthState = {};
 const bidang =
-  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof focus:ring-2 focus:ring-bebe";
+  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof";
 
 export function FormGantiSandi({
   teksSukses,
@@ -32,7 +32,7 @@ export function FormGantiSandi({
         <button
           type="submit"
           disabled={pending}
-          className="flex h-12 items-center justify-center rounded-full bg-fill px-5 text-sm font-medium text-on-fill hover:bg-fill-pressed disabled:opacity-60"
+          className="btn-duo flex items-center justify-center disabled:opacity-60"
         >
           {pending ? "Menyimpan..." : "Simpan"}
         </button>

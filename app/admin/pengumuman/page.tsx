@@ -39,7 +39,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ tersimpan?: strin
         Tampilkan di beranda
       </label>
       <div className="flex justify-end">
-        <button type="submit" className="inline-flex h-12 items-center rounded-full bg-accent px-5 text-sm font-semibold text-white hover:bg-accent-pressed">
+        <button type="submit" className="btn-duo inline-flex items-center">
           Simpan
         </button>
       </div>

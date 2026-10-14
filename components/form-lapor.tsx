@@ -15,7 +15,7 @@ export function FormLapor({
   const [state, action, pending] = useActionState(laporkan, awal);
 
   return (
-    <form action={action} className="space-y-3 rounded-[12px] border border-bebe bg-card p-4">
+    <form action={action} className="card-duo space-y-3 p-4">
       <h2 className="font-semibold">Laporkan</h2>
       <p className="text-sm leading-6 text-foggy">
         Laporkan kalau produk atau toko ini mencurigakan. Admin yang akan memeriksanya.
@@ -32,7 +32,7 @@ export function FormLapor({
         minLength={10}
         maxLength={500}
         rows={4}
-        className="w-full rounded-lg border border-bebe px-3 py-3 text-base outline-none focus:border-hof focus:ring-2 focus:ring-bebe"
+        className="w-full rounded-lg border border-bebe px-3 py-3 text-base outline-none focus:border-hof"
         placeholder="Ceritakan apa yang mencurigakan"
       />
       {state.error ? (
@@ -48,7 +48,7 @@ export function FormLapor({
       <button
         type="submit"
         disabled={pending || Boolean(state.sukses)}
-        className="h-11 rounded-lg border border-hof px-4 text-sm font-semibold text-hof disabled:opacity-60"
+        className="btn-duo disabled:opacity-60"
       >
         {pending ? "Mengirim..." : "Kirim laporan"}
       </button>

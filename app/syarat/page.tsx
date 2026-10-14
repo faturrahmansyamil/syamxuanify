@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Muncul } from "@/components/muncul";
 
 export const metadata: Metadata = {
   title: "Syarat & Ketentuan",
@@ -15,6 +16,7 @@ export default function HalamanSyarat() {
         </p>
       </header>
 
+      <Muncul>
       <section className="space-y-2 rounded-[12px] bg-card p-5">
         <h2 className="text-lg font-semibold">Barang terlarang</h2>
         <p className="text-sm leading-6">Jangan jual atau minta jasa berikut:</p>
@@ -29,7 +31,9 @@ export default function HalamanSyarat() {
           Admin boleh menolak atau menghapus toko dan produk yang melanggar, lalu menuliskan alasannya.
         </p>
       </section>
+      </Muncul>
 
+      <Muncul urut={1}>
       <section className="space-y-2 rounded-[12px] bg-card p-5">
         <h2 className="text-lg font-semibold">Aturan penjual</h2>
         <ul className="list-disc space-y-1 pl-5 text-sm leading-6">
@@ -40,7 +44,9 @@ export default function HalamanSyarat() {
           <li>Kalau ditolak, baca alasannya, perbaiki, lalu ajukan ulang.</li>
         </ul>
       </section>
+      </Muncul>
 
+      <Muncul urut={2}>
       <section className="space-y-3 rounded-[12px] bg-card p-5">
         <h2 className="text-lg font-semibold">Transaksi</h2>
         <p className="text-sm leading-6">
@@ -48,6 +54,7 @@ export default function HalamanSyarat() {
           dan penyelesaian masalah adalah tanggung jawab penjual dan pembeli.
         </p>
       </section>
+      </Muncul>
     </article>
   );
 }

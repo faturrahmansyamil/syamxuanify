@@ -5,7 +5,7 @@ import { hapusAkun, type PengaturanState } from "@/app/actions/pengaturan";
 
 const awal: PengaturanState = {};
 const bidang =
-  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof focus:ring-2 focus:ring-bebe";
+  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof";
 
 export function FormHapusAkun() {
   const [state, action, pending] = useActionState(hapusAkun, awal);
@@ -26,7 +26,7 @@ export function FormHapusAkun() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 items-center justify-center rounded-full border border-hof px-5 text-sm font-medium text-hof disabled:opacity-60"
+        className="btn-duo-white flex items-center justify-center disabled:opacity-60"
       >
         {pending ? "Menghapus..." : "Hapus akun"}
       </button>

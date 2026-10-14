@@ -61,7 +61,7 @@ export function PanelBeli({
       href={tautan}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-12 w-full items-center justify-center rounded-full bg-accent font-semibold text-white hover:bg-accent-pressed"
+      className="btn-duo flex w-full items-center justify-center"
     >
       Chat WhatsApp
     </a>
@@ -109,9 +109,8 @@ export function PanelBeli({
                     const batasBaru = typeof item.stock === "number" ? item.stock : typeof stok === "number" ? stok : 99;
                     setJumlah((nilai) => Math.min(Math.max(1, nilai), Math.max(batasBaru, 1)));
                   }}
-                  className={`rounded-full border px-3 py-2 text-sm ${
-                    aktif ? "border-hof bg-fill text-on-fill" : "border-bebe bg-card text-hof"
-                  } disabled:cursor-not-allowed disabled:opacity-50`}
+                  data-active={aktif ? "true" : "false"}
+                  className="chip-duo disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {item.nama}
                   {item.harga != null ? ` · ${formatRupiah(item.harga)}` : ""}
@@ -128,7 +127,7 @@ export function PanelBeli({
           aria-label="Kurangi"
           disabled={jumlahAman <= 1 || batas === 0}
           onClick={() => setJumlah(jumlahAman - 1)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-bebe bg-card text-lg disabled:opacity-40"
+          className="btn-duo-white inline-flex items-center justify-center disabled:opacity-40"
         >
           −
         </button>
@@ -138,7 +137,7 @@ export function PanelBeli({
           aria-label="Tambah"
           disabled={batas === 0 || jumlahAman >= batas}
           onClick={() => setJumlah(jumlahAman + 1)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-bebe bg-card text-lg disabled:opacity-40"
+          className="btn-duo-white inline-flex items-center justify-center disabled:opacity-40"
         >
           +
         </button>

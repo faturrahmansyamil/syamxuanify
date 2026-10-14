@@ -31,7 +31,7 @@ async function IsiUbah({ params }: { params: Promise<{ id: string }> }) {
 
   return (
     <div className="mx-auto max-w-xl space-y-4">
-      <Link href="/dashboard" className="text-sm font-semibold text-hof">
+      <Link href="/dashboard" className="btn-duo-white inline-flex items-center">
         Kembali ke dashboard
       </Link>
       <FormProduk aksi={ubahProduk} kategori={hasil.kategori} produk={produk} etalase={etalase} />

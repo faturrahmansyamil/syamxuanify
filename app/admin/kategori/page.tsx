@@ -14,7 +14,7 @@ const IKON = [
   { slug: "lainnya", nama: "Lainnya" },
 ];
 
-const tombol = "inline-flex h-9 items-center justify-center rounded-full bg-fill px-3 text-sm font-medium text-on-fill";
+const tombol = "btn-duo inline-flex items-center justify-center";
 const bidang = "h-10 rounded-lg border border-bebe bg-card px-3 text-sm outline-none";
 
 export default function HalamanKategori() {

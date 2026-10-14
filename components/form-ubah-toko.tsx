@@ -7,7 +7,7 @@ import type { TokoDasbor } from "@/lib/dasbor";
 
 const awal: FormState = {};
 const bidang =
-  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof focus:ring-2 focus:ring-bebe";
+  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof";
 
 export function FormUbahToko({ toko, kembali }: { toko: TokoDasbor; kembali?: string }) {
   const [state, action, pending] = useActionState(ubahToko, awal);
@@ -70,7 +70,7 @@ export function FormUbahToko({ toko, kembali }: { toko: TokoDasbor; kembali?: st
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center rounded-full bg-fill px-4 text-sm font-medium text-on-fill hover:bg-fill-pressed disabled:opacity-60 sm:w-auto"
+        className="btn-duo flex w-full items-center justify-center disabled:opacity-60 sm:w-auto"
       >
         {pending ? "Menyimpan..." : ditolak ? "Simpan dan ajukan ulang" : "Simpan perubahan"}
       </button>

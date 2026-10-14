@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { FormGantiSandi } from "@/components/form-ganti-sandi";
+import { Muncul } from "@/components/muncul";
 import { klienAdmin } from "@/lib/panel-admin";
 
 export const metadata: Metadata = { title: "Akun Admin" };
@@ -18,6 +19,7 @@ async function Isi() {
   if (!hasil.ok) return <p className="rounded-[12px] bg-card p-4 text-sm">{hasil.pesan}</p>;
 
   return (
+    <Muncul>
     <section className="mx-auto max-w-2xl space-y-4 rounded-[12px] border border-bebe bg-card p-5">
       <div>
         <h1 className="text-2xl font-semibold">Akun Admin</h1>
@@ -25,5 +27,6 @@ async function Isi() {
       </div>
       <FormGantiSandi teksSukses="Tersimpan" rataKanan />
     </section>
+    </Muncul>
   );
 }

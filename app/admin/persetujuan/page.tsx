@@ -3,13 +3,14 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ubahStatusProduk, ubahStatusToko } from "@/app/actions/admin";
 import { FormTolak } from "@/components/form-tolak";
+import { Muncul } from "@/components/muncul";
 import { TombolAksi } from "@/components/tombol-aksi";
 import { klienAdmin } from "@/lib/panel-admin";
 import { formatRupiah } from "@/lib/rupiah";
 
 export const metadata: Metadata = { title: "Persetujuan" };
 
-const tombol = "inline-flex h-10 items-center justify-center rounded-full bg-accent px-4 text-sm font-semibold text-white";
+const tombol = "btn-duo inline-flex items-center justify-center";
 
 export default function HalamanPersetujuan({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   return (
@@ -45,8 +46,10 @@ async function Isi({ searchParams }: { searchParams: Promise<{ tab?: string }> }
       {tab === "toko" ? (
         (toko?.data ?? []).length === 0 ? <Kosong>Tidak ada toko yang menunggu.</Kosong> : (
           <ul className="space-y-3">
-            {(toko?.data ?? []).map((item) => (
-              <li key={item.id} className="space-y-3 rounded-[12px] border border-bebe bg-card p-4">
+            {(toko?.data ?? []).map((item, indeks) => (
+              <li key={item.id}>
+                <Muncul urut={indeks}>
+                <div className="card-duo space-y-3 p-4">
                 <div>
                   <h2 className="font-semibold">{item.nama_toko}</h2>
                   <p className="mt-1 text-sm text-foggy">WhatsApp: {item.no_wa}</p>
@@ -55,19 +58,23 @@ async function Isi({ searchParams }: { searchParams: Promise<{ tab?: string }> }
                   <TombolAksi aksi={ubahStatusToko} bidang={{ id: item.id, status: "approved", kembali: "/admin/persetujuan?tab=toko" }} className={tombol}>
                     Setujui
                   </TombolAksi>
-                  <Link href={`/toko/${item.slug}`} className="inline-flex h-10 items-center text-sm font-medium text-hof">Lihat</Link>
+                  <Link href={`/toko/${item.slug}`} className="btn-duo-white inline-flex items-center">Lihat</Link>
                 </div>
                 <FormTolak aksi={ubahStatusToko} id={item.id} kembali="/admin/persetujuan?tab=toko" />
+                </div>
+                </Muncul>
               </li>
             ))}
           </ul>
         )
       ) : (produk?.data ?? []).length === 0 ? <Kosong>Tidak ada produk yang menunggu.</Kosong> : (
         <ul className="space-y-3">
-          {(produk?.data ?? []).map((item) => {
+          {(produk?.data ?? []).map((item, indeks) => {
             const tokoItem = Array.isArray(item.shops) ? item.shops[0] : item.shops;
             return (
-              <li key={item.id} className="space-y-3 rounded-[12px] border border-bebe bg-card p-4">
+              <li key={item.id}>
+                <Muncul urut={indeks}>
+                <div className="card-duo space-y-3 p-4">
                 <div>
                   <h2 className="font-semibold">{item.judul}</h2>
                   <p className="mt-1 text-sm text-foggy">{tokoItem?.nama_toko} · {formatRupiah(item.harga)}</p>
@@ -76,9 +83,11 @@ async function Isi({ searchParams }: { searchParams: Promise<{ tab?: string }> }
                   <TombolAksi aksi={ubahStatusProduk} bidang={{ id: item.id, status: "approved", kembali: "/admin/persetujuan?tab=produk" }} className={tombol}>
                     Setujui
                   </TombolAksi>
-                  <Link href={`/produk/${item.slug}`} className="inline-flex h-10 items-center text-sm font-medium text-hof">Lihat</Link>
+                  <Link href={`/produk/${item.slug}`} className="btn-duo-white inline-flex items-center">Lihat</Link>
                 </div>
                 <FormTolak aksi={ubahStatusProduk} id={item.id} kembali="/admin/persetujuan?tab=produk" />
+                </div>
+                </Muncul>
               </li>
             );
           })}
@@ -90,7 +99,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ tab?: string }> }
 
 function Tab({ href, aktif, children }: { href: string; aktif: boolean; children: string }) {
   return (
-    <Link href={href} className={`px-1 py-2 text-sm font-medium ${aktif ? "border-b-2 border-hof text-hof" : "text-foggy"}`}>
+    <Link href={href} data-active={aktif ? "true" : "false"} className="chip-duo">
       {children}
     </Link>
   );

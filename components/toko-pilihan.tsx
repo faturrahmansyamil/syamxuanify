@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BadgeCheck } from "lucide-react";
+import { Muncul } from "@/components/muncul";
 import { InisialToko } from "@/components/tampilan";
 import { fotoPenjual } from "@/lib/contoh-penjual";
 import { ambilTokoPilihan } from "@/lib/katalog";
@@ -9,16 +10,17 @@ export async function TokoPilihan() {
   if (toko.length === 0) return null;
 
   return (
+    <Muncul>
     <section className="mt-10">
-      <h2 className="text-2xl font-extrabold text-hof">Toko Pilihan</h2>
+      <h2 className="text-2xl font-black tracking-tight text-hof">Toko Pilihan</h2>
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {toko.map((item) => {
+        {toko.map((item, indeks) => {
           const foto = fotoPenjual(item.slug, item.logo_url);
           return (
+            <Muncul key={item.id} urut={indeks}>
             <Link
-              key={item.id}
               href={`/toko/${item.slug}`}
-              className="flex min-w-0 items-center gap-3 rounded-2xl border-2 border-bebe bg-card p-3"
+              className="card-duo flex h-full min-w-0 items-center gap-3 p-3"
             >
               {foto ? (
                 <img src={foto} alt="" className="h-14 w-14 shrink-0 rounded-full object-cover" />
@@ -38,9 +40,11 @@ export async function TokoPilihan() {
                 </span>
               </span>
             </Link>
+            </Muncul>
           );
         })}
       </div>
     </section>
+    </Muncul>
   );
 }

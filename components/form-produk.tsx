@@ -17,7 +17,7 @@ export type EtalaseForm = {
 
 const awal: FormState = {};
 const bidang =
-  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof focus:ring-2 focus:ring-bebe";
+  "w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof";
 
 export function FormProduk({
   aksi,
@@ -35,7 +35,7 @@ export function FormProduk({
   const [state, action, pending] = useActionState(aksi, awal);
 
   return (
-    <form action={action} className="space-y-4 rounded-[12px] border border-bebe bg-card p-5">
+    <form action={action} className="card-duo space-y-4 p-5">
       <h2 className="text-xl font-semibold">{produk ? "Ubah produk" : "Tambah produk"}</h2>
       {produk?.status === "rejected" ? (
         <p className="rounded-xl bg-red-50 px-3 py-2 text-sm leading-6 text-red-800">
@@ -178,9 +178,7 @@ export function FormProduk({
       <button
         type="submit"
         disabled={pending}
-        className={`flex h-12 w-full items-center justify-center rounded-full px-6 text-sm font-medium disabled:opacity-60 sm:w-auto ${
-          utama ? "bg-accent text-white hover:bg-accent-pressed" : "bg-fill text-on-fill hover:bg-fill-pressed"
-        }`}
+        className={`${utama ? "btn-duo" : "btn-duo-white"} flex w-full items-center justify-center disabled:opacity-60 sm:w-auto`}
       >
         {pending ? "Menyimpan..." : produk?.status === "rejected" ? "Simpan dan ajukan ulang" : "Simpan"}
       </button>
@@ -228,7 +226,7 @@ function DaftarVarian({ awal }: { awal: EtalaseForm["varian"] }) {
           <button
             type="button"
             onClick={() => setBaris(baris.filter((_, i) => i !== indeks))}
-            className="text-sm font-medium text-foggy"
+            className="btn-duo-white"
           >
             Hapus
           </button>
@@ -238,7 +236,7 @@ function DaftarVarian({ awal }: { awal: EtalaseForm["varian"] }) {
         <button
           type="button"
           onClick={() => setBaris([...baris, { nama: "", harga: "", stok: "" }])}
-          className="text-sm font-semibold text-hof"
+          className="btn-duo"
         >
           Tambah varian
         </button>

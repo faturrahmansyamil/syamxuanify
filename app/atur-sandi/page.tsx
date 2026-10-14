@@ -2,6 +2,7 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { FormAturSandi } from "@/components/form-atur-sandi";
+import { Muncul } from "@/components/muncul";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
@@ -11,6 +12,7 @@ export const metadata = {
 
 export default function HalamanAturSandi() {
   return (
+    <Muncul>
     <section className="mx-auto w-full max-w-md rounded-[12px] border border-bebe bg-card p-5 sm:p-8">
       <h1 className="text-2xl font-semibold tracking-tight">Kata sandi baru</h1>
       <div className="mt-6">
@@ -19,6 +21,7 @@ export default function HalamanAturSandi() {
         </Suspense>
       </div>
     </section>
+    </Muncul>
   );
 }
 

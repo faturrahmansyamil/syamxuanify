@@ -65,8 +65,8 @@ export function BidangTeks({
           maxLength={maxLength}
           inputMode={inputMode}
           aria-invalid={galat ? true : undefined}
-          className={`w-full rounded-[10px] border-2 bg-card py-3 pl-11 pr-3 text-base outline-none focus:ring-2 ${
-            galat ? "border-red-400 focus:border-red-500 focus:ring-red-100" : "border-bebe focus:border-accent focus:ring-langit"
+          className={`w-full rounded-xl border-2 bg-[#f7f7f7] py-3 pl-11 pr-3 text-base text-[#3c3c3c] outline-none ${
+            galat ? "border-red-400 focus:border-red-500" : "border-[#e5e5e5] focus:border-[#93c5fd]"
           }`}
         />
       </div>
@@ -110,8 +110,8 @@ export function BidangSandi({
           required
           minLength={6}
           aria-invalid={galat ? true : undefined}
-          className={`w-full rounded-[10px] border-2 bg-card py-3 pl-11 pr-12 text-base outline-none focus:ring-2 ${
-            galat ? "border-red-400 focus:border-red-500 focus:ring-red-100" : "border-bebe focus:border-accent focus:ring-langit"
+          className={`w-full rounded-xl border-2 bg-[#f7f7f7] py-3 pl-11 pr-12 text-base text-[#3c3c3c] outline-none ${
+            galat ? "border-red-400 focus:border-red-500" : "border-[#e5e5e5] focus:border-[#93c5fd]"
           }`}
         />
         <button
@@ -137,7 +137,7 @@ export function TombolUtama({ pending, anak }: { pending: boolean; anak: string 
     <button
       type="submit"
       disabled={pending}
-      className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-base font-bold text-white hover:bg-accent-pressed disabled:cursor-not-allowed disabled:opacity-70"
+      className="btn-duo flex w-full items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
     >
       {pending ? <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/40 border-t-white" /> : null}
       {pending ? "Memproses..." : anak}
@@ -165,7 +165,7 @@ export function TombolGoogle({
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-bebe bg-card text-sm font-bold text-hof hover:bg-deco disabled:opacity-70"
+        className="btn-duo-white flex w-full items-center justify-center gap-3 disabled:opacity-70"
       >
         {pending ? (
           <span className="h-5 w-5 animate-spin rounded-full border-2 border-bebe border-t-hof" />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import { Muncul } from "@/components/muncul";
 import { ambilRingkasan, klienAdmin } from "@/lib/panel-admin";
 
 export const metadata: Metadata = { title: "Ringkasan" };
@@ -41,13 +42,14 @@ async function Isi() {
         ))}
       </div>
       <div className="flex flex-wrap gap-2">
-        <Link href="/admin/persetujuan" className="inline-flex h-10 items-center rounded-full bg-accent px-4 text-sm font-semibold text-white hover:bg-accent-pressed">
+        <Link href="/admin/persetujuan" className="btn-duo inline-flex items-center">
           Ke persetujuan
         </Link>
-        <Link href="/admin/laporan" className="inline-flex h-10 items-center rounded-full bg-fill px-4 text-sm font-medium text-on-fill hover:bg-fill-pressed">
+        <Link href="/admin/laporan" className="btn-duo inline-flex items-center">
           Ke laporan
         </Link>
       </div>
+      <Muncul>
       <section className="rounded-[12px] border border-bebe bg-card p-4">
         <h2 className="text-lg font-semibold">Aktivitas terbaru</h2>
         {data.aktivitas.length === 0 ? (
@@ -64,6 +66,7 @@ async function Isi() {
           </ul>
         )}
       </section>
+      </Muncul>
     </div>
   );
 }

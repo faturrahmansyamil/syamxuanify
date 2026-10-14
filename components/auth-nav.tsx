@@ -56,10 +56,10 @@ export async function AuthNav() {
 function TautanTamu() {
   return (
     <div className="flex flex-nowrap items-center justify-end gap-x-2">
-      <Link href="/masuk" className="text-xs font-medium text-hof hover:underline sm:text-sm">
+      <Link href="/masuk" className="btn-duo-white inline-flex items-center">
         Masuk
       </Link>
-      <Link href="/daftar" className="text-xs font-medium text-hof hover:underline sm:text-sm">
+      <Link href="/daftar" className="btn-duo inline-flex items-center">
         Daftar
       </Link>
     </div>

@@ -27,12 +27,12 @@ export function GaleriProduk({ foto, judul }: { foto: string[]; judul: string })
               setBesar(true);
             }}
           >
-            <img src={src} alt="" className="aspect-square w-full rounded-2xl bg-card object-cover" />
+            <img src={src} alt="" className="aspect-square w-full rounded-xl bg-white object-cover" />
           </button>
         ))}
       </div>
       <button type="button" className="hidden w-full md:block" onClick={() => setBesar(true)}>
-        <img src={sekarang} alt={judul} className="aspect-square w-full rounded-2xl bg-card object-cover" />
+        <img src={sekarang} alt={judul} className="aspect-square w-full rounded-xl bg-white object-cover" />
       </button>
       {foto.length > 1 ? (
         <div className="flex gap-2 overflow-x-auto">
@@ -59,7 +59,7 @@ export function GaleriProduk({ foto, judul }: { foto: string[]; judul: string })
             <button
               type="button"
               onClick={() => setBesar(false)}
-              className="mt-4 h-11 w-full rounded-full bg-card font-medium text-hof"
+              className="btn-duo-white mt-4 w-full"
             >
               Tutup
             </button>

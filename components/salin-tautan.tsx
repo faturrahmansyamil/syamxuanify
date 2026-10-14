@@ -18,7 +18,7 @@ export function SalinTautan({ path }: { path: string }) {
             setPesan(tautan);
           }
         }}
-        className="inline-flex h-11 items-center rounded-lg border border-hof px-4 text-sm font-semibold text-hof"
+        className="btn-duo-white inline-flex items-center"
       >
         Salin link toko
       </button>

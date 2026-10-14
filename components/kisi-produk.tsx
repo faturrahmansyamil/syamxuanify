@@ -1,5 +1,6 @@
 import { connection } from "next/server";
 import { KartuProduk } from "@/components/kartu-produk";
+import { Muncul } from "@/components/muncul";
 import { idFavorit } from "@/lib/favorit";
 import type { ProdukPublik } from "@/lib/katalog";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
@@ -22,8 +23,10 @@ export async function KisiProduk({ produk, kembali }: { produk: ProdukPublik[]; 
 
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-5">
-      {produk.map((item) => (
-        <KartuProduk key={item.id} produk={item} disukai={disukai.has(item.id)} kembali={kembali} />
+      {produk.map((item, indeks) => (
+        <Muncul key={item.id} urut={indeks}>
+          <KartuProduk produk={item} disukai={disukai.has(item.id)} kembali={kembali} />
+        </Muncul>
       ))}
     </div>
   );

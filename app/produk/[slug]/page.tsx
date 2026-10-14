@@ -7,6 +7,7 @@ import { CatatLihat } from "@/components/catat-lihat";
 import { GaleriProduk } from "@/components/galeri-produk";
 import { GambarQris } from "@/components/gambar-qris";
 import { KisiProduk } from "@/components/kisi-produk";
+import { Muncul } from "@/components/muncul";
 import { LaporRingkas } from "@/components/lapor-ringkas";
 import { PanelBeli } from "@/components/panel-beli";
 import { PeringatanTransaksi } from "@/components/peringatan-transaksi";
@@ -159,7 +160,8 @@ function IsiProduk({
             {produk.deskripsi || "Penjual belum menulis deskripsi."}
           </p>
           {toko ? (
-            <div className="rounded-2xl border-2 border-bebe bg-card p-4">
+            <Muncul>
+            <div className="card-duo p-4">
               <div className="flex items-center gap-3">
                 {logo ? (
                   <img src={logo} alt="" className="h-12 w-12 rounded-full border-2 border-bebe object-cover" />
@@ -199,6 +201,7 @@ function IsiProduk({
                 )}
               </div>
             </div>
+            </Muncul>
           ) : null}
           {qris ? (
             <GambarQris url={qris} />
@@ -218,16 +221,20 @@ function IsiProduk({
         </div>
       </div>
       {tetangga.lain.length > 0 ? (
+        <Muncul>
         <section className="space-y-4">
           <h2 className="text-xl font-semibold">Produk lain dari toko ini</h2>
           <KisiProduk produk={tetangga.lain} kembali={`/produk/${produk.slug}`} />
         </section>
+        </Muncul>
       ) : null}
       {tetangga.serupa.length > 0 ? (
+        <Muncul>
         <section className="space-y-4">
           <h2 className="text-xl font-semibold">Produk serupa</h2>
           <KisiProduk produk={tetangga.serupa} kembali={`/produk/${produk.slug}`} />
         </section>
+        </Muncul>
       ) : null}
     </div>
   );

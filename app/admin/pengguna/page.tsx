@@ -6,7 +6,7 @@ import { kataCari, klienAdmin } from "@/lib/panel-admin";
 
 export const metadata: Metadata = { title: "Pengguna" };
 
-const tombol = "inline-flex h-9 items-center justify-center rounded-full bg-fill px-3 text-sm font-medium text-on-fill";
+const tombol = "btn-duo inline-flex items-center justify-center";
 const bidang = "h-10 w-full rounded-lg border border-bebe bg-card px-3 text-sm outline-none sm:w-auto";
 
 const PERAN = [

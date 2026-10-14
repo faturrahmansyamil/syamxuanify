@@ -113,8 +113,11 @@ async function IsiFooter() {
         <Link href="/syarat" className="text-accent hover:underline">
           Syarat
         </Link>
-        <a href={`mailto:${situs.email_kontak}`} className="break-all text-accent hover:underline">
-          {situs.email_kontak}
+        <Link href="/daftar" className="text-accent hover:underline">
+          Jadi Penjual
+        </Link>
+        <a href="mailto:syamxuanify@gmail.com" className="col-span-2 break-all text-accent hover:underline sm:col-span-1">
+          syamxuanify@gmail.com
         </a>
         {wa ? (
           <a href={wa} className="text-accent hover:underline">
@@ -126,6 +129,7 @@ async function IsiFooter() {
       <p className="mt-3 max-w-xl text-sm leading-6 text-foggy">
         Transaksi dilakukan langsung dengan penjual. {situs.nama_situs} tidak memproses pembayaran.
       </p>
+      <p className="mt-8 border-t border-bebe pt-4 text-xs text-foggy">© 2026 Syamxuanify</p>
     </div>
   );
 }

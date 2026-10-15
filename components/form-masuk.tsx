@@ -31,8 +31,8 @@ export function FormMasuk({ selanjutnya = "/" }: { selanjutnya?: string }) {
         />
         <div className="space-y-1.5">
           <BidangSandi id="password" name="password" label="Kata sandi" autoComplete="current-password" galat={galatSandi} />
-          <Link href="/lupa-sandi" className="inline-block text-sm font-medium text-[#3c3c3c] hover:underline">
-            Lupa password?
+          <Link href="/lupa-sandi" className="inline-flex min-h-11 items-center text-sm font-bold text-[#3c3c3c] hover:underline">
+            Lupa kata sandi?
           </Link>
         </div>
         {umum ? (

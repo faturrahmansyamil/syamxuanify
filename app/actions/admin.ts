@@ -156,6 +156,26 @@ export async function hapusTokoAdmin(formData: FormData) {
   redirect(kembali(formData));
 }
 
+export async function ubahUnggulan(formData: FormData) {
+  const supabase = await pastikanAdmin();
+  const id = uuid(formData.get("id"));
+  if (!id) redirect(kembali(formData));
+  const nyala = teks(formData, "unggulan") === "ya";
+
+  const { data: produk } = await supabase.from("products").select("slug").eq("id", id).maybeSingle();
+  if (produk) {
+    if (nyala) {
+      await supabase.from("products").update({ is_unggulan: false }).eq("is_unggulan", true);
+    }
+    await supabase.from("products").update({ is_unggulan: nyala }).eq("id", id);
+    revalidatePath("/");
+    revalidatePath("/produk");
+    revalidatePath("/admin", "layout");
+    revalidatePath(`/produk/${produk.slug}`);
+  }
+  redirect(kembali(formData));
+}
+
 export async function ubahStokAdmin(formData: FormData) {
   const supabase = await pastikanAdmin();
   const id = uuid(formData.get("id"));

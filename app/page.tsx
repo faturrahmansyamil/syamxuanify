@@ -1,10 +1,24 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import { CariProduk } from "@/components/cari-produk";
+import { IkonKategori } from "@/components/ikon-kategori";
 import { KatalogProduk } from "@/components/katalog-produk";
 import { KerangkaProduk } from "@/components/kartu-produk";
 import { Muncul } from "@/components/muncul";
+import { PlaceholderProduk } from "@/components/tampilan";
 import { TokoPilihan } from "@/components/toko-pilihan";
-import { ambilSitus } from "@/lib/situs";
+import { ambilKatalog, ambilTerlaris, bersihkanKata, slugAman, urutanAman, type UrutanKatalog } from "@/lib/katalog";
+import { formatRupiah } from "@/lib/rupiah";
+import { urlGambarAman } from "@/lib/wa";
+
+const POSISI = [
+  "left-[0%] top-[8%] z-[1]",
+  "left-[12%] top-[48%] z-[2]",
+  "right-[0%] top-[10%] z-[1]",
+  "right-[14%] top-[50%] z-[3]",
+  "left-[34%] top-[0%] z-[2]",
+  "right-[32%] top-[2%] z-[2]",
+];
 
 export default function Home({
   searchParams,
@@ -12,73 +26,155 @@ export default function Home({
   searchParams: Promise<{ q?: string; kategori?: string; urut?: string }>;
 }) {
   return (
-    <div>
+    <div className="space-y-[72px]">
       <h1 className="sr-only">Jualan teman kampus, dalam satu katalog.</h1>
-      <Muncul>
-      <section className="card-duo relative mb-8 mt-10 overflow-visible p-5 sm:p-6 md:mt-16 md:min-h-[300px] md:p-10">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
-          <span className="absolute top-1 right-0 h-44 w-44 rounded-full bg-white/15 md:top-4 md:right-6 md:h-96 md:w-96" />
-        </div>
-        <div className="relative z-10 pr-[11rem] md:max-w-[calc(100%-18rem)] md:pr-0 xl:max-w-[calc(100%-21rem)]">
-          <h2 className="text-[1.65rem] font-black leading-tight tracking-tight sm:text-5xl">Belanja dari sesama mahasiswa.</h2>
-          <p className="mt-3 text-sm leading-6 sm:text-lg">
-            Chat langsung ke penjual, bayar ke QRIS penjual.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <Link href="#daftar-produk" className="btn-duo-white inline-flex items-center justify-center whitespace-nowrap">
-              Mulai belanja
-            </Link>
-            <Link href="/akun" className="btn-duo inline-flex items-center justify-center whitespace-nowrap">
-              Buka toko
-            </Link>
-          </div>
-        </div>
-        <div className="pointer-events-none absolute -top-4 right-0 z-0 md:-top-10 md:right-2 xl:-top-14 xl:right-4">
-          <img
-            src="/maskot.png"
-            alt=""
-            className="maskot-layang relative h-[140px] w-[140px] object-contain md:h-[230px] md:w-[230px] xl:h-[310px] xl:w-[310px]"
-          />
-        </div>
-      </section>
-      </Muncul>
-      <Suspense fallback={null}>
-        <BannerPengumuman />
+      <Suspense fallback={<div className="h-[420px]"><p className="sr-only">Memuat beranda</p></div>}>
+        <Hero searchParams={searchParams} />
       </Suspense>
       <Suspense fallback={<KerangkaProduk />}>
-        <KatalogProduk searchParams={searchParams} />
+        <KatalogProduk searchParams={searchParams} beranda />
       </Suspense>
       <Suspense fallback={null}>
         <TokoPilihan />
       </Suspense>
       <Muncul>
-      <section className="card-duo mt-10 p-5 md:p-10">
-        <h2 className="max-w-xl text-2xl font-black leading-tight tracking-tight text-[#042c60] sm:text-4xl">
-          Punya usaha? Buka toko gratis di Syamxuanify.
-        </h2>
-        <p className="mt-3 max-w-xl text-sm font-bold leading-6 text-eel sm:text-lg">
-          Jualan ke teman sekampus, pembeli langsung chat WhatsApp kamu.
-        </p>
-        <Link
-          href="/daftar"
-          className="btn-duo mt-5 inline-flex items-center justify-center whitespace-nowrap"
-        >
-          Buka toko
-        </Link>
-      </section>
+        <section className="kartu px-[24px] py-[32px]">
+          <h2>Punya usaha? Buka toko gratis di Syamxuanify.</h2>
+          <p className="mt-[12px] max-w-xl text-[16px] text-muted-gray">
+            Jualan ke teman sekampus, pembeli langsung chat WhatsApp kamu.
+          </p>
+          <Link href="/daftar" className="btn-sekunder mt-[20px]">
+            Buka toko
+          </Link>
+        </section>
       </Muncul>
     </div>
   );
 }
 
-async function BannerPengumuman() {
-  const situs = await ambilSitus();
-  if (!situs.pengumuman_aktif || !situs.pengumuman_teks) return null;
+async function Hero({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; kategori?: string; urut?: string }>;
+}) {
+  const params = await searchParams;
+  const kata = bersihkanKata(params.q);
+  const kategori = slugAman(params.kategori) ? params.kategori : "";
+  const urutan = urutanAman(params.urut);
+  const hasil = await ambilKatalog(kata, kategori, urutan);
+  const kartu = (await ambilTerlaris(6)).slice(0, 6);
+
   return (
-    <Muncul>
-      <p className="card-duo mb-6 p-4 text-sm leading-6 text-[#042c60]">
-        {situs.pengumuman_teks}
-      </p>
-    </Muncul>
+    <section>
+      <div className="relative hidden h-[460px] md:block">
+        <p className="pointer-events-none absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center text-[72px] leading-none font-semibold tracking-[-0.05em] text-ink-black">
+          Syamxuanify<span className="text-shop-violet">.</span>
+        </p>
+        {kartu.map((item, indeks) => (
+          <KartuMelayang key={item.id} item={item} indeks={indeks} />
+        ))}
+      </div>
+      <div className="md:hidden">
+        <p className="text-center text-[40px] leading-none font-semibold tracking-[-0.05em]">
+          Syamxuanify<span className="text-shop-violet">.</span>
+        </p>
+        <div className="mt-[20px] flex gap-[12px] overflow-x-auto pb-[8px]">
+          {kartu.map((item) => (
+            <div key={item.id} className="w-[168px] shrink-0">
+              <KartuIsi item={item} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div id="cari" className="mx-auto mt-[28px] max-w-[640px] scroll-mt-28">
+        <CariProduk />
+      </div>
+      {hasil.ok ? (
+        <div className="mt-[16px] flex gap-[12px] overflow-x-auto pb-[4px]">
+          <Chip href={tautanFilter("/", "", kata, hasil.urutan)} aktif={!hasil.kategoriAktif} slug="semua">
+            Semua
+          </Chip>
+          {hasil.kategori.map((item) => (
+            <Chip
+              key={item.slug}
+              href={tautanFilter("/", item.slug, kata, hasil.urutan)}
+              aktif={hasil.kategoriAktif === item.slug}
+              slug={item.slug}
+            >
+              {item.nama}
+            </Chip>
+          ))}
+        </div>
+      ) : null}
+    </section>
   );
+}
+
+function KartuMelayang({
+  item,
+  indeks,
+}: {
+  item: Awaited<ReturnType<typeof ambilTerlaris>>[number];
+  indeks: number;
+}) {
+  return (
+    <div
+      className={`melayang absolute w-[168px] ${POSISI[indeks] ?? POSISI[0]}`}
+      style={{ animationDuration: `${4 + (indeks % 3) * 0.8}s`, animationDelay: `${indeks * 0.45}s` }}
+    >
+      <KartuIsi item={item} />
+    </div>
+  );
+}
+
+function KartuIsi({ item }: { item: Awaited<ReturnType<typeof ambilTerlaris>>[number] }) {
+  const gambar = urlGambarAman(item.gambar_url);
+  return (
+    <article className="kartu">
+      <Link href={`/produk/${item.slug}`} className="block">
+        <div className="bingkai-foto">
+          {gambar ? (
+            <img src={gambar} alt="" className="foto-kartu" />
+          ) : (
+            <PlaceholderProduk kategori={item.kategori?.slug} />
+          )}
+        </div>
+        <span className="flex flex-col gap-[12px] px-[12px] pb-[16px]">
+          <span className="line-clamp-2 min-h-[2.4em] text-[14px] font-semibold tracking-[-0.014em]">{item.judul}</span>
+          <span className="text-[14px]">{formatRupiah(item.harga)}</span>
+          <span className="label-kecil truncate text-muted-gray">{item.toko?.nama_toko}</span>
+        </span>
+      </Link>
+    </article>
+  );
+}
+
+function Chip({
+  href,
+  aktif,
+  slug,
+  children,
+}: {
+  href: string;
+  aktif: boolean;
+  slug: string;
+  children: string;
+}) {
+  return (
+    <Link href={href} data-active={aktif ? "true" : "false"} className="chip-kategori shrink-0">
+      <span className="inline-flex h-[16px] w-[16px] items-center justify-center rounded-full bg-canvas-mist">
+        <IkonKategori slug={slug} className="h-[12px] w-[12px]" />
+      </span>
+      {children}
+    </Link>
+  );
+}
+
+function tautanFilter(dasar: string, kategori: string, kata: string, urutan: UrutanKatalog = "terbaru") {
+  const params = new URLSearchParams();
+  if (kata) params.set("q", kata);
+  if (kategori) params.set("kategori", kategori);
+  if (urutan !== "terbaru") params.set("urut", urutan);
+  const query = params.toString();
+  return query ? `${dasar}?${query}` : dasar;
 }

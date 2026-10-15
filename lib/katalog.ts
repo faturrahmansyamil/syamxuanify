@@ -37,6 +37,10 @@ export type ProdukPublik = {
   condition?: "baru" | "bekas";
   preorder_days?: number | null;
   weight_or_size?: string | null;
+  baru?: boolean;
+  punyaVarian?: boolean;
+  klikWa?: number;
+  dibuat?: string;
 };
 
 export type UrutanKatalog = "terbaru" | "terlaris" | "murah" | "mahal";
@@ -59,13 +63,13 @@ export type TetanggaProduk = {
 const URUTAN_KATEGORI = ["makanan-jajanan", "produk-digital", "jasa", "fashion", "lainnya"];
 
 const KOLOM_PRODUK = `
-  id, judul, slug, deskripsi, harga, gambar_url, status, is_available,
+  id, judul, slug, deskripsi, harga, gambar_url, status, is_available, created_at,
   categories!inner(nama, slug),
   shops!inner(id, nama_toko, slug, deskripsi, no_wa, qris_url, logo_url, terverifikasi, status)
 `;
 
 const KOLOM_ETALASE = `
-  id, judul, slug, deskripsi, harga, gambar_url, status, is_available,
+  id, judul, slug, deskripsi, harga, gambar_url, status, is_available, created_at,
   stock, sold_count, condition, preorder_days, weight_or_size,
   categories!inner(nama, slug),
   shops!inner(id, nama_toko, slug, deskripsi, no_wa, qris_url, logo_url, terverifikasi, status)
@@ -87,6 +91,8 @@ type BarisProduk = {
   condition?: string | null;
   preorder_days?: number | null;
   weight_or_size?: string | null;
+  created_at?: string;
+  klik_wa?: number | null;
   categories: BarisKategori;
   shops: BarisToko;
 };
@@ -129,7 +135,7 @@ export async function ambilKatalog(
 
   return {
     ok: true as const,
-    produk: ((produkRes.data ?? []) as BarisProduk[]).map(jadikanProduk).filter(adaToko),
+    produk: await tandaiVarian(siap.supabase, petakan((produkRes.data ?? []) as BarisProduk[], siap.sekarang)),
     kategori: urutkanKategori((kategoriRes.data ?? []) as KategoriRingkas[]),
     kata,
     kategoriAktif: kategori ?? "",
@@ -163,7 +169,7 @@ export async function ambilProduk(slug: string, opsi?: { lihatAdmin?: boolean })
 
   return {
     ok: true as const,
-    produk: ((data ?? []) as BarisProduk[]).map(jadikanProduk).filter(adaToko),
+    produk: await tandaiVarian(siap.supabase, petakan((data ?? []) as BarisProduk[], siap.sekarang)),
   };
 }
 
@@ -182,7 +188,9 @@ export async function ambilProdukId(ids: string[]) {
   const { data, error } = dasar;
   if (error || !data) return [] as ProdukPublik[];
 
-  const peta = new Map(((data ?? []) as BarisProduk[]).map((baris) => [baris.id, jadikanProduk(baris)]));
+  const peta = new Map(
+    (await tandaiVarian(siap.supabase, petakan((data ?? []) as BarisProduk[], siap.sekarang))).map((baris) => [baris.id, baris]),
+  );
   return unik.map((id) => peta.get(id)).filter((item): item is ProdukPublik => Boolean(item?.toko));
 }
 
@@ -215,25 +223,32 @@ export async function ambilToko(slug: string, opsi?: { lihatMilik?: boolean; lih
     owner_id: string;
     products: Array<BarisProduk & { status: string }> | null;
   };
-  const produk = (toko.products ?? [])
-    .filter((item) => item.status === "approved")
-    .map((item) =>
-      jadikanProduk({
-        ...item,
-        shops: {
-          id: toko.id,
-          nama_toko: toko.nama_toko,
-          slug: toko.slug,
-          deskripsi: toko.deskripsi,
-          no_wa: toko.no_wa,
-          qris_url: toko.qris_url,
-          logo_url: toko.logo_url,
-          terverifikasi: toko.terverifikasi,
-          status: "approved",
-        },
-      }),
+  const produk = (
+    await tandaiVarian(
+      siap.supabase,
+      (toko.products ?? [])
+        .filter((item) => item.status === "approved")
+        .map((item) =>
+          jadikanProduk(
+            {
+              ...item,
+              shops: {
+                id: toko.id,
+                nama_toko: toko.nama_toko,
+                slug: toko.slug,
+                deskripsi: toko.deskripsi,
+                no_wa: toko.no_wa,
+                qris_url: toko.qris_url,
+                logo_url: toko.logo_url,
+                terverifikasi: toko.terverifikasi,
+                status: "approved",
+              },
+            },
+            siap.sekarang,
+          ),
+        ),
     )
-    .sort((a, b) => a.judul.localeCompare(b.judul, "id"));
+  ).sort((a, b) => a.judul.localeCompare(b.judul, "id"));
 
   return {
     ok: true as const,
@@ -309,13 +324,13 @@ async function siapkan() {
 
   try {
     const supabase = await createClient();
-    return { ok: true as const, supabase };
+    return { ok: true as const, supabase, sekarang: Date.now() };
   } catch {
     return { ok: false as const, pesan: "Supabase tidak terjangkau. Periksa koneksi, lalu muat ulang halaman." };
   }
 }
 
-function jadikanProduk(baris: BarisProduk): ProdukPublik {
+function jadikanProduk(baris: BarisProduk, sekarang = 0): ProdukPublik {
   const kategori = satu(baris.categories);
   const toko = satu(baris.shops);
   return {
@@ -332,6 +347,10 @@ function jadikanProduk(baris: BarisProduk): ProdukPublik {
     condition: baris.condition === "bekas" || baris.condition === "baru" ? baris.condition : undefined,
     preorder_days: typeof baris.preorder_days === "number" ? baris.preorder_days : null,
     weight_or_size: baris.weight_or_size || null,
+    baru: baruTujuhHari(baris.created_at, sekarang),
+    punyaVarian: false,
+    klikWa: typeof baris.klik_wa === "number" ? baris.klik_wa : undefined,
+    dibuat: baris.created_at,
     kategori: kategori ? { nama: kategori.nama, slug: kategori.slug } : null,
     toko: toko
       ? {
@@ -346,6 +365,115 @@ function jadikanProduk(baris: BarisProduk): ProdukPublik {
         }
       : null,
   };
+}
+
+function baruTujuhHari(dibuat: string | undefined, sekarang: number) {
+  if (!dibuat || sekarang <= 0) return false;
+  const waktu = Date.parse(dibuat);
+  if (Number.isNaN(waktu)) return false;
+  return sekarang >= waktu && sekarang - waktu < 7 * 24 * 60 * 60 * 1000;
+}
+
+function petakan(baris: BarisProduk[], sekarang: number) {
+  return baris.map((item) => jadikanProduk(item, sekarang)).filter(adaToko);
+}
+
+async function tandaiVarian(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  daftar: ProdukPublik[],
+) {
+  if (daftar.length === 0) return daftar;
+  const { data, error } = await supabase.from("product_variants").select("product_id").in(
+    "product_id",
+    daftar.map((item) => item.id),
+  );
+  if (error || !data) return daftar;
+  const ada = new Set(data.map((baris) => String(baris.product_id)));
+  return daftar.map((item) => (ada.has(item.id) ? { ...item, punyaVarian: true } : item));
+}
+
+export async function ambilUnggulan() {
+  const siap = await siapkan();
+  if (!siap.ok) return null;
+
+  let kolom: typeof KOLOM_ETALASE | typeof KOLOM_PRODUK = KOLOM_ETALASE;
+  let pilihan = await siap.supabase
+    .from("products")
+    .select(`${kolom}, is_unggulan`)
+    .eq("status", "approved")
+    .eq("shops.status", "approved")
+    .eq("is_unggulan", true)
+    .order("created_at", { ascending: false })
+    .limit(1);
+
+  if (pilihan.error && kolomEtalase(pilihan.error.message) && !pilihan.error.message.toLowerCase().includes("is_unggulan")) {
+    kolom = KOLOM_PRODUK;
+    pilihan = await siap.supabase
+      .from("products")
+      .select(`${kolom}, is_unggulan`)
+      .eq("status", "approved")
+      .eq("shops.status", "approved")
+      .eq("is_unggulan", true)
+      .order("created_at", { ascending: false })
+      .limit(1);
+  }
+
+  if (!pilihan.error && pilihan.data?.length) {
+    const [produk] = await tandaiVarian(siap.supabase, petakan(pilihan.data as BarisProduk[], siap.sekarang));
+    if (produk) return produk;
+  }
+
+  const baru = await siap.supabase
+    .from("products")
+    .select(kolom)
+    .eq("status", "approved")
+    .eq("shops.status", "approved")
+    .order("created_at", { ascending: false })
+    .limit(1);
+  const sumber = baru.error && kolom !== KOLOM_PRODUK
+    ? await siap.supabase
+        .from("products")
+        .select(KOLOM_PRODUK)
+        .eq("status", "approved")
+        .eq("shops.status", "approved")
+        .order("created_at", { ascending: false })
+        .limit(1)
+    : baru;
+  if (sumber.error || !sumber.data?.length) return null;
+  const [produk] = await tandaiVarian(siap.supabase, petakan(sumber.data as BarisProduk[], siap.sekarang));
+  return produk ?? null;
+}
+
+export async function ambilTerlaris(batas = 10) {
+  const siap = await siapkan();
+  if (!siap.ok) return [] as ProdukPublik[];
+
+  const pertama = await siap.supabase
+    .from("products")
+    .select(`${KOLOM_ETALASE}, klik_wa`)
+    .eq("status", "approved")
+    .eq("shops.status", "approved")
+    .order("klik_wa", { ascending: false })
+    .order("created_at", { ascending: false })
+    .limit(batas);
+
+  if (!pertama.error) {
+    let daftar = await tandaiVarian(siap.supabase, petakan((pertama.data ?? []) as BarisProduk[], siap.sekarang));
+    if (!daftar.some((item) => (item.klikWa ?? 0) > 0)) {
+      daftar = [...daftar].sort((a, b) => (b.dibuat ?? "").localeCompare(a.dibuat ?? ""));
+    }
+    return daftar;
+  }
+
+  const cadangan = await siap.supabase
+    .from("products")
+    .select(kolomEtalase(pertama.error.message) ? KOLOM_PRODUK : KOLOM_ETALASE)
+    .eq("status", "approved")
+    .eq("shops.status", "approved")
+    .order("created_at", { ascending: false })
+    .limit(batas);
+  if (cadangan.error || !cadangan.data) return [] as ProdukPublik[];
+  return tandaiVarian(siap.supabase, petakan(cadangan.data as BarisProduk[], siap.sekarang));
 }
 
 function adaToko(produk: ProdukPublik): produk is ProdukPublik & { toko: TokoPublik } {
@@ -461,14 +589,14 @@ async function muatSatuProduk(supabase: Awaited<ReturnType<typeof createClient>>
 }
 
 const KOLOM_TOKO = `id, owner_id, nama_toko, slug, deskripsi, no_wa, qris_url, logo_url, terverifikasi, status,
-       products(id, judul, slug, deskripsi, harga, gambar_url, status, is_available, categories(nama, slug))`;
+       products(id, judul, slug, deskripsi, harga, gambar_url, status, is_available, created_at, categories(nama, slug))`;
 
 async function muatSatuToko(supabase: Awaited<ReturnType<typeof createClient>>, slug: string) {
   const etalase = await supabase
     .from("shops")
     .select(
       `id, owner_id, nama_toko, slug, deskripsi, no_wa, qris_url, logo_url, terverifikasi, status, is_closed,
-       products(id, judul, slug, deskripsi, harga, gambar_url, status, is_available, stock, sold_count, categories(nama, slug))`,
+       products(id, judul, slug, deskripsi, harga, gambar_url, status, is_available, stock, sold_count, created_at, categories(nama, slug))`,
     )
     .eq("slug", slug)
     .maybeSingle();
@@ -501,8 +629,8 @@ export async function ambilTetangga(produk: ProdukPublik): Promise<TetanggaProdu
   const [foto, varian, lain, serupa, jumlahToko] = await Promise.all([
     muatFoto(siap.supabase, produk.id, fotoAwal),
     muatVarian(siap.supabase, produk.id),
-    muatLain(siap.supabase, produk),
-    muatSerupa(siap.supabase, produk),
+    muatLain(siap.supabase, produk, siap.sekarang),
+    muatSerupa(siap.supabase, produk, siap.sekarang),
     hitungProdukToko(siap.supabase, produk.toko.id),
   ]);
   return { foto, varian, lain, serupa, jumlahToko };
@@ -540,7 +668,7 @@ async function muatVarian(supabase: Awaited<ReturnType<typeof createClient>>, id
     }));
 }
 
-async function muatLain(supabase: Awaited<ReturnType<typeof createClient>>, produk: ProdukPublik) {
+async function muatLain(supabase: Awaited<ReturnType<typeof createClient>>, produk: ProdukPublik, sekarang: number) {
   const shopId = produk.toko?.id;
   if (!shopId) return [] as ProdukPublik[];
   const etalase = await supabase
@@ -565,10 +693,10 @@ async function muatLain(supabase: Awaited<ReturnType<typeof createClient>>, prod
           .limit(8)
       : etalase;
   if (hasil.error || !hasil.data) return [] as ProdukPublik[];
-  return (hasil.data as BarisProduk[]).map(jadikanProduk).filter(adaToko);
+  return tandaiVarian(supabase, petakan(hasil.data as BarisProduk[], sekarang));
 }
 
-async function muatSerupa(supabase: Awaited<ReturnType<typeof createClient>>, produk: ProdukPublik) {
+async function muatSerupa(supabase: Awaited<ReturnType<typeof createClient>>, produk: ProdukPublik, sekarang: number) {
   const slug = produk.kategori?.slug;
   const shopId = produk.toko?.id;
   if (!slug || !shopId) return [] as ProdukPublik[];
@@ -596,7 +724,7 @@ async function muatSerupa(supabase: Awaited<ReturnType<typeof createClient>>, pr
           .limit(8)
       : etalase;
   if (hasil.error || !hasil.data) return [] as ProdukPublik[];
-  return (hasil.data as BarisProduk[]).map(jadikanProduk).filter(adaToko);
+  return tandaiVarian(supabase, petakan(hasil.data as BarisProduk[], sekarang));
 }
 
 async function hitungProdukToko(supabase: Awaited<ReturnType<typeof createClient>>, shopId: string) {

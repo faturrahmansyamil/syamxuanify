@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { hapusProdukAdmin, ubahStokAdmin } from "@/app/actions/admin";
+import { hapusProdukAdmin, ubahStokAdmin, ubahUnggulan } from "@/app/actions/admin";
 import { TombolAksi } from "@/components/tombol-aksi";
 import { kataCari, klienAdmin, labelStatus, satu, statusAman } from "@/lib/panel-admin";
 import { formatRupiah } from "@/lib/rupiah";
@@ -59,15 +59,25 @@ async function Isi({ searchParams }: { searchParams: Promise<{ q?: string; statu
             ) : daftar.map((produk) => {
               const toko = satu(produk.shops);
               const tersedia = produk.is_available !== false;
+              const unggulan = produk.is_unggulan === true;
               return (
                 <tr key={produk.id} className="border-t border-bebe">
                   <td className="px-4 py-3 font-medium">{produk.judul}</td>
                   <td className="px-4 py-3">{toko?.nama_toko ?? "Toko"}</td>
                   <td className="px-4 py-3">{formatRupiah(produk.harga)}</td>
-                  <td className="px-4 py-3">{labelStatus(produk.status)}{tersedia ? "" : " · nonaktif"}</td>
+                  <td className="px-4 py-3">{labelStatus(produk.status)}{tersedia ? "" : " · nonaktif"}{unggulan ? " · unggulan" : ""}</td>
                   <td className="px-4 py-3">
                     <div className="flex flex-wrap gap-2">
                       <Link href={`/produk/${produk.slug}`} className={tombol}>Lihat</Link>
+                      {typeof produk.is_unggulan === "boolean" ? (
+                        <TombolAksi
+                          aksi={ubahUnggulan}
+                          bidang={{ id: produk.id, unggulan: unggulan ? "tidak" : "ya", kembali }}
+                          className={tombol}
+                        >
+                          {unggulan ? "Cabut unggulan" : "Jadikan unggulan"}
+                        </TombolAksi>
+                      ) : null}
                       <TombolAksi aksi={ubahStokAdmin} bidang={{ id: produk.id, tersedia: tersedia ? "tidak" : "ya", kembali }} className={tombol}>
                         {tersedia ? "Nonaktifkan" : "Aktifkan"}
                       </TombolAksi>
@@ -95,7 +105,10 @@ function tautan(kata: string, status: string) {
 }
 
 async function muat(supabase: Awaited<ReturnType<typeof import("@/lib/supabase/server").createClient>>, kata: string, status: string) {
-  const lengkapAwal = supabase.from("products").select("id, judul, slug, harga, status, is_available, shops(nama_toko)").order("created_at", { ascending: false });
+  const lengkapAwal = supabase
+    .from("products")
+    .select("id, judul, slug, harga, status, is_available, is_unggulan, shops(nama_toko)")
+    .order("created_at", { ascending: false });
   const lengkapStatus = status ? lengkapAwal.eq("status", status) : lengkapAwal;
   const lengkap = await (kata ? lengkapStatus.ilike("judul", `%${kata}%`) : lengkapStatus);
   if (!lengkap.error) {
@@ -106,6 +119,23 @@ async function muat(supabase: Awaited<ReturnType<typeof import("@/lib/supabase/s
       harga: produk.harga,
       status: produk.status,
       is_available: produk.is_available,
+      is_unggulan: produk.is_unggulan,
+      shops: produk.shops,
+    }));
+  }
+
+  const stokAwal = supabase.from("products").select("id, judul, slug, harga, status, is_available, shops(nama_toko)").order("created_at", { ascending: false });
+  const stokStatus = status ? stokAwal.eq("status", status) : stokAwal;
+  const stok = await (kata ? stokStatus.ilike("judul", `%${kata}%`) : stokStatus);
+  if (!stok.error) {
+    return (stok.data ?? []).map((produk) => ({
+      id: produk.id,
+      judul: produk.judul,
+      slug: produk.slug,
+      harga: produk.harga,
+      status: produk.status,
+      is_available: produk.is_available,
+      is_unggulan: null as boolean | null,
       shops: produk.shops,
     }));
   }
@@ -120,6 +150,7 @@ async function muat(supabase: Awaited<ReturnType<typeof import("@/lib/supabase/s
     harga: produk.harga,
     status: produk.status,
     is_available: true,
+    is_unggulan: null as boolean | null,
     shops: produk.shops,
   }));
 }

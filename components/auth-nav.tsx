@@ -19,10 +19,10 @@ export async function AuthNav() {
   if (!email) return <TautanTamu />;
 
   const peran = await peranPengguna(supabase);
-  const tautan = "text-xs font-medium text-hof hover:underline sm:text-sm";
+  const tautan = "inline-flex min-h-[44px] items-center px-[8px] text-[14px] font-medium text-ink-black";
 
   return (
-    <div className="flex flex-wrap items-center justify-end gap-x-2 gap-y-1">
+    <div className="flex flex-wrap items-center justify-end gap-2">
       {peran === "admin" ? (
         <Link href="/admin" className={tautan}>
           Admin
@@ -43,9 +43,9 @@ export async function AuthNav() {
           Akun Saya
         </Link>
       ) : null}
-      <span className="hidden max-w-32 truncate text-sm text-foggy sm:inline sm:max-w-56">{email}</span>
+      <span className="hidden max-w-[8rem] truncate text-[14px] text-muted-gray sm:inline sm:max-w-[14rem]">{email}</span>
       <form action={keluar}>
-        <button type="submit" className="text-xs font-medium text-hof hover:underline sm:text-sm">
+        <button type="submit" className="btn-sekunder">
           Keluar
         </button>
       </form>
@@ -55,11 +55,11 @@ export async function AuthNav() {
 
 function TautanTamu() {
   return (
-    <div className="flex flex-nowrap items-center justify-end gap-x-2">
-      <Link href="/masuk" className="btn-duo-white inline-flex items-center">
+    <div className="flex flex-nowrap items-center justify-end gap-2">
+      <Link href="/masuk" className="btn-utama shrink-0">
         Masuk
       </Link>
-      <Link href="/daftar" className="btn-duo inline-flex items-center">
+      <Link href="/daftar" className="btn-utama shrink-0">
         Daftar
       </Link>
     </div>

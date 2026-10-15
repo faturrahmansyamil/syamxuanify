@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, ChevronRight } from "lucide-react";
 import { Muncul } from "@/components/muncul";
 import { InisialToko } from "@/components/tampilan";
 import { fotoPenjual } from "@/lib/contoh-penjual";
@@ -11,8 +11,11 @@ export async function TokoPilihan() {
 
   return (
     <Muncul>
-    <section className="mt-10">
-      <h2 className="text-2xl font-black tracking-tight text-hof">Toko Pilihan</h2>
+    <section>
+      <h2 className="mb-[24px] inline-flex items-center gap-[4px]">
+        Toko Pilihan
+        <ChevronRight className="h-[16px] w-[16px]" aria-hidden="true" />
+      </h2>
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {toko.map((item, indeks) => {
           const foto = fotoPenjual(item.slug, item.logo_url);
@@ -31,12 +34,12 @@ export async function TokoPilihan() {
                 <span className="block truncate text-sm font-extrabold text-hof">{item.nama_toko}</span>
                 <span className="mt-1 flex flex-wrap items-center gap-2">
                   {item.terverifikasi ? (
-                    <span className="inline-flex items-center gap-1 rounded-xl bg-langit px-2 py-0.5 text-[11px] font-bold text-accent">
+                    <span className="inline-flex min-h-6 items-center gap-1 rounded-xl bg-langit px-2 py-0.5 text-xs font-bold text-[#1e40af]">
                       <BadgeCheck className="h-3.5 w-3.5" aria-hidden="true" strokeWidth={2.5} />
-                      Verified
+                      Terverifikasi
                     </span>
                   ) : null}
-                  <span className="text-xs font-bold text-foggy">{item.jumlah} produk</span>
+                  <span className="text-xs font-bold text-[#4b4b4b]">{item.jumlah} produk</span>
                 </span>
               </span>
             </Link>

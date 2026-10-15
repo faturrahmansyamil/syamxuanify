@@ -65,12 +65,10 @@ export function BidangTeks({
           maxLength={maxLength}
           inputMode={inputMode}
           aria-invalid={galat ? true : undefined}
-          className={`w-full rounded-xl border-2 bg-[#f7f7f7] py-3 pl-11 pr-3 text-base text-[#3c3c3c] outline-none ${
-            galat ? "border-red-400 focus:border-red-500" : "border-[#e5e5e5] focus:border-[#93c5fd]"
-          }`}
+          className="input-pill pl-[44px]"
         />
       </div>
-      {bantuan ? <p className="text-xs leading-5 text-foggy">{bantuan}</p> : null}
+      {bantuan ? <p className="text-xs leading-5 text-[#4b4b4b]">{bantuan}</p> : null}
       {galat ? (
         <p role="alert" className="text-sm text-red-700">
           {galat}
@@ -110,15 +108,13 @@ export function BidangSandi({
           required
           minLength={6}
           aria-invalid={galat ? true : undefined}
-          className={`w-full rounded-xl border-2 bg-[#f7f7f7] py-3 pl-11 pr-12 text-base text-[#3c3c3c] outline-none ${
-            galat ? "border-red-400 focus:border-red-500" : "border-[#e5e5e5] focus:border-[#93c5fd]"
-          }`}
+          className={`input-pill pl-[44px] pr-[48px] ${galat ? "border-ink-black" : ""}`}
         />
         <button
           type="button"
           onClick={() => setTampil((nilai) => !nilai)}
           aria-label={tampil ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
-          className="absolute right-2 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-foggy hover:bg-faint hover:text-hof"
+          className="btn-sekunder btn-ikon absolute top-1/2 right-[6px] -translate-y-1/2"
         >
           {tampil ? <IkonMata coret /> : <IkonMata />}
         </button>
@@ -137,7 +133,7 @@ export function TombolUtama({ pending, anak }: { pending: boolean; anak: string 
     <button
       type="submit"
       disabled={pending}
-      className="btn-duo flex w-full items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
+      className="btn-utama flex w-full disabled:cursor-not-allowed disabled:opacity-70"
     >
       {pending ? <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/40 border-t-white" /> : null}
       {pending ? "Memproses..." : anak}
@@ -165,7 +161,7 @@ export function TombolGoogle({
       <button
         type="submit"
         disabled={pending}
-        className="btn-duo-white flex w-full items-center justify-center gap-3 disabled:opacity-70"
+        className="btn-sekunder flex w-full gap-[12px] disabled:opacity-70"
       >
         {pending ? (
           <span className="h-5 w-5 animate-spin rounded-full border-2 border-bebe border-t-hof" />
@@ -180,13 +176,13 @@ export function TombolGoogle({
 
 export function PemisahAtau() {
   return (
-    <p className="text-center text-xs text-foggy">atau pakai email</p>
+    <p className="text-center text-xs text-[#4b4b4b]">atau pakai email</p>
   );
 }
 
 function IkonBidang({ nama }: { nama: "email" | "gembok" | "orang" | "wa" }) {
   return (
-    <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-foggy">
+    <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#4b4b4b]">
       {nama === "email" ? (
         <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
           <path d="M4 7h16v10H4z" />

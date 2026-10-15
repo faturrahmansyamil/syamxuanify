@@ -6,7 +6,15 @@ import type { ProdukPublik } from "@/lib/katalog";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
-export async function KisiProduk({ produk, kembali }: { produk: ProdukPublik[]; kembali: string }) {
+export async function KisiProduk({
+  produk,
+  kembali,
+  kolom = "padat",
+}: {
+  produk: ProdukPublik[];
+  kembali: string;
+  kolom?: "padat" | "beranda";
+}) {
   await connection();
   let disukai = new Set<string>();
 
@@ -22,9 +30,9 @@ export async function KisiProduk({ produk, kembali }: { produk: ProdukPublik[]; 
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-5">
+    <div className={kolom === "beranda" ? "grid grid-cols-2 gap-[12px] md:grid-cols-3 lg:grid-cols-4" : "grid grid-cols-2 gap-[12px] md:grid-cols-3 lg:grid-cols-5"}>
       {produk.map((item, indeks) => (
-        <Muncul key={item.id} urut={indeks}>
+        <Muncul key={item.id} urut={indeks} className="flex h-full flex-col">
           <KartuProduk produk={item} disukai={disukai.has(item.id)} kembali={kembali} />
         </Muncul>
       ))}

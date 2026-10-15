@@ -144,6 +144,7 @@ function IsiProduk({
             </div>
           </div>
           <PanelBeli
+            id={produk.id}
             judul={produk.judul}
             harga={produk.harga}
             terjual={produk.sold_count}
@@ -183,7 +184,7 @@ function IsiProduk({
               <div className="mt-4 grid grid-cols-2 gap-2">
                 <Link
                   href={`/toko/${toko.slug}`}
-                  className="flex h-11 items-center justify-center rounded-full border border-hof text-sm font-semibold text-hof"
+                  className="btn-sekunder flex items-center justify-center"
                 >
                   Lihat Toko
                 </Link>
@@ -192,7 +193,7 @@ function IsiProduk({
                     href={tanya}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-11 items-center justify-center rounded-full border border-hof text-sm font-semibold text-hof"
+                    className="btn-utama flex items-center justify-center"
                   >
                     Chat
                   </a>

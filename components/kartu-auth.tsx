@@ -10,16 +10,16 @@ export function KartuAuth({
   bawah: ReactNode;
 }) {
   return (
-    <div className="auth-muncul mx-auto w-full max-w-md px-1 pt-2 pb-4">
+    <div className="mx-auto w-full max-w-md px-1 pt-2 pb-4">
       <img
         src="/maskot.png"
         alt=""
-        className="maskot-layang pointer-events-none mx-auto mb-3 h-28 w-28 object-contain sm:h-32 sm:w-32"
+        className="pointer-events-none mx-auto mb-[12px] h-[64px] w-[64px] object-contain"
       />
-      <div className="card-duo px-5 py-6 text-[#3c3c3c] sm:px-7 sm:py-8">
-        <h1 className="text-3xl font-black leading-tight tracking-tight text-accent sm:text-4xl">{judul}</h1>
-        <div className="mt-6">{anak}</div>
-        <div className="mt-6 text-sm font-bold">{bawah}</div>
+      <div className="kartu px-[24px] py-[28px] text-ink-black">
+        <h1>{judul}</h1>
+        <div className="mt-[24px]">{anak}</div>
+        <div className="mt-[24px] text-[14px]">{bawah}</div>
       </div>
     </div>
   );

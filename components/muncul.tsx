@@ -5,9 +5,11 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 export function Muncul({
   children,
   urut = 0,
+  className = "",
 }: {
   children: ReactNode;
   urut?: number;
+  className?: string;
 }) {
   const simpul = useRef<HTMLDivElement>(null);
   const [tampil, setTampil] = useState(false);
@@ -35,7 +37,7 @@ export function Muncul({
   const gaya: CSSProperties = { transitionDelay: `${urut * 60}ms` };
 
   return (
-    <div ref={simpul} className={tampil ? "muncul muncul-tampil" : "muncul"} style={gaya}>
+    <div ref={simpul} className={`${tampil ? "muncul muncul-tampil" : "muncul"} ${className}`} style={gaya}>
       {children}
     </div>
   );

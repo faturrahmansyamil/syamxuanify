@@ -1,11 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { catatKlikWa } from "@/app/actions/klik";
 import { formatRupiah } from "@/lib/rupiah";
 import type { VarianEtalase } from "@/lib/katalog";
 import { pesanPesan, tautanWhatsApp } from "@/lib/wa";
 
 export function PanelBeli({
+  id,
   judul,
   harga,
   terjual,
@@ -18,6 +20,7 @@ export function PanelBeli({
   nomor,
   namaToko,
 }: {
+  id: string;
   judul: string;
   harga: number;
   terjual?: number;
@@ -61,7 +64,10 @@ export function PanelBeli({
       href={tautan}
       target="_blank"
       rel="noopener noreferrer"
-      className="btn-duo flex w-full items-center justify-center"
+      onClick={() => {
+        void catatKlikWa(id);
+      }}
+      className="btn-utama flex w-full"
     >
       Chat WhatsApp
     </a>
@@ -69,7 +75,7 @@ export function PanelBeli({
     <button
       type="button"
       disabled
-      className="flex h-12 w-full cursor-not-allowed items-center justify-center rounded-full bg-faint text-sm font-medium text-hof"
+      className="btn-utama flex w-full cursor-not-allowed opacity-60"
     >
       {wajibVarian ? "Pilih varian dulu" : "Chat WhatsApp"}
     </button>

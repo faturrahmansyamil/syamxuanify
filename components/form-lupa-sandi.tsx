@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useActionState } from "react";
 import { kirimReset, type AuthState } from "@/app/actions/auth";
 
@@ -11,7 +12,7 @@ export function FormLupaSandi() {
   const [state, action, pending] = useActionState(kirimReset, awal);
 
   return (
-    <form action={action} className="space-y-4">
+    <form action={action} className="space-y-[16px]">
       <div className="space-y-1.5">
         <label htmlFor="email" className="block text-sm font-medium">
           Email
@@ -19,7 +20,7 @@ export function FormLupaSandi() {
         <input id="email" name="email" type="email" autoComplete="email" required className={bidang} />
       </div>
       {state.error ? (
-        <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p role="alert" className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm">
           {state.error}
         </p>
       ) : null}
@@ -28,13 +29,11 @@ export function FormLupaSandi() {
           {state.sukses}
         </p>
       ) : null}
-      <button
+      <Tombol
         type="submit"
-        disabled={pending}
-        className="btn-duo flex w-full items-center justify-center disabled:cursor-not-allowed disabled:opacity-60"
-      >
+        disabled={pending} varian="primary" ukuran="lg" className="w-full">
         {pending ? "Mengirim..." : "Kirim tautan"}
-      </button>
+      </Tombol>
     </form>
   );
 }

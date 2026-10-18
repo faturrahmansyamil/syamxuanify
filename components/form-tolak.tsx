@@ -1,3 +1,4 @@
+import { Tombol } from "@/components/tombol";
 export function FormTolak({
   aksi,
   id,
@@ -25,12 +26,10 @@ export function FormTolak({
         placeholder="Tulis alasan yang jelas, minimal 10 huruf."
         className="w-full rounded-lg border border-bebe bg-card px-3 py-3 text-base outline-none focus:border-hof"
       />
-      <button
-        type="submit"
-        className="btn-duo-white flex w-full items-center justify-center sm:w-auto"
-      >
+      <Tombol
+        type="submit" varian="secondary" ukuran="lg">
         Tolak
-      </button>
+      </Tombol>
     </form>
   );
 }

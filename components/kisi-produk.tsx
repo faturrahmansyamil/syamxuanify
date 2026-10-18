@@ -13,7 +13,7 @@ export async function KisiProduk({
 }: {
   produk: ProdukPublik[];
   kembali: string;
-  kolom?: "padat" | "beranda";
+  kolom?: "padat" | "beranda" | "empat";
 }) {
   await connection();
   let disukai = new Set<string>();
@@ -30,12 +30,18 @@ export async function KisiProduk({
   }
 
   return (
-    <div className={kolom === "beranda" ? "grid grid-cols-2 gap-[12px] md:grid-cols-3 lg:grid-cols-4" : "grid grid-cols-2 gap-[12px] md:grid-cols-3 lg:grid-cols-5"}>
+    <div className={kelasKisi(kolom)}>
       {produk.map((item, indeks) => (
         <Muncul key={item.id} urut={indeks} className="flex h-full flex-col">
-          <KartuProduk produk={item} disukai={disukai.has(item.id)} kembali={kembali} />
+          <KartuProduk produk={item} disukai={disukai.has(item.id)} kembali={kembali} prioritas={indeks === 0} />
         </Muncul>
       ))}
     </div>
   );
+}
+
+function kelasKisi(kolom: "padat" | "beranda" | "empat") {
+  if (kolom === "empat") return "grid grid-cols-2 gap-[12px] md:grid-cols-4";
+  if (kolom === "beranda") return "grid grid-cols-2 gap-[12px] md:grid-cols-3 lg:grid-cols-4";
+  return "grid grid-cols-2 gap-[12px] md:grid-cols-3 lg:grid-cols-5";
 }

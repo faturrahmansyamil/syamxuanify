@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useActionState } from "react";
 import { gantiKataSandi, type AuthState } from "@/app/actions/auth";
 
@@ -17,7 +18,7 @@ export function FormGantiSandi({
   const [state, action, pending] = useActionState(gantiKataSandi, awal);
 
   return (
-    <form action={action} className="space-y-4">
+    <form action={action} className="space-y-[16px]">
       <label className="block space-y-1.5 text-sm font-medium">
         Kata sandi baru
         <input name="password" type="password" autoComplete="new-password" required minLength={6} maxLength={72} className={bidang} />
@@ -26,16 +27,14 @@ export function FormGantiSandi({
         Ulangi kata sandi
         <input name="konfirmasi" type="password" autoComplete="new-password" required minLength={6} maxLength={72} className={bidang} />
       </label>
-      {state.error ? <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{state.error}</p> : null}
+      {state.error ? <p className="rounded-xl bg-canvas-mist px-3 py-2 text-sm text-ink-black">{state.error}</p> : null}
       {state.sukses ? <p className="rounded-xl bg-faint px-3 py-2 text-sm text-hof">{teksSukses ?? state.sukses}</p> : null}
       <div className={rataKanan ? "flex justify-end" : ""}>
-        <button
+        <Tombol
           type="submit"
-          disabled={pending}
-          className="btn-duo flex items-center justify-center disabled:opacity-60"
-        >
+          disabled={pending} varian="secondary" ukuran="lg">
           {pending ? "Menyimpan..." : "Simpan"}
-        </button>
+        </Tombol>
       </div>
     </form>
   );

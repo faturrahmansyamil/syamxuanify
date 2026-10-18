@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
@@ -53,25 +54,23 @@ export function BingkaiAdmin({
   }, [jalur]);
 
   return (
-    <div className="md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:items-start md:gap-8">
-      <button
+    <div className="md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:items-start md:gap-[32px]">
+      <Tombol
         type="button"
-        onClick={() => setBuka(true)}
-        className="btn-duo mb-4 inline-flex items-center md:hidden"
-      >
+        onClick={() => setBuka(true)} varian="secondary" ukuran="lg" className="mb-[16px] md:hidden">
         Menu
-      </button>
+      </Tombol>
       {buka ? (
         <button type="button" aria-label="Tutup menu" className="fixed inset-0 z-30 bg-black/40 md:hidden" onClick={() => setBuka(false)} />
       ) : null}
       <aside
-        className={`${buka ? "fixed inset-y-0 left-0 z-40 flex w-[min(100%,18rem)]" : "hidden md:flex"} flex-col rounded-[12px] border border-bebe bg-card p-4 md:sticky md:top-24 md:max-h-[calc(100vh-7rem)]`}
+        className={`${buka ? "fixed inset-y-0 left-0 z-40 flex w-[min(100%,18rem)]" : "hidden md:flex"} flex-col rounded-[12px] border border-bebe bg-card p-[16px] md:sticky md:top-[96px] md:max-h-[calc(100vh-7rem)]`}
       >
-        <div className="mb-4 flex items-center justify-between md:hidden">
+        <div className="mb-[16px] flex items-center justify-between md:hidden">
           <p className="text-sm font-semibold">Menu admin</p>
-          <button type="button" onClick={() => setBuka(false)} className="text-sm font-medium text-hof">
+          <Tombol type="button" onClick={() => setBuka(false)} varian="secondary" ukuran="sm">
             Tutup
-          </button>
+          </Tombol>
         </div>
         <nav className="min-h-0 flex-1 space-y-5 overflow-y-auto">
           {GRUP.map((grup) => (
@@ -103,10 +102,10 @@ export function BingkaiAdmin({
             </div>
           ))}
         </nav>
-        <form action={keluar} className="mt-4 border-t border-bebe pt-4">
-          <button type="submit" className="text-sm font-medium text-hof hover:underline">
+        <form action={keluar} className="mt-[16px] border-t border-bebe pt-[16px]">
+          <Tombol type="submit" varian="secondary" ukuran="sm">
             Keluar
-          </button>
+          </Tombol>
         </form>
       </aside>
       <div className="min-w-0">{children}</div>

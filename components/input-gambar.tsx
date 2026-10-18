@@ -59,7 +59,7 @@ export function InputGambar({
         }}
       />
       {pesan ? (
-        <p role={galat ? "alert" : "status"} className={galat ? "text-sm text-red-700" : "text-sm text-hof"}>
+        <p role={galat ? "alert" : "status"} className={galat ? "text-sm text-ink-black" : "text-sm text-hof"}>
           {pesan}
         </p>
       ) : null}

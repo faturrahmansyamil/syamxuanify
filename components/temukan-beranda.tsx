@@ -16,7 +16,7 @@ export async function TemukanBeranda() {
   if (!ada) return null;
 
   return (
-    <div className="mb-10 space-y-10">
+    <div className="mb-[40px] space-y-[40px]">
       <PapanHarian hariIni={data.hariIni} penjualBaru={data.penjualBaru} favorit={data.favorit} />
       <LagiTren kolom={data.tren} />
       <BaruMendarat produk={data.baruMendarat} />

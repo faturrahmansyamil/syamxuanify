@@ -1,11 +1,14 @@
 "use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, type ReactNode } from "react";
-import { KELAS_JALUR, gerakHalus, langkahKartu } from "@/components/langkah-kartu";
+import { JudulBagian } from "@/components/judul-bagian";
+import { KELAS_JALUR, gerakHalus, langkahKartu, useDiAwal, useTarikJalur } from "@/components/langkah-kartu";
+import { PanahGeser } from "@/components/panah-geser";
 
-export function GeserKartu({ judul, children }: { judul: string; children: ReactNode }) {
+export function GeserKartu({ judul, href, children, celah = "gap-3" }: { judul: string; href?: string; children: ReactNode; celah?: string }) {
   const jalur = useRef<HTMLDivElement>(null);
+  const tarik = useTarikJalur(jalur);
+  const awal = useDiAwal(jalur);
 
   function geser(arah: number) {
     const el = jalur.current;
@@ -16,20 +19,18 @@ export function GeserKartu({ judul, children }: { judul: string; children: React
   return (
     <section>
       <div className="mb-[24px] flex items-center justify-between gap-[12px]">
-        <h2 className="inline-flex min-w-0 items-center gap-[4px]">
-          <span className="truncate">{judul}</span>
-          <ChevronRight className="h-[16px] w-[16px] shrink-0" aria-hidden="true" />
-        </h2>
-        <div className="flex shrink-0 gap-[8px]">
-          <button type="button" onClick={() => geser(-1)} className="panah-geser" aria-label="Geser ke kiri">
-            <ChevronLeft className="h-[16px] w-[16px]" aria-hidden="true" />
-          </button>
-          <button type="button" onClick={() => geser(1)} className="panah-geser" aria-label="Geser ke kanan">
-            <ChevronRight className="h-[16px] w-[16px]" aria-hidden="true" />
-          </button>
-        </div>
+        <JudulBagian judul={judul} href={href} className="mb-0" />
+        <PanahGeser awal={awal} geser={geser} />
       </div>
-      <div ref={jalur} className={KELAS_JALUR}>
+      <div
+        ref={jalur}
+        className={`${KELAS_JALUR} ${celah} cursor-grab active:cursor-grabbing`}
+        onPointerDown={tarik.onPointerDown}
+        onPointerMove={tarik.onPointerMove}
+        onPointerUp={tarik.lepas}
+        onPointerCancel={tarik.lepas}
+        onClickCapture={tarik.onClickCapture}
+      >
         {children}
       </div>
     </section>

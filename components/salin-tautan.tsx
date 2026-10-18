@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useState } from "react";
 
 export function SalinTautan({ path }: { path: string }) {
@@ -7,7 +8,7 @@ export function SalinTautan({ path }: { path: string }) {
 
   return (
     <div className="space-y-2">
-      <button
+      <Tombol
         type="button"
         onClick={async () => {
           const tautan = `${window.location.origin}${path}`;
@@ -17,11 +18,9 @@ export function SalinTautan({ path }: { path: string }) {
           } catch {
             setPesan(tautan);
           }
-        }}
-        className="btn-duo-white inline-flex items-center"
-      >
+        }} varian="secondary" ukuran="lg">
         Salin link toko
-      </button>
+      </Tombol>
       {pesan ? <p className="text-sm text-hof">{pesan}</p> : null}
     </div>
   );

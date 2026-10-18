@@ -283,6 +283,7 @@ export type TokoPilihan = {
   logo_url: string | null;
   terverifikasi: boolean;
   jumlah: number;
+  foto: string[];
 };
 
 export async function ambilTokoPilihan(): Promise<TokoPilihan[]> {
@@ -291,21 +292,30 @@ export async function ambilTokoPilihan(): Promise<TokoPilihan[]> {
 
   const { data, error } = await siap.supabase
     .from("shops")
-    .select("id, nama_toko, slug, logo_url, terverifikasi, products(status)")
+    .select("id, nama_toko, slug, logo_url, terverifikasi, products(status, gambar_url)")
     .eq("status", "approved")
     .order("created_at", { ascending: false })
-    .limit(6);
+    .limit(4);
 
   if (error || !data) return [];
 
-  return data.map((baris) => ({
-    id: baris.id,
-    nama_toko: baris.nama_toko,
-    slug: baris.slug,
-    logo_url: baris.logo_url,
-    terverifikasi: Boolean(baris.terverifikasi),
-    jumlah: hitungProdukDisetujui(baris.products),
-  }));
+  return data.map((baris) => {
+    const produk = !baris.products ? [] : Array.isArray(baris.products) ? baris.products : [baris.products];
+    const foto = produk
+      .filter((item) => item.status === "approved")
+      .map((item) => urlGambarAman(item.gambar_url))
+      .filter((item): item is string => Boolean(item))
+      .slice(0, 3);
+    return {
+      id: baris.id,
+      nama_toko: baris.nama_toko,
+      slug: baris.slug,
+      logo_url: baris.logo_url,
+      terverifikasi: Boolean(baris.terverifikasi),
+      jumlah: hitungProdukDisetujui(baris.products),
+      foto,
+    };
+  });
 }
 
 function hitungProdukDisetujui(produk: { status: string }[] | { status: string } | null) {
@@ -397,29 +407,33 @@ export async function ambilUnggulan() {
   if (!siap.ok) return null;
 
   let kolom: typeof KOLOM_ETALASE | typeof KOLOM_PRODUK = KOLOM_ETALASE;
-  let pilihan = await siap.supabase
+  const awal = await siap.supabase
     .from("products")
-    .select(`${kolom}, is_unggulan`)
+    .select(`${KOLOM_ETALASE}, is_unggulan`)
     .eq("status", "approved")
     .eq("shops.status", "approved")
     .eq("is_unggulan", true)
     .order("created_at", { ascending: false })
     .limit(1);
 
-  if (pilihan.error && kolomEtalase(pilihan.error.message) && !pilihan.error.message.toLowerCase().includes("is_unggulan")) {
-    kolom = KOLOM_PRODUK;
-    pilihan = await siap.supabase
-      .from("products")
-      .select(`${kolom}, is_unggulan`)
-      .eq("status", "approved")
-      .eq("shops.status", "approved")
-      .eq("is_unggulan", true)
-      .order("created_at", { ascending: false })
-      .limit(1);
-  }
+  const perluUlang = Boolean(
+    awal.error && kolomEtalase(awal.error.message) && !awal.error.message.toLowerCase().includes("is_unggulan"),
+  );
+  if (perluUlang) kolom = KOLOM_PRODUK;
+  const ulang = perluUlang
+    ? await siap.supabase
+        .from("products")
+        .select(`${KOLOM_PRODUK}, is_unggulan`)
+        .eq("status", "approved")
+        .eq("shops.status", "approved")
+        .eq("is_unggulan", true)
+        .order("created_at", { ascending: false })
+        .limit(1)
+    : null;
+  const pilihan = ulang ?? awal;
 
   if (!pilihan.error && pilihan.data?.length) {
-    const [produk] = await tandaiVarian(siap.supabase, petakan(pilihan.data as BarisProduk[], siap.sekarang));
+    const [produk] = await tandaiVarian(siap.supabase, petakan(pilihan.data as unknown as BarisProduk[], siap.sekarang));
     if (produk) return produk;
   }
 
@@ -465,15 +479,23 @@ export async function ambilTerlaris(batas = 10) {
     return daftar;
   }
 
-  const cadangan = await siap.supabase
-    .from("products")
-    .select(kolomEtalase(pertama.error.message) ? KOLOM_PRODUK : KOLOM_ETALASE)
-    .eq("status", "approved")
-    .eq("shops.status", "approved")
-    .order("created_at", { ascending: false })
-    .limit(batas);
+  const cadangan = kolomEtalase(pertama.error.message)
+    ? await siap.supabase
+        .from("products")
+        .select(KOLOM_PRODUK)
+        .eq("status", "approved")
+        .eq("shops.status", "approved")
+        .order("created_at", { ascending: false })
+        .limit(batas)
+    : await siap.supabase
+        .from("products")
+        .select(KOLOM_ETALASE)
+        .eq("status", "approved")
+        .eq("shops.status", "approved")
+        .order("created_at", { ascending: false })
+        .limit(batas);
   if (cadangan.error || !cadangan.data) return [] as ProdukPublik[];
-  return tandaiVarian(siap.supabase, petakan(cadangan.data as BarisProduk[], siap.sekarang));
+  return tandaiVarian(siap.supabase, petakan(cadangan.data as unknown as BarisProduk[], siap.sekarang));
 }
 
 function adaToko(produk: ProdukPublik): produk is ProdukPublik & { toko: TokoPublik } {

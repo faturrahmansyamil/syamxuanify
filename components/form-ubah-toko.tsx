@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useActionState, type ReactNode } from "react";
 import { ubahToko, type FormState } from "@/app/actions/toko";
 import { InputGambar } from "@/components/input-gambar";
@@ -14,7 +15,7 @@ export function FormUbahToko({ toko, kembali }: { toko: TokoDasbor; kembali?: st
   const ditolak = toko.status === "rejected";
 
   return (
-    <form action={action} className="space-y-4 rounded-[12px] border border-bebe bg-card p-5">
+    <form action={action} className="space-y-[16px] rounded-[12px] border border-bebe bg-card p-5">
       {kembali ? <input type="hidden" name="kembali" value={kembali} /> : null}
       <div>
         <h2 className="text-xl font-semibold">Ubah data toko</h2>
@@ -63,17 +64,15 @@ export function FormUbahToko({ toko, kembali }: { toko: TokoDasbor; kembali?: st
         <InputGambar id="qris" name="qris" jagaKetajaman />
       </Bidang>
       {state.error ? (
-        <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p role="alert" className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm">
           {state.error}
         </p>
       ) : null}
-      <button
+      <Tombol
         type="submit"
-        disabled={pending}
-        className="btn-duo flex w-full items-center justify-center disabled:opacity-60 sm:w-auto"
-      >
+        disabled={pending} varian="secondary" ukuran="lg">
         {pending ? "Menyimpan..." : ditolak ? "Simpan dan ajukan ulang" : "Simpan perubahan"}
-      </button>
+      </Tombol>
     </form>
   );
 }

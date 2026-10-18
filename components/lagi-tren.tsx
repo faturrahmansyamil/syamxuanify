@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { Tombol } from "@/components/tombol";
+import { JudulBagian } from "@/components/judul-bagian";
 import { BarisNomor } from "@/components/baris-nomor";
 import { Muncul } from "@/components/muncul";
 import type { KolomTren } from "@/lib/temukan";
@@ -17,15 +17,12 @@ export function LagiTren({ kolom }: { kolom: KolomTren[] }) {
   return (
     <Muncul>
       <section>
-        <h2 className="mb-[24px] inline-flex items-center gap-[4px]">
-          Lagi tren
-          <ChevronRight className="h-[16px] w-[16px]" aria-hidden="true" />
-        </h2>
+        <JudulBagian judul="Lagi tren" />
         <div className={grid}>
           {tampil.map((item) => (
             <div key={item.slug} className="min-w-0">
-              <h3 className="text-lg font-black text-[#042c60]">{item.judul}</h3>
-              <div className="card-duo mt-3 p-2">
+              <h3 className="text-lg font-semibold text-[#000000]">{item.judul}</h3>
+              <div className="kartu mt-3 p-2">
                 {item.produk.map((produk, indeks) => (
                   <BarisNomor
                     key={produk.id}
@@ -37,12 +34,10 @@ export function LagiTren({ kolom }: { kolom: KolomTren[] }) {
                     harga={produk.harga}
                   />
                 ))}
-                <Link
-                  href={`/produk?kategori=${item.slug}`}
-                  className="btn-duo-white mt-2 flex w-full items-center justify-center"
-                >
+                <Tombol
+                  href={`/produk?kategori=${item.slug}`} varian="secondary" ukuran="sm" className="mt-[8px]">
                   Semua {item.judul}
-                </Link>
+                </Tombol>
               </div>
             </div>
           ))}

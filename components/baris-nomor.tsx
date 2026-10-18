@@ -30,7 +30,7 @@ export function BarisNomor({
         ) : (
           <span className="block aspect-square h-[56px] w-[56px] rounded-[20px] bg-canvas-mist" />
         )}
-        <span className="label-kecil absolute bottom-[4px] left-[4px] inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-white px-[4px] text-ink-black">
+        <span className="label-kecil absolute bottom-[4px] left-[4px] inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-ink-black px-[4px] text-white">
           {n}
         </span>
       </span>

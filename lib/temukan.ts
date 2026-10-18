@@ -48,6 +48,8 @@ export type KartuBaru = {
   harga: number;
   gambar: string | null;
   toko: string;
+  slugToko: string;
+  wa: string;
 };
 
 export type PenjualTop = {
@@ -433,17 +435,19 @@ function rakitToko(
   };
 }
 
+type TokoBaru = { nama_toko: string; slug: string; no_wa: string };
+
 async function muatBaruMendarat(supabase: Awaited<ReturnType<typeof createClient>>): Promise<KartuBaru[]> {
   const { data, error } = await supabase
     .from("products")
-    .select("id, judul, slug, harga, gambar_url, shops!inner(nama_toko, status)")
+    .select("id, judul, slug, harga, gambar_url, shops!inner(nama_toko, slug, no_wa, status)")
     .eq("status", "approved")
     .eq("shops.status", "approved")
     .order("created_at", { ascending: false })
     .limit(10);
   if (error || !data) return [];
   return data.map((baris) => {
-    const toko = satu(baris.shops as { nama_toko: string } | Array<{ nama_toko: string }> | null);
+    const toko = satu(baris.shops as TokoBaru | TokoBaru[] | null);
     return {
       id: baris.id,
       judul: baris.judul,
@@ -451,6 +455,8 @@ async function muatBaruMendarat(supabase: Awaited<ReturnType<typeof createClient
       harga: baris.harga,
       gambar: urlGambarAman(baris.gambar_url),
       toko: toko?.nama_toko ?? "Toko",
+      slugToko: toko?.slug ?? "",
+      wa: toko?.no_wa ?? "",
     };
   });
 }

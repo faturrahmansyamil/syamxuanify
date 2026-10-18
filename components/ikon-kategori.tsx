@@ -1,21 +1,15 @@
-import { Ellipsis, LayoutGrid, Monitor, Pencil, Shirt, Utensils } from "lucide-react";
+import { Circle, Ellipsis, Monitor, Pencil, Shirt, Utensils, type LucideIcon } from "lucide-react";
 
-export function IkonKategori({
-  slug,
-  className = "h-4 w-4",
-}: {
-  slug?: string | null;
-  className?: string;
-}) {
-  const Ikon = pilihIkon(slug);
-  return <Ikon className={className} aria-hidden="true" strokeWidth={2.5} />;
-}
+const IKON: Record<string, LucideIcon> = {
+  semua: Circle,
+  "makanan-jajanan": Utensils,
+  "produk-digital": Monitor,
+  jasa: Pencil,
+  fashion: Shirt,
+  lainnya: Ellipsis,
+};
 
-function pilihIkon(slug?: string | null) {
-  if (slug === "makanan-jajanan") return Utensils;
-  if (slug === "produk-digital") return Monitor;
-  if (slug === "jasa") return Pencil;
-  if (slug === "fashion") return Shirt;
-  if (slug === "semua") return LayoutGrid;
-  return Ellipsis;
+export function IkonKategori({ slug, className }: { slug: string; className?: string }) {
+  const Ikon = IKON[slug] ?? IKON.lainnya;
+  return <Ikon className={className ?? "h-[16px] w-[16px]"} strokeWidth={1.75} aria-hidden="true" />;
 }

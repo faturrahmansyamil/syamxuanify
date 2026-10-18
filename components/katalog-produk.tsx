@@ -1,22 +1,15 @@
-import Link from "next/link";
-import { BaruMendarat } from "@/components/baru-mendarat";
 import { IkonKategori } from "@/components/ikon-kategori";
-import { ambilKatalog, ambilTerlaris, bersihkanKata, slugAman, urutanAman, type UrutanKatalog } from "@/lib/katalog";
+import { JalurChip } from "@/components/jalur-chip";
+import { Tombol } from "@/components/tombol";
+import { ambilKatalog, bersihkanKata, slugAman, urutanAman, type UrutanKatalog } from "@/lib/katalog";
 import { KisiProduk } from "@/components/kisi-produk";
-import { LagiTren } from "@/components/lagi-tren";
 import { Muncul } from "@/components/muncul";
-import { PapanHarian } from "@/components/papan-harian";
-import { TopPenjual } from "@/components/top-penjual";
-import { TopTerlaris } from "@/components/top-terlaris";
-import { ambilTemukan } from "@/lib/temukan";
 
 export async function KatalogProduk({
   searchParams,
-  beranda = false,
-  dasar = "/",
+  dasar = "/produk",
 }: {
   searchParams: Promise<{ q?: string; kategori?: string; urut?: string }>;
-  beranda?: boolean;
   dasar?: string;
 }) {
   const params = await searchParams;
@@ -24,50 +17,44 @@ export async function KatalogProduk({
   const kategori = slugAman(params.kategori) ? params.kategori : "";
   const urutan = urutanAman(params.urut);
   const hasil = await ambilKatalog(kata, kategori, urutan);
-  const terlaris = beranda ? await ambilTerlaris(10) : [];
-  const temukan = beranda ? await ambilTemukan() : null;
 
   if (!hasil.ok) {
     return <Kotak judul="Katalog belum bisa dimuat">{hasil.pesan}</Kotak>;
   }
 
   const kategoriFilter = (
-      <div id={beranda ? undefined : "saringan"} className="flex gap-[12px] overflow-x-auto pb-[4px]">
-        <Filter href={tautanFilter(dasar, "", kata, hasil.urutan)} aktif={!hasil.kategoriAktif} slug="semua">
+      <JalurChip>
+        <Filter href={tautanFilter(dasar === "/cari" ? "/cari" : "/produk", "", kata, hasil.urutan)} aktif={!hasil.kategoriAktif} slug="semua">
           Semua
         </Filter>
         {hasil.kategori.map((item) => (
           <Filter
             key={item.slug}
-            href={tautanFilter(dasar, item.slug, kata, hasil.urutan)}
+            href={tautanFilter(`/kategori/${item.slug}`, "", kata, hasil.urutan)}
             aktif={hasil.kategoriAktif === item.slug}
             slug={item.slug}
           >
             {item.nama}
           </Filter>
         ))}
-      </div>
+      </JalurChip>
   );
 
   const daftar = (
       <section className="space-y-[16px]">
-        {beranda ? (
-          <h2 className="mb-[24px] inline-flex items-center gap-[4px]">
-            Produk Terbaru
-          </h2>
-        ) : null}
-        <div className="flex gap-[12px] overflow-x-auto">
+        <JalurChip>
           {URUTAN.map((item) => (
-            <Link
+            <Tombol
               key={item.id}
               href={tautanFilter(dasar, kategori, kata, item.id)}
-              data-active={hasil.urutan === item.id ? "true" : "false"}
-              className="chip-kategori shrink-0"
+              chip
+              varian={hasil.urutan === item.id ? "primary" : "secondary"}
+              className="shrink-0"
             >
               {item.nama}
-            </Link>
+            </Tombol>
           ))}
-        </div>
+        </JalurChip>
         {hasil.produk.length === 0 ? (
           <Kotak judul="Tidak ada produk">
             {kata || hasil.kategoriAktif
@@ -78,36 +65,16 @@ export async function KatalogProduk({
           <KisiProduk
             produk={hasil.produk}
             kembali={tautanFilter(dasar, kategori, kata, hasil.urutan)}
-            kolom={beranda ? "beranda" : "padat"}
+            kolom="padat"
           />
         )}
-        {beranda ? (
-          <Link href="/produk" className="btn-sekunder">
-            Lihat semua produk
-          </Link>
-        ) : null}
       </section>
   );
 
-  if (beranda) {
-    return (
-      <div id="daftar-produk" className="scroll-mt-28 space-y-[64px]">
-        <TopTerlaris produk={terlaris} />
-        {temukan ? (
-          <PapanHarian hariIni={temukan.hariIni} penjualBaru={temukan.penjualBaru} favorit={temukan.favorit} />
-        ) : null}
-        {temukan ? <LagiTren kolom={temukan.tren} /> : null}
-        {temukan ? <BaruMendarat produk={temukan.baruMendarat} /> : null}
-        <Muncul>{daftar}</Muncul>
-        {temukan ? <TopPenjual toko={temukan.topPenjual} /> : null}
-      </div>
-    );
-  }
-
   return (
     <Muncul>
-      <div className="scroll-mt-28 space-y-4">
-        <h1>Semua produk</h1>
+      <div className="scroll-mt-28 space-y-[16px]">
+        <h1>{dasar === "/cari" ? (kata ? kata : "Cari") : hasil.kategori.find((item) => item.slug === hasil.kategoriAktif)?.nama ?? "Semua produk"}</h1>
         {kategoriFilter}
         {daftar}
       </div>
@@ -143,17 +110,10 @@ function Filter({
   children: string;
 }) {
   return (
-    <Link
-      href={href}
-      prefetch={true}
-      data-active={aktif ? "true" : "false"}
-      className="chip-kategori shrink-0"
-    >
-      <span className="inline-flex h-[16px] w-[16px] items-center justify-center rounded-full bg-canvas-mist">
-        <IkonKategori slug={slug} className="h-[12px] w-[12px]" />
-      </span>
+    <Tombol href={href} prefetch={true} chip varian={aktif ? "primary" : "secondary"} className="shrink-0">
+      <IkonKategori slug={slug} />
       {children}
-    </Link>
+    </Tombol>
   );
 }
 

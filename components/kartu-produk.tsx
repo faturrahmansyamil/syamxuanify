@@ -1,59 +1,87 @@
 import Link from "next/link";
 import { BadgeCheck } from "lucide-react";
+import { AngkaNaik } from "@/components/angka-naik";
+import { Tombol } from "@/components/tombol";
+import { GambarIsi } from "@/components/gambar-isi";
 import { TombolFavorit } from "@/components/tombol-favorit";
 import { PlaceholderProduk } from "@/components/tampilan";
 import { fotoPenjual } from "@/lib/contoh-penjual";
 import { formatRupiah } from "@/lib/rupiah";
-import { urlGambarAman } from "@/lib/wa";
+import { pesanToko, tautanWhatsApp, urlGambarAman } from "@/lib/wa";
 import type { ProdukPublik } from "@/lib/katalog";
 
 export function KartuProduk({
   produk,
   disukai = false,
   kembali = "/",
+  prioritas = false,
   peringkat,
 }: {
   produk: ProdukPublik;
   disukai?: boolean;
   kembali?: string;
+  prioritas?: boolean;
   peringkat?: number;
 }) {
   const gambar = urlGambarAman(produk.gambar_url);
+  const chat = produk.toko ? tautanWhatsApp(produk.toko.no_wa, pesanToko(produk.toko.nama_toko)) : null;
+  const foto = (
+    <>
+      <Link href={`/produk/${produk.slug}`} className="relative block overflow-hidden rounded-[20px]">
+        {gambar ? (
+          <span className="relative block aspect-square">
+            <GambarIsi src={gambar} sizes="(max-width: 768px) 46vw, 240px" priority={prioritas} className="foto-kartu" />
+          </span>
+        ) : (
+          <PlaceholderProduk kategori={produk.kategori?.slug} />
+        )}
+      </Link>
+      <LencanaStatus produk={produk} />
+      <div className="absolute top-[12px] right-[12px] z-30 h-[32px] w-[32px]">
+        <TombolFavorit id={produk.id} slug={produk.slug} disukai={disukai} kembali={kembali} />
+      </div>
+      {chat ? (
+        <Tombol href={chat} varian="primary" ukuran="sm" target="_blank" rel="noopener noreferrer" className="chat-penjual">
+          Chat penjual
+        </Tombol>
+      ) : null}
+    </>
+  );
+  const teks = (
+    <Link href={`/produk/${produk.slug}`} className="flex min-h-0 flex-1 flex-col gap-[12px] px-[12px] pb-[16px]">
+      <p className="line-clamp-2 min-h-[2.4em] text-[14px] font-semibold tracking-[-0.014em] text-ink-black">{produk.judul}</p>
+      <p className="text-[14px] text-ink-black">{formatRupiah(produk.harga)}</p>
+      <div className="mt-auto">
+        {produk.toko ? (
+          <BarisToko
+            nama={produk.toko.nama_toko}
+            slug={produk.toko.slug}
+            logo={produk.toko.logo_url}
+            terverifikasi={produk.toko.terverifikasi}
+          />
+        ) : null}
+      </div>
+    </Link>
+  );
+
+  if (peringkat) {
+    return (
+      <div className="flex shrink-0 items-start">
+        <span className="angka-peringkat relative z-0 h-[240px] md:h-[320px]">
+          <AngkaNaik n={peringkat} />
+        </span>
+        <article className="kartu relative z-[1] -ml-[18px] w-[240px] md:w-[320px]">
+          <div className="relative">{foto}</div>
+          {teks}
+        </article>
+      </div>
+    );
+  }
 
   return (
     <article className="kartu flex h-full flex-col">
-      <div className="bingkai-foto relative">
-        <Link href={`/produk/${produk.slug}`} prefetch={true} className="block overflow-hidden rounded-[20px]">
-          {gambar ? (
-            <img src={gambar} alt="" className="foto-kartu" />
-          ) : (
-            <PlaceholderProduk kategori={produk.kategori?.slug} />
-          )}
-        </Link>
-        <LencanaStatus produk={produk} />
-        {typeof peringkat === "number" ? (
-          <span className="label-kecil absolute bottom-[12px] left-[12px] z-20 inline-flex h-[22px] min-w-[22px] items-center justify-center rounded-full bg-white px-[6px] text-ink-black">
-            {peringkat}
-          </span>
-        ) : null}
-        <div className="absolute top-[12px] right-[12px] z-20">
-          <TombolFavorit id={produk.id} slug={produk.slug} disukai={disukai} kembali={kembali} />
-        </div>
-      </div>
-      <Link href={`/produk/${produk.slug}`} prefetch={true} className="flex min-h-0 flex-1 flex-col gap-[12px] px-[12px] pb-[16px]">
-        <h3 className="line-clamp-2 min-h-[2.4em] text-[14px] font-semibold tracking-[-0.014em] text-ink-black">{produk.judul}</h3>
-        <p className="text-[14px] text-ink-black">{formatRupiah(produk.harga)}</p>
-        <div className="mt-auto">
-          {produk.toko ? (
-            <BarisToko
-              nama={produk.toko.nama_toko}
-              slug={produk.toko.slug}
-              logo={produk.toko.logo_url}
-              terverifikasi={produk.toko.terverifikasi}
-            />
-          ) : null}
-        </div>
-      </Link>
+      <div className="relative">{foto}</div>
+      {teks}
     </article>
   );
 }
@@ -75,9 +103,11 @@ export function BarisToko({
   return (
     <p className="label-kecil flex min-w-0 items-center gap-[8px] text-muted-gray">
       {foto ? (
-        <img src={foto} alt="" className="aspect-square h-[16px] w-[16px] shrink-0 rounded-full object-cover" />
+        <span className="relative aspect-square h-[16px] w-[16px] shrink-0 overflow-hidden rounded-full">
+          <GambarIsi src={foto} sizes="16px" />
+        </span>
       ) : (
-        <span className="inline-flex aspect-square h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full bg-canvas-mist text-[11px] font-medium text-ink-black">
+        <span className="inline-flex aspect-square h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full bg-ink-black text-[11px] font-medium text-white">
           {huruf}
         </span>
       )}
@@ -90,11 +120,7 @@ export function BarisToko({
 export function LencanaStatus({ produk }: { produk: ProdukPublik }) {
   const lencana = labelLencana(produk);
   if (!lencana) return null;
-  return (
-    <span className="label-kecil absolute top-[12px] left-[12px] z-20 inline-flex h-[22px] items-center rounded-full bg-white px-[8px] text-ink-black">
-      {lencana}
-    </span>
-  );
+  return <span className="lencana-baru">{lencana}</span>;
 }
 
 function labelLencana(produk: ProdukPublik) {
@@ -106,11 +132,11 @@ function labelLencana(produk: ProdukPublik) {
 
 export function KerangkaProduk() {
   return (
-    <div>
+    <div data-kerangka="1">
       <p className="sr-only">Memuat produk</p>
-      <div className="grid grid-cols-2 gap-[12px] md:grid-cols-3 lg:grid-cols-4">
-        {[0, 1, 2, 3, 4, 5, 6, 7].map((item) => (
-          <div key={item} className="kartu aspect-square" />
+      <div className="grid grid-cols-2 gap-[12px] lg:grid-cols-4" aria-hidden="true">
+        {[0, 1, 2, 3].map((item) => (
+          <div key={item} className="h-[300px] rounded-[28px] bg-[#ebebeb]" />
         ))}
       </div>
     </div>

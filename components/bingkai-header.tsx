@@ -16,14 +16,14 @@ export function BingkaiHeader({
 
   if (ringkas) {
     return (
-      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-4 py-3 md:px-10">
+      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-[16px] py-3 md:px-[40px]">
         {logo}
       </div>
     );
   }
 
   return (
-    <div className="mx-auto grid w-full max-w-[1200px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 md:grid-cols-[auto_minmax(0,36rem)_auto] md:gap-6 md:px-10">
+    <div className="mx-auto grid w-full max-w-[1200px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-[16px] py-3 md:grid-cols-[auto_minmax(0,36rem)_auto] md:gap-[24px] md:px-[40px]">
       {logo}
       <div className="col-span-2 row-start-2 min-w-0 md:col-span-1 md:col-start-2 md:row-start-1">{cari}</div>
       <div className="col-start-2 row-start-1 flex min-w-0 items-center justify-end gap-2 md:col-start-3">

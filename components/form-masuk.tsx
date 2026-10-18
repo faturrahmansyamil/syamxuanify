@@ -14,29 +14,38 @@ export function FormMasuk({ selanjutnya = "/" }: { selanjutnya?: string }) {
   const umum = galatUmum(state.error);
 
   return (
-    <div className="space-y-5">
+    <div>
       <TombolGoogle label="Masuk dengan Google" selanjutnya={selanjutnya} />
       <PemisahAtau />
-      <form action={action} className="space-y-4">
+      <form action={action}>
         <input type="hidden" name="selanjutnya" value={selanjutnya} />
-        <BidangTeks
-          id="email"
-          name="email"
-          label="Email"
-          type="email"
-          autoComplete="email"
-          required
-          ikon="email"
-          galat={galatEmail}
-        />
-        <div className="space-y-1.5">
-          <BidangSandi id="password" name="password" label="Kata sandi" autoComplete="current-password" galat={galatSandi} />
-          <Link href="/lupa-sandi" className="inline-flex min-h-11 items-center text-sm font-bold text-[#3c3c3c] hover:underline">
-            Lupa kata sandi?
-          </Link>
+        <div className="flex flex-col gap-[16px]">
+          <BidangTeks
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+            autoComplete="email"
+            required
+            galat={galatEmail}
+          />
+          <BidangSandi
+            id="password"
+            name="password"
+            label="Kata sandi"
+            autoComplete="current-password"
+            galat={galatSandi}
+            catatan={
+              <div className="mt-[6px] text-right">
+                <Link href="/lupa-sandi" className="text-[14px] text-ink-black">
+                  Lupa kata sandi?
+                </Link>
+              </div>
+            }
+          />
         </div>
         {umum ? (
-          <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">
+          <p role="alert" className="mt-[12px] text-[14px] teks-galat">
             {umum}
           </p>
         ) : null}

@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useState } from "react";
 
 export function GaleriProduk({ foto, judul }: { foto: string[]; judul: string }) {
@@ -43,7 +44,7 @@ export function GaleriProduk({ foto, judul }: { foto: string[]; judul: string })
               aria-label={`Foto ${indeks + 1}`}
               aria-pressed={indeks === aktif}
               onClick={() => setAktif(indeks)}
-              className={`h-16 w-16 shrink-0 overflow-hidden rounded-[12px] border-2 ${
+              className={`h-[64px] w-[64px] shrink-0 overflow-hidden rounded-[12px] border-2 ${
                 indeks === aktif ? "border-hof" : "border-transparent"
               }`}
             >
@@ -53,16 +54,14 @@ export function GaleriProduk({ foto, judul }: { foto: string[]; judul: string })
         </div>
       ) : null}
       {besar ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" onClick={() => setBesar(false)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-[16px]" onClick={() => setBesar(false)}>
           <div role="dialog" aria-modal="true" aria-label={judul} className="w-full max-w-3xl" onClick={(event) => event.stopPropagation()}>
             <img src={sekarang} alt={judul} className="max-h-[80vh] w-full rounded-[12px] object-contain" />
-            <button
+            <Tombol
               type="button"
-              onClick={() => setBesar(false)}
-              className="btn-duo-white mt-4 w-full"
-            >
+              onClick={() => setBesar(false)} varian="secondary" ukuran="lg" className="mt-[16px]">
               Tutup
-            </button>
+            </Tombol>
           </div>
         </div>
       ) : null}

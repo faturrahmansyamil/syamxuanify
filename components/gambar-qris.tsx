@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useState } from "react";
 
 export function GambarQris({ url }: { url: string }) {
@@ -7,29 +8,25 @@ export function GambarQris({ url }: { url: string }) {
 
   return (
     <div>
-      <button
+      <Tombol
         type="button"
-        onClick={() => setTerbuka(true)}
-        className="btn-duo-white inline-flex items-center"
-      >
-        <span className="block text-base font-bold">Lihat QRIS</span>
-      </button>
+        onClick={() => setTerbuka(true)} varian="secondary" ukuran="lg">
+        <span className="block text-base font-medium">Lihat QRIS</span>
+      </Tombol>
       {terbuka ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-[16px]">
           <div
             role="dialog"
             aria-modal="true"
             aria-label="QRIS diperbesar"
-            className="w-full max-w-md rounded-[12px] bg-card p-4"
+            className="w-full max-w-md rounded-[12px] bg-card p-[16px]"
           >
             <img src={url} alt="QRIS penjual diperbesar" className="max-h-[70vh] w-full object-contain" />
-            <button
+            <Tombol
               type="button"
-              onClick={() => setTerbuka(false)}
-              className="btn-duo mt-4 w-full"
-            >
+              onClick={() => setTerbuka(false)} varian="secondary" ukuran="lg" className="mt-[16px]">
               Tutup
-            </button>
+            </Tombol>
           </div>
         </div>
       ) : null}

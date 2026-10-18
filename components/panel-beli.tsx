@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { catatKlikWa } from "@/app/actions/klik";
+import { Tombol } from "@/components/tombol";
 import { formatRupiah } from "@/lib/rupiah";
 import type { VarianEtalase } from "@/lib/katalog";
 import { pesanPesan, tautanWhatsApp } from "@/lib/wa";
@@ -60,34 +61,31 @@ export function PanelBeli({
   const teksStok = !terbatas ? null : batas <= 0 ? "Habis" : batas <= 5 ? `Sisa ${batas}!` : `Stok: ${batas}`;
 
   const tombol = bisaPesan && tautan ? (
-    <a
+    <Tombol
       href={tautan}
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => {
         void catatKlikWa(id);
       }}
-      className="btn-utama flex w-full"
+      varian="primary"
+      ukuran="lg"
     >
       Chat WhatsApp
-    </a>
+    </Tombol>
   ) : (
-    <button
-      type="button"
-      disabled
-      className="btn-utama flex w-full cursor-not-allowed opacity-60"
-    >
+    <Tombol type="button" disabled varian="primary" ukuran="lg">
       {wajibVarian ? "Pilih varian dulu" : "Chat WhatsApp"}
-    </button>
+    </Tombol>
   );
 
   return (
-    <div className="space-y-4">
-      <p className="text-4xl font-extrabold leading-none text-accent">{teksHarga}</p>
+    <div className="space-y-[16px]">
+      <p className="text-4xl font-semibold leading-none text-accent">{teksHarga}</p>
       <div className="flex flex-wrap items-center gap-2 text-sm">
         {typeof terjual === "number" ? <span className="text-foggy">{terjual} terjual</span> : null}
         {kondisi ? (
-          <span className="rounded-full bg-faint px-2 py-0.5 text-xs font-medium text-hof">
+          <span className="rounded-full bg-ink-black px-2 py-0.5 text-xs font-medium text-white">
             {kondisi === "bekas" ? "Bekas" : "Baru"}
           </span>
         ) : null}
@@ -105,7 +103,7 @@ export function PanelBeli({
               const habisVarian = item.stock === 0;
               const aktif = item.id === dipilih;
               return (
-                <button
+                <Tombol
                   key={item.id}
                   type="button"
                   disabled={habisVarian}
@@ -115,12 +113,12 @@ export function PanelBeli({
                     const batasBaru = typeof item.stock === "number" ? item.stock : typeof stok === "number" ? stok : 99;
                     setJumlah((nilai) => Math.min(Math.max(1, nilai), Math.max(batasBaru, 1)));
                   }}
-                  data-active={aktif ? "true" : "false"}
-                  className="chip-duo disabled:cursor-not-allowed disabled:opacity-50"
+                  chip
+                  varian={aktif ? "primary" : "secondary"}
                 >
                   {item.nama}
                   {item.harga != null ? ` · ${formatRupiah(item.harga)}` : ""}
-                </button>
+                </Tombol>
               );
             })}
           </div>
@@ -128,25 +126,29 @@ export function PanelBeli({
       ) : null}
       <div className="flex items-center gap-3">
         <p className="text-sm font-medium">Jumlah</p>
-        <button
+        <Tombol
           type="button"
           aria-label="Kurangi"
           disabled={jumlahAman <= 1 || batas === 0}
           onClick={() => setJumlah(jumlahAman - 1)}
-          className="btn-duo-white inline-flex items-center justify-center disabled:opacity-40"
+          ikon
+          ukuran="sm"
+          varian="secondary"
         >
           −
-        </button>
-        <span className="min-w-6 text-center text-sm font-semibold">{batas === 0 ? 0 : jumlahAman}</span>
-        <button
+        </Tombol>
+        <span className="min-w-[24px] text-center text-sm font-semibold">{batas === 0 ? 0 : jumlahAman}</span>
+        <Tombol
           type="button"
           aria-label="Tambah"
           disabled={batas === 0 || jumlahAman >= batas}
           onClick={() => setJumlah(jumlahAman + 1)}
-          className="btn-duo-white inline-flex items-center justify-center disabled:opacity-40"
+          ikon
+          ukuran="sm"
+          varian="secondary"
         >
           +
-        </button>
+        </Tombol>
         {batas > 0 ? <span className="text-sm text-foggy">Total {formatRupiah(total)}</span> : null}
       </div>
       <div className="hidden md:block">{tombol}</div>

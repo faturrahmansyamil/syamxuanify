@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useActionState } from "react";
 import { hapusAkun, type PengaturanState } from "@/app/actions/pengaturan";
 
@@ -11,7 +12,7 @@ export function FormHapusAkun() {
   const [state, action, pending] = useActionState(hapusAkun, awal);
 
   return (
-    <form action={action} className="space-y-4 rounded-[12px] border border-bebe bg-card p-5">
+    <form action={action} className="space-y-[16px] rounded-[12px] border border-bebe bg-card p-5">
       <div>
         <h2 className="text-xl font-semibold">Hapus akun</h2>
         <p className="mt-2 text-sm leading-6 text-foggy">
@@ -22,14 +23,12 @@ export function FormHapusAkun() {
         Konfirmasi
         <input name="konfirmasi" required autoComplete="off" placeholder="HAPUS" className={bidang} />
       </label>
-      {state.error ? <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{state.error}</p> : null}
-      <button
+      {state.error ? <p className="rounded-xl bg-canvas-mist px-3 py-2 text-sm text-ink-black">{state.error}</p> : null}
+      <Tombol
         type="submit"
-        disabled={pending}
-        className="btn-duo-white flex items-center justify-center disabled:opacity-60"
-      >
+        disabled={pending} varian="secondary" ukuran="lg">
         {pending ? "Menghapus..." : "Hapus akun"}
-      </button>
+      </Tombol>
     </form>
   );
 }

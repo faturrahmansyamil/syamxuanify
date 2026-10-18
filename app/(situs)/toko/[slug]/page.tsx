@@ -1,0 +1,110 @@
+import { Tombol } from "@/components/tombol";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { BlokLaporan } from "@/components/blok-laporan";
+import { KisiProduk } from "@/components/kisi-produk";
+import { Muncul } from "@/components/muncul";
+import { InisialToko } from "@/components/tampilan";
+import { ambilToko } from "@/lib/katalog";
+import { metadataBagikan, ringkasTeks } from "@/lib/og";
+import { fotoPenjual } from "@/lib/contoh-penjual";
+import { pesanToko, tautanWhatsApp } from "@/lib/wa";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const hasil = await ambilToko(slug);
+  const toko = hasil.ok ? hasil.toko : null;
+  return metadataBagikan(
+    toko?.nama_toko ?? "Toko",
+    ringkasTeks(toko?.deskripsi, "Lihat toko ini di Syamxuanify, lalu chat penjual lewat WhatsApp."),
+    toko?.logo_url,
+  );
+}
+
+export default function HalamanToko({ params }: { params: Promise<{ slug: string }> }) {
+  return (
+    <Suspense fallback={<p className="text-sm text-hof">Memuat toko...</p>}>
+      <DataToko params={params} />
+    </Suspense>
+  );
+}
+
+async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const hasil = await ambilToko(slug, { lihatMilik: true, lihatAdmin: true });
+
+  if (!hasil.ok) {
+    return <p className="rounded-[12px] bg-card p-[16px] text-sm">{hasil.pesan}</p>;
+  }
+  if (!hasil.toko) notFound();
+
+  const toko = hasil.toko;
+  const logo = fotoPenjual(toko.slug, toko.logo_url);
+  const whatsapp = tautanWhatsApp(toko.no_wa, pesanToko(toko.nama_toko));
+
+  return (
+    <div className="space-y-[24px]">
+      {toko.status !== "approved" ? (
+        <p className="rounded-[12px] bg-card px-[16px] py-3 text-sm leading-6 text-hof">
+          {toko.status === "rejected"
+            ? "Toko ini ditolak dan belum tampil untuk pembeli."
+            : "Toko ini belum tampil untuk pembeli. Statusnya masih menunggu persetujuan admin."}
+        </p>
+      ) : null}
+      <Muncul>
+      <section className="kartu p-5">
+        <div className="flex items-start gap-[16px]">
+          {logo ? (
+            <img src={logo} alt={`Foto ${toko.nama_toko}`} className="h-[64px] w-[64px] rounded-full object-cover" />
+          ) : (
+            <InisialToko nama={toko.nama_toko} className="h-[64px] w-[64px] text-xl" />
+          )}
+          <div className="min-w-0">
+            <h1 className="break-words text-2xl font-semibold tracking-tight">{toko.nama_toko}</h1>
+            {toko.terverifikasi ? (
+              <span className="mt-2 inline-flex rounded-full bg-faint px-2 py-1 text-xs font-medium text-hof">
+                Terverifikasi
+              </span>
+            ) : null}
+          </div>
+        </div>
+        <p className="mt-[16px] text-sm leading-6 text-hof">
+          {toko.deskripsi || "Toko ini belum menulis deskripsi."}
+        </p>
+        {whatsapp ? (
+          <Tombol
+            href={whatsapp}
+            target="_blank"
+            rel="noopener noreferrer" varian="primary" ukuran="lg" className="mt-[16px]">
+            Chat WhatsApp
+          </Tombol>
+        ) : null}
+      </section>
+      </Muncul>
+      {toko.is_closed ? (
+        <p className="rounded-[12px] bg-card px-[16px] py-3 text-sm leading-6 text-hof">Toko ini sedang tutup sementara.</p>
+      ) : null}
+      <Muncul>
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold">Produk</h2>
+        {hasil.produk.length === 0 ? (
+          <p className="rounded-[12px] bg-card p-[16px] text-sm text-foggy">
+            Belum ada produk yang disetujui di toko ini.
+          </p>
+        ) : (
+          <KisiProduk produk={hasil.produk} kembali={`/toko/${toko.slug}`} />
+        )}
+      </section>
+      </Muncul>
+      <BlokLaporan shopId={toko.id} kembali={`/toko/${toko.slug}`} />
+      <Tombol href="/" varian="secondary" ukuran="lg">
+        Kembali ke beranda
+      </Tombol>
+    </div>
+  );
+}

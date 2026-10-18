@@ -2,15 +2,15 @@ import { IkonKategori } from "@/components/ikon-kategori";
 
 export function PlaceholderProduk({ kategori }: { judul?: string; kategori?: string | null }) {
   return (
-    <div className="flex aspect-square w-full items-center justify-center rounded-xl bg-deco text-hof">
-      <IkonKategori slug={kategori} className="h-10 w-10" />
+    <div className="flex aspect-square w-full items-center justify-center rounded-[20px] bg-canvas-mist text-ink-black">
+      <IkonKategori slug={kategori ?? "lainnya"} className="h-[40px] w-[40px]" />
     </div>
   );
 }
 
 export function InisialToko({
   nama,
-  className = "h-12 w-12 text-base",
+  className = "h-[48px] w-[48px] text-base",
 }: {
   nama: string;
   className?: string;

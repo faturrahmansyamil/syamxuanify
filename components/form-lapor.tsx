@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useActionState } from "react";
 import { laporkan, type LaporanState } from "@/app/actions/laporan";
 
@@ -15,7 +16,7 @@ export function FormLapor({
   const [state, action, pending] = useActionState(laporkan, awal);
 
   return (
-    <form action={action} className="card-duo space-y-3 p-4">
+    <form action={action} className="kartu space-y-3 p-[16px]">
       <h2 className="font-semibold">Laporkan</h2>
       <p className="text-sm leading-6 text-foggy">
         Laporkan kalau produk atau toko ini mencurigakan. Admin yang akan memeriksanya.
@@ -36,7 +37,7 @@ export function FormLapor({
         placeholder="Ceritakan apa yang mencurigakan"
       />
       {state.error ? (
-        <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p role="alert" className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm">
           {state.error}
         </p>
       ) : null}
@@ -45,13 +46,11 @@ export function FormLapor({
           {state.sukses}
         </p>
       ) : null}
-      <button
+      <Tombol
         type="submit"
-        disabled={pending || Boolean(state.sukses)}
-        className="btn-duo disabled:opacity-60"
-      >
+        disabled={pending || Boolean(state.sukses)} varian="secondary" ukuran="lg">
         {pending ? "Mengirim..." : "Kirim laporan"}
-      </button>
+      </Tombol>
     </form>
   );
 }

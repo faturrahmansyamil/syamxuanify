@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import Link from "next/link";
 import { useActionState, type ReactNode } from "react";
 import { bukaToko, type FormState } from "@/app/actions/toko";
@@ -13,7 +14,7 @@ export function FormBukaToko() {
   const [state, action, pending] = useActionState(bukaToko, awal);
 
   return (
-    <form action={action} className="card-duo space-y-4 p-5">
+    <form action={action} className="kartu space-y-[16px] p-5">
       <div>
         <h2 className="text-xl font-semibold">Buka toko</h2>
         <p className="mt-2 text-sm leading-6 text-foggy">
@@ -46,17 +47,15 @@ export function FormBukaToko() {
         </span>
       </label>
       {state.error ? (
-        <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p role="alert" className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm">
           {state.error}
         </p>
       ) : null}
-      <button
+      <Tombol
         type="submit"
-        disabled={pending}
-        className="btn-duo flex w-full items-center justify-center disabled:opacity-60"
-      >
+        disabled={pending} varian="primary" ukuran="lg">
         {pending ? "Menyimpan..." : "Buka toko"}
-      </button>
+      </Tombol>
     </form>
   );
 }

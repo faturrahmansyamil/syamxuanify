@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useActionState, useState } from "react";
 import type { FormState } from "@/app/actions/toko";
 import { InputGambar } from "@/components/input-gambar";
@@ -35,10 +36,10 @@ export function FormProduk({
   const [state, action, pending] = useActionState(aksi, awal);
 
   return (
-    <form action={action} className="card-duo space-y-4 p-5">
+    <form action={action} className="kartu space-y-[16px] p-5">
       <h2 className="text-xl font-semibold">{produk ? "Ubah produk" : "Tambah produk"}</h2>
       {produk?.status === "rejected" ? (
-        <p className="rounded-xl bg-red-50 px-3 py-2 text-sm leading-6 text-red-800">
+        <p className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm leading-6">
           Ditolak: {produk.rejection_reason || "Admin tidak menulis alasan."} Simpan untuk mengajukan ulang.
         </p>
       ) : null}
@@ -91,7 +92,7 @@ export function FormProduk({
           className={bidang}
         />
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-[16px] sm:grid-cols-2">
         <div className="space-y-1.5">
           <label htmlFor="stock" className="block text-sm font-medium">
             Stok
@@ -171,17 +172,13 @@ export function FormProduk({
         </p>
       )}
       {state.error ? (
-        <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p role="alert" className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm">
           {state.error}
         </p>
       ) : null}
-      <button
-        type="submit"
-        disabled={pending}
-        className={`${utama ? "btn-duo" : "btn-duo-white"} flex w-full items-center justify-center disabled:opacity-60 sm:w-auto`}
-      >
+      <Tombol type="submit" disabled={pending} varian={utama ? "primary" : "secondary"} ukuran="lg">
         {pending ? "Menyimpan..." : produk?.status === "rejected" ? "Simpan dan ajukan ulang" : "Simpan"}
-      </button>
+      </Tombol>
     </form>
   );
 }
@@ -223,23 +220,19 @@ function DaftarVarian({ awal }: { awal: EtalaseForm["varian"] }) {
             placeholder="Stok"
             className={bidang}
           />
-          <button
+          <Tombol
             type="button"
-            onClick={() => setBaris(baris.filter((_, i) => i !== indeks))}
-            className="btn-duo-white"
-          >
+            onClick={() => setBaris(baris.filter((_, i) => i !== indeks))} varian="secondary" ukuran="lg">
             Hapus
-          </button>
+          </Tombol>
         </div>
       ))}
       {baris.length < 10 ? (
-        <button
+        <Tombol
           type="button"
-          onClick={() => setBaris([...baris, { nama: "", harga: "", stok: "" }])}
-          className="btn-duo"
-        >
+          onClick={() => setBaris([...baris, { nama: "", harga: "", stok: "" }])} varian="secondary" ukuran="lg">
           Tambah varian
-        </button>
+        </Tombol>
       ) : null}
       <p className="text-xs leading-5 text-foggy">Harga dan stok varian boleh kosong. Kosong berarti ikut harga dan stok utama.</p>
     </div>

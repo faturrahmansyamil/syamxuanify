@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { connection } from "next/server";
 import { keluar } from "@/app/actions/auth";
+import { Tombol } from "@/components/tombol";
 import { peranPengguna } from "@/lib/peran";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
@@ -45,9 +46,9 @@ export async function AuthNav() {
       ) : null}
       <span className="hidden max-w-[8rem] truncate text-[14px] text-muted-gray sm:inline sm:max-w-[14rem]">{email}</span>
       <form action={keluar}>
-        <button type="submit" className="btn-sekunder">
+        <Tombol type="submit" varian="secondary" ukuran="md">
           Keluar
-        </button>
+        </Tombol>
       </form>
     </div>
   );
@@ -56,12 +57,12 @@ export async function AuthNav() {
 function TautanTamu() {
   return (
     <div className="flex flex-nowrap items-center justify-end gap-2">
-      <Link href="/masuk" className="btn-utama shrink-0">
+      <Tombol href="/masuk" varian="secondary" ukuran="md" className="shrink-0">
         Masuk
-      </Link>
-      <Link href="/daftar" className="btn-utama shrink-0">
+      </Tombol>
+      <Tombol href="/daftar" varian="primary" ukuran="md" className="shrink-0">
         Daftar
-      </Link>
+      </Tombol>
     </div>
   );
 }

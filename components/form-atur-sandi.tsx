@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { useActionState } from "react";
 import { simpanSandiBaru, type AuthState } from "@/app/actions/auth";
 
@@ -11,7 +12,7 @@ export function FormAturSandi() {
   const [state, action, pending] = useActionState(simpanSandiBaru, awal);
 
   return (
-    <form action={action} className="space-y-4">
+    <form action={action} className="space-y-[16px]">
       <div className="space-y-1.5">
         <label htmlFor="password" className="block text-sm font-medium">
           Kata sandi baru
@@ -43,17 +44,15 @@ export function FormAturSandi() {
         />
       </div>
       {state.error ? (
-        <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p role="alert" className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm">
           {state.error}
         </p>
       ) : null}
-      <button
+      <Tombol
         type="submit"
-        disabled={pending}
-        className="btn-duo flex w-full items-center justify-center disabled:cursor-not-allowed disabled:opacity-60"
-      >
+        disabled={pending} varian="primary" ukuran="lg" className="w-full">
         {pending ? "Menyimpan..." : "Simpan kata sandi"}
-      </button>
+      </Tombol>
     </form>
   );
 }

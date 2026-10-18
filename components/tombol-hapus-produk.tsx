@@ -1,5 +1,6 @@
 "use client";
 
+import { Tombol } from "@/components/tombol";
 import { hapusProduk } from "@/app/actions/produk-toko";
 
 export function TombolHapusProduk({ id }: { id: string }) {
@@ -11,9 +12,9 @@ export function TombolHapusProduk({ id }: { id: string }) {
       }}
     >
       <input type="hidden" name="id" value={id} />
-      <button type="submit" className="btn-duo-white">
+      <Tombol type="submit" varian="secondary" ukuran="sm">
         Hapus
-      </button>
+      </Tombol>
     </form>
   );
 }

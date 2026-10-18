@@ -7,7 +7,7 @@ const LABEL = {
 const WARNA = {
   pending: "bg-faint text-foggy",
   approved: "bg-faint text-hof",
-  rejected: "bg-faint text-red-700",
+  rejected: "bg-faint text-ink-black",
 } as const;
 
 export function StatusModerasi({ status }: { status: keyof typeof LABEL }) {

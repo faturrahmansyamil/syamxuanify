@@ -1,4 +1,8 @@
+"use client";
+
+import { Heart } from "lucide-react";
 import { ubahFavorit } from "@/app/actions/favorit";
+import { Tombol } from "@/components/tombol";
 
 export function TombolFavorit({
   id,
@@ -12,21 +16,26 @@ export function TombolFavorit({
   kembali: string;
 }) {
   return (
-    <form action={ubahFavorit}>
+    <form
+      action={ubahFavorit}
+      className="inline-block h-[32px] w-[32px]"
+      onClick={(event) => event.stopPropagation()}
+      onPointerDown={(event) => event.stopPropagation()}
+    >
       <input type="hidden" name="id" value={id} />
       <input type="hidden" name="slug" value={slug} />
       <input type="hidden" name="kembali" value={kembali} />
-      <button
+      <Tombol
         type="submit"
+        ikon
+        ukuran="sm"
+        varian="secondary"
+        bayang="sm"
         aria-label={disukai ? "Hapus dari favorit" : "Simpan ke favorit"}
         aria-pressed={disukai}
-        data-active={disukai ? "true" : "false"}
-        className="btn-duo-white btn-hati"
       >
-        <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true" fill={disukai ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8">
-          <path d="M12 20s-7-4.4-7-9a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 4.6-7 9-7 9Z" />
-        </svg>
-      </button>
+        <Heart strokeWidth={1.75} fill={disukai ? "currentColor" : "none"} aria-hidden="true" />
+      </Tombol>
     </form>
   );
 }

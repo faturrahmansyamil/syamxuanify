@@ -1,18 +1,17 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { Tombol } from "@/components/tombol";
 
 export function TombolAksi({
   aksi,
   bidang,
   konfirmasi,
-  className,
   children,
 }: {
   aksi: (formData: FormData) => void | Promise<void>;
   bidang: Record<string, string>;
   konfirmasi?: string;
-  className: string;
   children: ReactNode;
 }) {
   return (
@@ -26,9 +25,9 @@ export function TombolAksi({
       {Object.entries(bidang).map(([nama, nilai]) => (
         <input key={nama} type="hidden" name={nama} value={nilai} />
       ))}
-      <button type="submit" className={className}>
+      <Tombol type="submit" varian="secondary" ukuran="sm">
         {children}
-      </button>
+      </Tombol>
     </form>
   );
 }

@@ -30,7 +30,7 @@ export function KartuProduk({
       <Link href={`/produk/${produk.slug}`} className="relative block overflow-hidden rounded-[20px]">
         {gambar ? (
           <span className="relative block aspect-square">
-            <GambarIsi src={gambar} sizes="(max-width: 768px) 46vw, 240px" priority={prioritas} className="foto-kartu" />
+            <GambarIsi src={gambar} alt={produk.judul} sizes="(max-width: 768px) 46vw, 240px" priority={prioritas} className="foto-kartu" />
           </span>
         ) : (
           <PlaceholderProduk kategori={produk.kategori?.slug} />

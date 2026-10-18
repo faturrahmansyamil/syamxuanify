@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
+import { metadataBagikan } from "@/lib/og";
 import { Muncul } from "@/components/muncul";
 
-export const metadata: Metadata = {
-  title: "Syarat & Ketentuan",
-  description: "Aturan memakai Syamxuanify, barang yang dilarang, dan tanggung jawab transaksi.",
-};
+export const metadata: Metadata = metadataBagikan("Syarat & Ketentuan", "Aturan memakai Syamxuanify, barang yang dilarang, dan tanggung jawab transaksi.");
 
 export default function HalamanSyarat() {
   return (

@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
+import { metadataBagikan } from "@/lib/og";
 import { Suspense } from "react";
 import { KatalogProduk } from "@/components/katalog-produk";
 import { KerangkaProduk } from "@/components/kartu-produk";
 
-export const metadata: Metadata = {
-  title: "Semua produk",
-  description: "Daftar produk yang disetujui di Syamxuanify. Chat penjual lewat WhatsApp dan bayar ke QRIS penjual.",
-};
+export const metadata: Metadata = metadataBagikan("Semua produk", "Jajanan, produk digital, jasa, dan fashion dari mahasiswa. Chat penjual lewat WhatsApp, bayar langsung ke penjual.");
 
 export default function HalamanProduk({
   searchParams,

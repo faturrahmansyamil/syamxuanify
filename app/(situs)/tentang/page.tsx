@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
+import { metadataBagikan } from "@/lib/og";
 import { Suspense } from "react";
 import { Muncul } from "@/components/muncul";
 import { ambilSitus } from "@/lib/situs";
 
-export const metadata: Metadata = {
-  title: "Tentang",
-  description: "Syamxuanify adalah etalase mahasiswa kampus. Chat penjual di WhatsApp dan bayar ke QRIS penjual.",
-};
+export const metadata: Metadata = metadataBagikan("Tentang", "Syamxuanify adalah etalase mahasiswa kampus. Chat penjual di WhatsApp dan bayar langsung ke penjual.");
 
 export default function HalamanTentang() {
   return (

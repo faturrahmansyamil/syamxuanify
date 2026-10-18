@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
+import { metadataBagikan } from "@/lib/og";
 import { Suspense } from "react";
+import { EtalaseKosong } from "@/components/etalase-kosong";
 import { TopPenjual } from "@/components/top-penjual";
 import { ambilSemuaToko } from "@/lib/temukan";
 
-export const metadata: Metadata = {
-  title: "Semua toko",
-  description: "Toko mahasiswa yang sudah disetujui di Syamxuanify.",
-};
+export const metadata: Metadata = metadataBagikan("Semua toko", "Daftar toko mahasiswa di Syamxuanify. Buka tokonya, lihat produk, lalu chat penjual lewat WhatsApp.");
 
 export default function HalamanToko() {
   return (
@@ -22,7 +21,9 @@ async function Daftar() {
     <div>
       <h1 className="text-2xl font-semibold text-[#000000]">Semua toko</h1>
       {toko.length === 0 ? (
-        <p className="kartu mt-[16px] p-5 text-sm font-medium text-[#787574]">Belum ada toko yang disetujui.</p>
+        <div className="mt-[16px]">
+          <EtalaseKosong judul="Belum ada toko yang buka." isi="Toko mahasiswa akan muncul di sini. Mau jadi yang pertama?" />
+        </div>
       ) : (
         <TopPenjual toko={toko} semua />
       )}

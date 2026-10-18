@@ -1,10 +1,9 @@
+import { metadataBagikan } from "@/lib/og";
 import Link from "next/link";
 import { KartuAuth } from "@/components/kartu-auth";
 import { FormDaftar } from "@/components/form-daftar";
 
-export const metadata = {
-  title: "Daftar",
-};
+export const metadata = metadataBagikan("Daftar", "Bikin akun Syamxuanify gratis, lalu buka toko dari halaman akun.");
 
 export default function HalamanDaftar() {
   return (

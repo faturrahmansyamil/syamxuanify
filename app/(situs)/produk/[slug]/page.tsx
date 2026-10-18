@@ -202,11 +202,7 @@ function IsiProduk({
             </div>
             </Muncul>
           ) : null}
-          {qris ? (
-            <GambarQris url={qris} />
-          ) : (
-            <p className="text-sm font-medium text-foggy">QRIS belum dipasang.</p>
-          )}
+          {qris ? <GambarQris url={qris} /> : null}
           <PeringatanTransaksi />
           {toko ? (
             masuk ? (

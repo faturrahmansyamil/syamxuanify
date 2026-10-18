@@ -32,7 +32,7 @@ export function TokoPilihan({ toko }: { toko: TokoPilihan[] }) {
                   const src = item.foto[indeks];
                   return (
                     <span key={`${item.id}-${indeks}`} className="relative aspect-square overflow-hidden rounded-[16px]">
-                      {src ? <GambarIsi src={src} sizes="(max-width: 640px) 28vw, 120px" /> : null}
+                      {src ? <GambarIsi src={src} alt={`Produk dari ${item.nama_toko}`} sizes="(max-width: 640px) 28vw, 120px" /> : null}
                     </span>
                   );
                 })}

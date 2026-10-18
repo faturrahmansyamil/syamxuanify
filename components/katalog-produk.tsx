@@ -1,5 +1,6 @@
 import { IkonKategori } from "@/components/ikon-kategori";
 import { JalurChip } from "@/components/jalur-chip";
+import { EtalaseKosong } from "@/components/etalase-kosong";
 import { Tombol } from "@/components/tombol";
 import { ambilKatalog, bersihkanKata, slugAman, urutanAman, type UrutanKatalog } from "@/lib/katalog";
 import { KisiProduk } from "@/components/kisi-produk";
@@ -17,6 +18,12 @@ export async function KatalogProduk({
   const kategori = slugAman(params.kategori) ? params.kategori : "";
   const urutan = urutanAman(params.urut);
   const hasil = await ambilKatalog(kata, kategori, urutan);
+  const disaring = Boolean(kata || (hasil.ok && hasil.kategoriAktif));
+  let katalogKosong = hasil.ok && hasil.produk.length === 0 && !disaring;
+  if (hasil.ok && hasil.produk.length === 0 && disaring) {
+    const semua = await ambilKatalog(undefined, undefined, "terbaru");
+    katalogKosong = semua.ok && semua.produk.length === 0;
+  }
 
   if (!hasil.ok) {
     return <Kotak judul="Katalog belum bisa dimuat">{hasil.pesan}</Kotak>;
@@ -42,7 +49,8 @@ export async function KatalogProduk({
 
   const daftar = (
       <section className="space-y-[16px]">
-        <JalurChip>
+        {hasil.produk.length > 0 ? (
+          <JalurChip>
           {URUTAN.map((item) => (
             <Tombol
               key={item.id}
@@ -55,12 +63,25 @@ export async function KatalogProduk({
             </Tombol>
           ))}
         </JalurChip>
+        ) : null}
         {hasil.produk.length === 0 ? (
-          <Kotak judul="Tidak ada produk">
-            {kata || hasil.kategoriAktif
-              ? "Tidak ada produk yang cocok. Coba kata lain atau pilih kategori Semua."
-              : "Belum ada produk yang disetujui."}
-          </Kotak>
+          katalogKosong ? (
+            <EtalaseKosong />
+          ) : (
+            <Muncul>
+              <div className="rounded-[28px] bg-white px-[20px] py-[16px] shadow-[var(--shadow-sm-2)]">
+                <h3>Tidak ada yang cocok</h3>
+                <p className="mt-[8px] text-[14px] leading-[1.4] text-muted-gray">
+                  {kata ? `Belum ada produk untuk "${kata}". Coba kata lain.` : "Belum ada produk di kategori ini."}
+                </p>
+                <div className="mt-[12px]">
+                  <Tombol href="/produk" chip varian="secondary">
+                    Lihat semua produk
+                  </Tombol>
+                </div>
+              </div>
+            </Muncul>
+          )
         ) : (
           <KisiProduk
             produk={hasil.produk}

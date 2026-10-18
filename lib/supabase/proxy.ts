@@ -97,5 +97,35 @@ export async function updateSession(request: NextRequest) {
     return redirectResponse;
   }
 
+  const detail = /^\/(produk|toko|kategori)\/([^/]+)\/?$/.exec(jalur);
+  if (detail && (!sudahMasuk || detail[1] === "kategori")) {
+    let slug = "";
+    try {
+      slug = decodeURIComponent(detail[2]);
+    } catch {
+      slug = "";
+    }
+    const cek = !slug
+      ? { data: [], error: null }
+      : detail[1] === "kategori"
+        ? await supabase.from("categories").select("id").eq("slug", slug).limit(1)
+        : await supabase
+            .from(detail[1] === "produk" ? "products" : "shops")
+            .select("id")
+            .eq("slug", slug)
+            .eq("status", "approved")
+            .limit(1);
+    if (!cek.error && (cek.data ?? []).length === 0) {
+      const alamat = request.nextUrl.clone();
+      alamat.pathname = "/_tidak-ditemukan";
+      alamat.search = "";
+      const kosong = NextResponse.rewrite(alamat, { status: 404 });
+      supabaseResponse.cookies.getAll().forEach((cookie) => {
+        kosong.cookies.set(cookie);
+      });
+      return kosong;
+    }
+  }
+
   return supabaseResponse;
 }

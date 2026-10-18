@@ -588,3 +588,13 @@ html.sedang-muat .wordmark-teks {
     opacity: 1;
   }
 }
+
+/* HP: bar WhatsApp produk duduk di atas nav bawah, jadi isi dan footer butuh ruang ekstra */
+@media (max-width: 767px) {
+  body:has(.bar-wa-hp) #isi {
+    padding-bottom: 160px;
+  }
+  body:has(.bar-wa-hp) footer {
+    padding-bottom: 152px;
+  }
+}

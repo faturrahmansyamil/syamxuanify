@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
+import { metadataBagikan } from "@/lib/og";
 import { Suspense } from "react";
 import { KatalogProduk } from "@/components/katalog-produk";
 import { KerangkaKatalog } from "@/components/kerangka";
 
-export const metadata: Metadata = {
-  title: "Cari",
-  description: "Cari jajanan, jasa, dan fashion di Syamxuanify. Tidak perlu masuk.",
-};
+export const metadata: Metadata = metadataBagikan("Cari", "Cari jajanan, produk digital, jasa, dan fashion dari mahasiswa di Syamxuanify.");
 
 export default function HalamanCari({
   searchParams,

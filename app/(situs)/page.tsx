@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { BaruMendarat } from "@/components/baru-mendarat";
 import { CariProduk } from "@/components/cari-produk";
+import { EtalaseKosong } from "@/components/etalase-kosong";
 import { HeroHidup, type KartuHidup } from "@/components/hero-hidup";
 import { IkonKategori } from "@/components/ikon-kategori";
 import { JalurChip } from "@/components/jalur-chip";
@@ -74,6 +75,8 @@ async function IsiBeranda({
     ambilUnggulan(),
   ]);
   const konstelasi = susunKonstelasi(unggulan, katalog.ok ? katalog.produk : []);
+  const kosong = katalog.ok && katalog.produk.length === 0;
+  const terlarisAsli = terlaris.filter((item) => (item.klikWa ?? 0) > 0);
 
   return (
     <>
@@ -96,7 +99,14 @@ async function IsiBeranda({
           </JalurChip>
         ) : null}
       </HeroHidup>
-      <TopTerlaris produk={terlaris} />
+      {kosong ? (
+        <EtalaseKosong
+          judul="Belum ada yang jualan. Jadi penjual pertama di kampusmu."
+          isi="Buka toko gratis, pasang produk, dan pembeli langsung chat kamu lewat WhatsApp."
+          langkah
+        />
+      ) : null}
+      <TopTerlaris produk={terlarisAsli} />
       {katalog.ok
         ? BARIS.map((baris) => {
             const produk = katalog.produk.filter((item) => item.kategori?.slug === baris.slug).slice(0, 4);

@@ -152,7 +152,7 @@ export function PanelBeli({
         {batas > 0 ? <span className="text-sm text-foggy">Total {formatRupiah(total)}</span> : null}
       </div>
       <div className="hidden md:block">{tombol}</div>
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-bebe bg-card p-3 md:hidden">{tombol}</div>
+      <div className="bar-wa-hp fixed inset-x-0 bottom-[calc(73px+max(8px,env(safe-area-inset-bottom)))] z-40 border-t border-bebe bg-card p-3 md:hidden">{tombol}</div>
     </div>
   );
 }

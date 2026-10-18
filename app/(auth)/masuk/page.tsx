@@ -1,12 +1,11 @@
+import { metadataBagikan } from "@/lib/og";
 import Link from "next/link";
 import { Suspense } from "react";
 import { KartuAuth } from "@/components/kartu-auth";
 import { FormMasuk } from "@/components/form-masuk";
 import { tautanAman } from "@/lib/tujuan";
 
-export const metadata = {
-  title: "Masuk",
-};
+export const metadata = metadataBagikan("Masuk", "Masuk ke akun Syamxuanify untuk menyimpan favorit dan mengelola toko.");
 
 export default function HalamanMasuk({
   searchParams,

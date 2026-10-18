@@ -28,7 +28,7 @@ export function GaleriProduk({ foto, judul }: { foto: string[]; judul: string })
               setBesar(true);
             }}
           >
-            <img src={src} alt="" className="aspect-square w-full rounded-xl bg-white object-cover" />
+            <img src={src} alt={`${judul}, foto ${indeks + 1}`} className="aspect-square w-full rounded-xl bg-white object-cover" />
           </button>
         ))}
       </div>
@@ -48,7 +48,7 @@ export function GaleriProduk({ foto, judul }: { foto: string[]; judul: string })
                 indeks === aktif ? "border-hof" : "border-transparent"
               }`}
             >
-              <img src={src} alt="" className="h-full w-full object-cover" />
+              <img src={src} alt={`${judul}, foto ${indeks + 1}`} className="h-full w-full object-cover" />
             </button>
           ))}
         </div>

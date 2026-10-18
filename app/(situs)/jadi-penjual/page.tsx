@@ -1,9 +1,8 @@
 import { Tombol } from "@/components/tombol";
 import type { Metadata } from "next";
+import { metadataBagikan } from "@/lib/og";
 
-export const metadata: Metadata = {
-  title: "Jadi penjual",
-};
+export const metadata: Metadata = metadataBagikan("Jadi penjual", "Buka toko gratis di Syamxuanify. Pasang produk dan nomor WhatsApp, pembeli langsung chat kamu.");
 
 export default function HalamanJadiPenjual() {
   return (

@@ -344,7 +344,7 @@ function KartuMelayang({ item, lebar, prioritas = false }: { item: KartuHidup; l
     <Link href={`/produk/${item.slug}`} className="block overflow-hidden rounded-[20px] bg-white" style={{ width: lebar, boxShadow: "var(--shadow-sm)" }}>
       {gambar ? (
         <span className="relative block aspect-square overflow-hidden">
-          <GambarIsi src={gambar} sizes={`${lebar}px`} priority={prioritas} className="object-cover" />
+          <GambarIsi src={gambar} alt={item.judul} sizes={`${lebar}px`} priority={prioritas} className="object-cover" />
         </span>
       ) : (
         <span className="block aspect-square">

@@ -15,11 +15,11 @@ export default function HalamanMasuk({
   return (
     <KartuAuth
       judul="Masuk ke Syamxuanify"
-      sub="Pakai Google atau email."
+      sub="Pakai akun Google atau email yang sudah terdaftar."
       bawah={
         <>
           Belum punya akun?{" "}
-          <Link href="/daftar" className="text-ink-black">
+          <Link href="/daftar" className="font-bold text-[#141210] underline decoration-2 underline-offset-4 hover:text-[#ff3b1f]">
             Daftar
           </Link>
         </>

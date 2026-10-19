@@ -9,11 +9,11 @@ export default function HalamanDaftar() {
   return (
     <KartuAuth
       judul="Bikin akun gratis"
-      sub="Gratis untuk mahasiswa."
+      sub="Gratis. Mulai sebagai pembeli, buka toko kapan saja."
       bawah={
         <>
           Sudah punya akun?{" "}
-          <Link href="/masuk" className="text-ink-black">
+          <Link href="/masuk" className="font-bold text-[#141210] underline decoration-2 underline-offset-4 hover:text-[#ff3b1f]">
             Masuk
           </Link>
         </>

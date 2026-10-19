@@ -49,7 +49,7 @@ export function BidangTeks({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-[6px] block text-[14px] font-medium">
+      <label htmlFor={id} className="label-auth">
         {label}
       </label>
       <input
@@ -63,11 +63,12 @@ export function BidangTeks({
         maxLength={maxLength}
         inputMode={inputMode}
         aria-invalid={galat ? true : undefined}
+        aria-describedby={[galat ? `${id}-galat` : null, bantuan ? `${id}-bantuan` : null].filter(Boolean).join(" ") || undefined}
         className="input-auth"
       />
-      {bantuan ? <p className="mt-[4px] text-[12px] leading-[1.4] text-[#787574]">{bantuan}</p> : null}
+      {bantuan ? <p id={`${id}-bantuan`} className="mt-[6px] text-[12px] leading-[1.45] text-[#6b645c]">{bantuan}</p> : null}
       {galat ? (
-        <p role="alert" className="mt-[4px] text-[12px] leading-[1.4] teks-galat">
+        <p id={`${id}-galat`} role="alert" className="galat-auth">
           {galat}
         </p>
       ) : null}
@@ -94,7 +95,7 @@ export function BidangSandi({
 
   return (
     <div>
-      <label htmlFor={id} className="mb-[6px] block text-[14px] font-medium">
+      <label htmlFor={id} className="label-auth">
         {label}
       </label>
       <div className="relative">
@@ -106,6 +107,7 @@ export function BidangSandi({
           required
           minLength={6}
           aria-invalid={galat ? true : undefined}
+          aria-describedby={galat ? `${id}-galat` : undefined}
           className="input-auth ada-mata"
         />
         <span className="absolute top-1/2 right-[12px] -translate-y-1/2">
@@ -123,7 +125,7 @@ export function BidangSandi({
       </div>
       {catatan}
       {galat ? (
-        <p role="alert" className="mt-[4px] text-[12px] leading-[1.4] teks-galat">
+        <p id={`${id}-galat`} role="alert" className="galat-auth">
           {galat}
         </p>
       ) : null}
@@ -133,7 +135,7 @@ export function BidangSandi({
 
 export function TombolUtama({ pending, anak }: { pending: boolean; anak: string }) {
   return (
-    <Tombol type="submit" disabled={pending} varian="primary" ukuran="lg" className="mt-[24px] w-full">
+    <Tombol type="submit" disabled={pending} varian="primary" ukuran="lg" className="mt-[24px] w-full border-[#141210]! bg-[#ff3b1f]! text-white! hover:bg-[#141210]!">
       {pending ? <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white motion-reduce:animate-none" /> : null}
       {pending ? "Memproses..." : anak}
     </Tombol>
@@ -173,10 +175,10 @@ export function TombolGoogle({
 
 export function PemisahAtau() {
   return (
-    <div className="my-[24px] flex items-center gap-[12px]">
-      <span className="h-px flex-1 bg-[#ebebeb]" />
-      <span className="text-[12px] text-[#787574]">atau</span>
-      <span className="h-px flex-1 bg-[#ebebeb]" />
+    <div className="my-[22px] flex items-center gap-[12px]" role="separator" aria-label="atau">
+      <span className="h-0 flex-1 border-t-[1.5px] border-dashed border-[#141210]/40" />
+      <span className="font-bon text-[12px] tracking-[0.14em] text-[#6b645c]">ATAU</span>
+      <span className="h-0 flex-1 border-t-[1.5px] border-dashed border-[#141210]/40" />
     </div>
   );
 }
@@ -194,10 +196,10 @@ function IkonMata({ coret = false }: { coret?: boolean }) {
 function IkonGoogle() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-      <path fill="#000000" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z" />
-      <path fill="#000000" d="M12 22c2.7 0 5-1 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z" />
-      <path fill="#000000" d="M6.4 13.9A6 6 0 0 1 6.1 12c0-.7.1-1.3.3-1.9V7.5H3.1A10 10 0 0 0 2 12c0 1.6.4 3.1 1.1 4.5l3.3-2.6Z" />
-      <path fill="#000000" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1Z" />
+      <path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z" />
+      <path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z" />
+      <path fill="#FBBC05" d="M6.4 13.9A6 6 0 0 1 6.1 12c0-.7.1-1.3.3-1.9V7.5H3.1A10 10 0 0 0 2 12c0 1.6.4 3.1 1.1 4.5l3.3-2.6Z" />
+      <path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1Z" />
     </svg>
   );
 }

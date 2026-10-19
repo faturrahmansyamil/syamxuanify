@@ -42,7 +42,7 @@ async function Isi() {
     <div className="mx-auto max-w-3xl space-y-[32px]">
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Akun Saya</h1>
-        <p className="text-sm leading-6 text-foggy">Profil, favorit, riwayat, laporan, dan keamanan.</p>
+        <p className="text-sm leading-[1.6] text-foggy">Profil, favorit, riwayat, laporan, dan keamanan.</p>
       </header>
 
       <FormProfil nama={profil.nama} noWa={profil.no_wa} foto={urlGambarAman(profil.foto_url)} />
@@ -50,7 +50,7 @@ async function Isi() {
       <Muncul>
       <section className="rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Favorit</h2>
-        <p className="mt-2 text-sm leading-6 text-foggy">Produk yang kamu simpan dengan tombol hati.</p>
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">Produk yang kamu simpan dengan tombol hati.</p>
         <Tombol href="/akun/favorit" varian="secondary" ukuran="lg" className="mt-[16px]">
           Lihat favorit
         </Tombol>
@@ -60,9 +60,9 @@ async function Isi() {
       <Muncul urut={1}>
       <section className="space-y-3 rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Riwayat dilihat</h2>
-        {riwayat.pesan ? <p className="text-sm leading-6 text-foggy">{riwayat.pesan}</p> : null}
+        {riwayat.pesan ? <p className="text-sm leading-[1.6] text-foggy">{riwayat.pesan}</p> : null}
         {riwayat.produk.length === 0 && !riwayat.pesan ? (
-          <p className="text-sm leading-6 text-foggy">Belum ada produk yang dilihat.</p>
+          <p className="text-sm leading-[1.6] text-foggy">Belum ada produk yang dilihat.</p>
         ) : (
           <ul className="space-y-2">
             {riwayat.produk.map((produk) => (
@@ -78,13 +78,13 @@ async function Isi() {
       <Muncul urut={2}>
       <section className="space-y-3 rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Laporan saya</h2>
-        {laporan.pesan ? <p className="text-sm leading-6 text-foggy">{laporan.pesan}</p> : null}
+        {laporan.pesan ? <p className="text-sm leading-[1.6] text-foggy">{laporan.pesan}</p> : null}
         {laporan.daftar.length === 0 && !laporan.pesan ? (
-          <p className="text-sm leading-6 text-foggy">Belum ada laporan.</p>
+          <p className="text-sm leading-[1.6] text-foggy">Belum ada laporan.</p>
         ) : (
           <ul className="space-y-3">
             {laporan.daftar.map((item) => (
-              <li key={item.id} className="rounded-lg bg-faint px-3 py-2 text-sm leading-6 text-hof">
+              <li key={item.id} className="rounded-lg bg-faint px-3 py-2 text-sm leading-[1.6] text-hof">
                 <span className="font-medium">{item.judul}</span>
                 <span className="text-foggy"> · {item.status}</span>
                 <span className="block text-foggy">{item.alasan}</span>

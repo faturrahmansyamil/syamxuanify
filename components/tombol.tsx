@@ -39,9 +39,9 @@ const UKURAN: Record<Ukuran, { kotak: string; isi: string; ikon: string }> = {
 };
 
 const WARNA: Record<Varian, string> = {
-  primary: "bg-[#000000] text-white hover:bg-[#332f2d]",
-  secondary: "border border-[#ebebeb] bg-white text-[#000000] hover:bg-[#f2f4f5]",
-  ghost: "bg-transparent text-[#000000] hover:bg-[#f2f4f5]",
+  primary: "border-2 border-[#141210] bg-[#141210] text-[#fff4dc] hover:bg-[#ff3b1f] hover:text-[#141210]",
+  secondary: "border-2 border-[#141210] bg-white text-[#141210] hover:bg-[#ffd60a]",
+  ghost: "bg-transparent text-[#141210] hover:bg-[#141210]/10",
 };
 
 function kelasTombol({
@@ -56,17 +56,17 @@ function kelasTombol({
 }: Dasar) {
   const ukuranKelas = UKURAN[ukuran];
   return [
-    "tombol rounded-full font-medium leading-none tracking-[-0.014em] no-underline transition-[background-color,transform] duration-200 ease-out",
-    "active:scale-[0.96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#000000]",
+    "tombol rounded-[12px] font-bold leading-none tracking-[-0.01em] no-underline transition-[background-color,transform] duration-200 ease-out",
+    "active:scale-[0.96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d5bff]",
     "disabled:cursor-not-allowed disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100",
     "[&_svg]:block [&_svg]:shrink-0",
-    ikon ? `grid place-items-center p-0 ${ukuranKelas.kotak}` : chip ? "inline-flex h-[36px] items-center justify-center gap-[6px] px-[14px]" : `inline-flex items-center justify-center ${ukuranKelas.isi}`,
+    ikon ? `grid place-items-center p-0 ${ukuranKelas.kotak}` : chip ? "inline-flex h-[38px] items-center justify-center gap-[6px] rounded-[10px] px-[14px]" : `inline-flex items-center justify-center ${ukuranKelas.isi}`,
     chip || ukuran !== "lg" ? "text-[14px]" : "",
     chip || ukuran !== "lg" ? ukuranKelas.ikon : ukuranKelas.ikon,
     WARNA[varian],
     sorot ? "tombol-sorot" : "",
     bayang === "sm" ? "tombol-bayang" : "",
-    terang ? "text-white! hover:bg-[#f2f4f5]! hover:text-[#000000]!" : "",
+    terang ? "border-transparent! bg-transparent! text-white! hover:bg-white/15!" : "",
     className ?? "",
   ]
     .filter(Boolean)

@@ -17,7 +17,7 @@ export function FormSitus({ situs }: { situs: Situs }) {
     <form action={action} className="space-y-[16px] rounded-[12px] border border-bebe bg-card p-5">
       <div>
         <h2 className="text-xl font-semibold">Info situs</h2>
-        <p className="mt-2 text-sm leading-6 text-foggy">Nama, tagline, logo, WhatsApp, dan email ini dipakai di header, footer, dan halaman Tentang.</p>
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">Nama, tagline, logo, WhatsApp, dan email ini dipakai di header, footer, dan halaman Tentang.</p>
       </div>
       <label className="block space-y-1.5 text-sm font-medium">
         Nama situs

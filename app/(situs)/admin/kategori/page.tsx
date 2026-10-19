@@ -30,7 +30,7 @@ async function Isi() {
   if (!hasil.ok) return <p className="rounded-[12px] bg-card p-[16px] text-sm">{hasil.pesan}</p>;
   const daftar = await hasil.supabase.from("categories").select("id, nama, ikon, urutan, aktif").order("urutan");
   if (daftar.error) {
-    return <p className="rounded-[12px] bg-card p-[16px] text-sm leading-6">Kategori belum siap. Jalankan supabase/migration-4-7.sql, lalu muat ulang.</p>;
+    return <p className="rounded-[12px] bg-card p-[16px] text-sm leading-[1.6]">Kategori belum siap. Jalankan supabase/migration-4-7.sql, lalu muat ulang.</p>;
   }
 
   return (

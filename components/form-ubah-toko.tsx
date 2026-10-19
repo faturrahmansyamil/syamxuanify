@@ -19,7 +19,7 @@ export function FormUbahToko({ toko, kembali }: { toko: TokoDasbor; kembali?: st
       {kembali ? <input type="hidden" name="kembali" value={kembali} /> : null}
       <div>
         <h2 className="text-xl font-semibold">Ubah data toko</h2>
-        <p className="mt-2 text-sm leading-6 text-foggy">
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">
           {ditolak
             ? "Perbaiki data ini, lalu simpan. Toko diajukan ulang dan statusnya kembali menunggu."
             : "Kosongkan logo atau QRIS kalau gambarnya tidak diganti."}

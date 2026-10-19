@@ -17,7 +17,7 @@ export function FormBukaToko() {
     <form action={action} className="kartu space-y-[16px] p-5">
       <div>
         <h2 className="text-xl font-semibold">Buka toko</h2>
-        <p className="mt-2 text-sm leading-6 text-foggy">
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">
           Tokomu mulai dengan status menunggu. Admin yang akan menyetujuinya.
         </p>
       </div>
@@ -36,7 +36,7 @@ export function FormBukaToko() {
       <Bidang id="qris" label="Gambar QRIS" petunjuk="JPG, PNG, atau WebP. Maksimal 2 MB.">
         <InputGambar id="qris" name="qris" required jagaKetajaman />
       </Bidang>
-      <label className="flex items-start gap-3 text-sm leading-6">
+      <label className="flex items-start gap-3 text-sm leading-[1.6]">
         <input type="checkbox" name="setuju" value="ya" required className="mt-1 h-5 w-5 shrink-0 accent-hof" />
         <span>
           Saya setuju{" "}

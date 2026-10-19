@@ -15,7 +15,7 @@ export function FormHapusAkun() {
     <form action={action} className="space-y-[16px] rounded-[12px] border border-bebe bg-card p-5">
       <div>
         <h2 className="text-xl font-semibold">Hapus akun</h2>
-        <p className="mt-2 text-sm leading-6 text-foggy">
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">
           Akun, toko, dan produkmu akan terhapus. Ketik HAPUS untuk melanjutkan.
         </p>
       </div>

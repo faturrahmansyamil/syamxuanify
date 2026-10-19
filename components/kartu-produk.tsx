@@ -27,7 +27,7 @@ export function KartuProduk({
   const chat = produk.toko ? tautanWhatsApp(produk.toko.no_wa, pesanToko(produk.toko.nama_toko)) : null;
   const foto = (
     <>
-      <Link href={`/produk/${produk.slug}`} className="relative block overflow-hidden rounded-[20px]">
+      <Link href={`/produk/${produk.slug}`} className="relative block overflow-hidden border-b-2 border-[#141210]">
         {gambar ? (
           <span className="relative block aspect-square">
             <GambarIsi src={gambar} alt={produk.judul} sizes="(max-width: 768px) 46vw, 240px" priority={prioritas} className="foto-kartu" />
@@ -37,20 +37,31 @@ export function KartuProduk({
         )}
       </Link>
       <LencanaStatus produk={produk} />
+      <span className="label-harga">{formatRupiah(produk.harga)}</span>
       <div className="absolute top-[12px] right-[12px] z-30 h-[32px] w-[32px]">
         <TombolFavorit id={produk.id} slug={produk.slug} disukai={disukai} kembali={kembali} />
       </div>
       {chat ? (
-        <Tombol href={chat} varian="primary" ukuran="sm" target="_blank" rel="noopener noreferrer" className="chat-penjual">
-          Chat penjual
+        <Tombol
+          href={chat}
+          varian="primary"
+          ukuran="sm"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Chat ${produk.toko?.nama_toko ?? "penjual"} di WhatsApp`}
+          className="chat-penjual border-[#141210]! bg-[#00a859]! text-white! hover:bg-[#141210]!"
+        >
+          WA
         </Tombol>
       ) : null}
     </>
   );
   const teks = (
-    <Link href={`/produk/${produk.slug}`} className="flex min-h-0 flex-1 flex-col gap-[12px] px-[12px] pb-[16px]">
-      <p className="line-clamp-2 min-h-[2.4em] text-[14px] font-semibold tracking-[-0.014em] text-ink-black">{produk.judul}</p>
-      <p className="text-[14px] text-ink-black">{formatRupiah(produk.harga)}</p>
+    <Link href={`/produk/${produk.slug}`} className="flex min-h-0 flex-1 flex-col gap-[10px] px-[12px] pt-[12px] pb-[14px]">
+      {produk.kategori ? (
+        <span className="text-[11px] font-bold tracking-[0.06em] text-[#6b5d4b] uppercase">{produk.kategori.nama}</span>
+      ) : null}
+      <p className="line-clamp-2 min-h-[2.5em] text-[15px] leading-[1.25] font-bold text-ink-black">{produk.judul}</p>
       <div className="mt-auto">
         {produk.toko ? (
           <BarisToko
@@ -136,7 +147,7 @@ export function KerangkaProduk() {
       <p className="sr-only">Memuat produk</p>
       <div className="grid grid-cols-2 gap-[12px] lg:grid-cols-4" aria-hidden="true">
         {[0, 1, 2, 3].map((item) => (
-          <div key={item} className="h-[300px] rounded-[28px] bg-[#ebebeb]" />
+          <div key={item} className="h-[300px] rounded-[16px] border-2 border-[#141210]/15 bg-[#f6e6c4]" />
         ))}
       </div>
     </div>

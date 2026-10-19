@@ -70,22 +70,23 @@ export function PanelBeli({
       }}
       varian="primary"
       ukuran="lg"
+      className="w-full border-[#141210]! bg-[#00a859]! text-white! shadow-[4px_4px_0_#141210] hover:bg-[#141210]! md:w-auto"
     >
-      Chat WhatsApp
+      Chat penjual di WhatsApp
     </Tombol>
   ) : (
-    <Tombol type="button" disabled varian="primary" ukuran="lg">
+    <Tombol type="button" disabled varian="primary" ukuran="lg" className="w-full md:w-auto">
       {wajibVarian ? "Pilih varian dulu" : "Chat WhatsApp"}
     </Tombol>
   );
 
   return (
     <div className="space-y-[16px]">
-      <p className="text-4xl font-semibold leading-none text-accent">{teksHarga}</p>
+      <p className="font-display inline-block -rotate-2 border-2 border-[#141210] bg-[#ffd60a] px-[14px] py-[8px] text-[34px] leading-none font-extrabold text-[#141210]">{teksHarga}</p>
       <div className="flex flex-wrap items-center gap-2 text-sm">
         {typeof terjual === "number" ? <span className="text-foggy">{terjual} terjual</span> : null}
         {kondisi ? (
-          <span className="rounded-full bg-ink-black px-2 py-0.5 text-xs font-medium text-white">
+          <span className="rounded-[6px] border-2 border-[#141210] bg-white px-2 py-0.5 text-xs font-bold text-[#141210]">
             {kondisi === "bekas" ? "Bekas" : "Baru"}
           </span>
         ) : null}

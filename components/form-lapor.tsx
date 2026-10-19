@@ -18,7 +18,7 @@ export function FormLapor({
   return (
     <form action={action} className="kartu space-y-3 p-[16px]">
       <h2 className="font-semibold">Laporkan</h2>
-      <p className="text-sm leading-6 text-foggy">
+      <p className="text-sm leading-[1.6] text-foggy">
         Laporkan kalau produk atau toko ini mencurigakan. Admin yang akan memeriksanya.
       </p>
       {productId ? <input type="hidden" name="product_id" value={productId} /> : null}

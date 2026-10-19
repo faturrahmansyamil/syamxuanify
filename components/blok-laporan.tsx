@@ -15,9 +15,9 @@ export async function BlokLaporan({
 
   if (!masuk) {
     return (
-      <div className="kartu p-[16px]">
+      <div className="kartu" style={{ padding: 16 }}>
         <h2 className="font-semibold">Laporkan</h2>
-        <p className="mt-2 text-sm leading-6 text-foggy">
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">
           Masuk dulu kalau kamu ingin melaporkan produk atau toko yang mencurigakan.
         </p>
         <Tombol

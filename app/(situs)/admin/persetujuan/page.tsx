@@ -36,7 +36,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ tab?: string }> }
     <div className="space-y-[16px]">
       <header>
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Persetujuan</h1>
-        <p className="mt-2 text-sm leading-6 text-foggy">Hanya yang masih menunggu. Tolak wajib menulis alasan.</p>
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">Hanya yang masih menunggu. Tolak wajib menulis alasan.</p>
       </header>
       <div className="flex gap-[16px] border-b border-bebe">
         <Tab href="/admin/persetujuan?tab=toko" aktif={tab === "toko"}>Toko</Tab>

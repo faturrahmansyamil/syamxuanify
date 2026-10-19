@@ -36,7 +36,7 @@ async function IsiAturSandi() {
   const { data } = await supabase.auth.getClaims();
   if (!data?.claims) {
     return (
-      <p className="text-sm leading-6">
+      <p className="text-sm leading-[1.6]">
         Buka tautan dari email dulu, baru halaman ini bisa menyimpan kata sandi baru.{" "}
         <Link href="/lupa-sandi" className="font-semibold text-hof hover:underline">
           Kirim ulang
@@ -47,7 +47,7 @@ async function IsiAturSandi() {
 
   return (
     <>
-      <p className="mb-[16px] text-sm leading-6 text-foggy">
+      <p className="mb-[16px] text-sm leading-[1.6] text-foggy">
         Pilih kata sandi baru, minimal 6 karakter.
       </p>
       <FormAturSandi />

@@ -34,7 +34,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ saring?: string }
     <div className="space-y-[16px]">
       <header>
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Verifikasi Toko</h1>
-        <p className="mt-2 text-sm leading-6 text-foggy">Label Terverifikasi hanya untuk toko.</p>
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">Label Terverifikasi hanya untuk toko.</p>
       </header>
       <div className="flex gap-2">
         <Saring href="/admin/verifikasi?saring=belum" aktif={!sudah}>Belum</Saring>

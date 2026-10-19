@@ -50,48 +50,51 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
   return (
     <div className="space-y-[24px]">
       {toko.status !== "approved" ? (
-        <p className="rounded-[12px] bg-card px-[16px] py-3 text-sm leading-6 text-hof">
+        <p className="rounded-[12px] bg-card px-[16px] py-3 text-sm leading-[1.6] text-hof">
           {toko.status === "rejected"
             ? "Toko ini ditolak dan belum tampil untuk pembeli."
             : "Toko ini belum tampil untuk pembeli. Statusnya masih menunggu persetujuan admin."}
         </p>
       ) : null}
       <Muncul>
-      <section className="kartu p-5">
+      <section className="overflow-hidden rounded-[22px] border-2 border-[#141210] bg-[#2d5bff] text-white">
+        <div className="tenda" aria-hidden="true" />
+        <div className="p-[20px] md:p-[32px]">
         <div className="flex items-start gap-[16px]">
           {logo ? (
-            <img src={logo} alt={`Foto ${toko.nama_toko}`} className="h-[64px] w-[64px] rounded-full object-cover" />
+            <img src={logo} alt={`Foto ${toko.nama_toko}`} className="h-[72px] w-[72px] rounded-[16px] border-2 border-[#141210] object-cover" />
           ) : (
-            <InisialToko nama={toko.nama_toko} className="h-[64px] w-[64px] text-xl" />
+            <InisialToko nama={toko.nama_toko} className="h-[72px] w-[72px] border-2 border-[#141210] bg-[#ffd60a]! text-2xl text-[#141210]!" />
           )}
           <div className="min-w-0">
-            <h1 className="break-words text-2xl font-semibold tracking-tight">{toko.nama_toko}</h1>
+            <h1 className="break-words text-[38px] text-white md:text-[56px]">{toko.nama_toko}</h1>
             {toko.terverifikasi ? (
-              <span className="mt-2 inline-flex rounded-full bg-faint px-2 py-1 text-xs font-medium text-hof">
+              <span className="mt-2 inline-flex rounded-[6px] border-2 border-[#141210] bg-[#ffd60a] px-2 py-1 text-xs font-bold text-[#141210]">
                 Terverifikasi
               </span>
             ) : null}
           </div>
         </div>
-        <p className="mt-[16px] text-sm leading-6 text-hof">
+        <p className="mt-[16px] max-w-[560px] text-[16px] leading-[1.5] text-white">
           {toko.deskripsi || "Toko ini belum menulis deskripsi."}
         </p>
         {whatsapp ? (
           <Tombol
             href={whatsapp}
             target="_blank"
-            rel="noopener noreferrer" varian="primary" ukuran="lg" className="mt-[16px]">
-            Chat WhatsApp
+            rel="noopener noreferrer" varian="primary" ukuran="lg" className="mt-[20px] border-[#141210]! bg-[#00a859]! text-white! shadow-[4px_4px_0_#141210] hover:bg-[#141210]!">
+            Chat penjual di WhatsApp
           </Tombol>
         ) : null}
+        </div>
       </section>
       </Muncul>
       {toko.is_closed ? (
-        <p className="rounded-[12px] bg-card px-[16px] py-3 text-sm leading-6 text-hof">Toko ini sedang tutup sementara.</p>
+        <p className="rounded-[12px] bg-card px-[16px] py-3 text-sm leading-[1.6] text-hof">Toko ini sedang tutup sementara.</p>
       ) : null}
       <Muncul>
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold">Produk</h2>
+        <h2 className="border-b-2 border-[#141210] pb-[10px] text-[30px]">Dagangan di lapak ini</h2>
         {hasil.produk.length === 0 ? (
           <p className="rounded-[12px] bg-card p-[16px] text-sm text-foggy">
             Belum ada produk yang disetujui di toko ini.

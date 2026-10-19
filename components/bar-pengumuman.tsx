@@ -41,16 +41,16 @@ export function BarPengumuman({
   return (
     <>
       <style>{":root { --tinggi-pengumuman: 48px; }"}</style>
-      <div className="relative h-[48px] w-full bg-[#000000]">
+      <div className="relative h-[48px] w-full bg-[#2d5bff]">
         <Link
           href={tautan}
           className="group flex h-full w-full items-center justify-center gap-[10px] px-[48px]"
         >
-          <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-[6px] bg-white text-[12px] font-medium leading-none text-black">
-            S<span className="text-shop-violet">.</span>
+          <span className="font-display flex h-[24px] shrink-0 items-center justify-center rounded-[6px] border-2 border-[#141210] bg-[#ffd60a] px-[6px] text-[11px] font-extrabold leading-none text-[#141210]">
+            GRATIS
           </span>
           <span className="min-w-0">
-            <span className="block truncate text-[14px] font-medium leading-[1.2] text-white group-hover:underline md:overflow-visible md:whitespace-nowrap">
+            <span className="block truncate text-[14px] font-bold leading-[1.2] text-white group-hover:underline md:overflow-visible md:whitespace-nowrap">
               {isi}
             </span>
             <span className="hidden text-[10px] leading-[1.2] text-white/70 group-hover:underline md:block">

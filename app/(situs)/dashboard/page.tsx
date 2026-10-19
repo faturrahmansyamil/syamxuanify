@@ -53,7 +53,7 @@ async function IsiDasbor() {
     <div className="space-y-[24px]">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Dashboard</h1>
-        <p className="mt-2 text-sm leading-6 text-foggy">Kelola toko dan produkmu dari sini.</p>
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">Kelola toko dan produkmu dari sini.</p>
       </div>
       <Muncul>
       <section className="kartu space-y-[16px] p-5">
@@ -72,7 +72,7 @@ async function IsiDasbor() {
             </div>
           </div>
         </div>
-        <p className="text-sm leading-6 text-hof">{toko.deskripsi || "Belum ada deskripsi."}</p>
+        <p className="text-sm leading-[1.6] text-hof">{toko.deskripsi || "Belum ada deskripsi."}</p>
         <p className="text-sm">WhatsApp: {toko.no_wa}</p>
         {qris ? (
           <img src={qris} alt="QRIS toko" className="h-36 w-36 rounded-[12px] border border-bebe object-contain" />
@@ -80,7 +80,7 @@ async function IsiDasbor() {
           <p className="text-sm text-foggy">Gambar QRIS belum ada.</p>
         )}
         {toko.status === "rejected" ? (
-          <div className="teks-galat rounded-[12px] bg-canvas-mist px-[16px] py-3 text-sm leading-6">
+          <div className="teks-galat rounded-[12px] bg-canvas-mist px-[16px] py-3 text-sm leading-[1.6]">
             <p className="font-semibold">Toko ditolak</p>
             <p className="mt-1 whitespace-pre-wrap break-words">
               {toko.rejection_reason || "Admin tidak menulis alasan."}
@@ -88,7 +88,7 @@ async function IsiDasbor() {
             <p className="mt-2">Ubah data di bawah, lalu simpan. Statusnya kembali menunggu.</p>
           </div>
         ) : (
-          <p className="text-sm leading-6 text-foggy">
+          <p className="text-sm leading-[1.6] text-foggy">
             {toko.status === "approved"
               ? "Toko ini sudah tampil untuk pembeli."
               : "Toko ini belum tampil untuk pembeli. Tunggu admin menyetujuinya."}
@@ -115,7 +115,7 @@ async function IsiDasbor() {
             {hasil.produk.map((produk, indeks) => (
               <li key={produk.id}>
                 <Muncul urut={indeks}>
-                <div className="kartu p-[16px]">
+                <div className="kartu" style={{ padding: 16 }}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="break-words font-semibold">{produk.judul}</p>
@@ -125,7 +125,7 @@ async function IsiDasbor() {
                       {produk.is_available ? "Tersedia" : "Habis"}
                     </p>
                     {produk.status === "rejected" ? (
-                      <p className="mt-2 break-words text-sm leading-6 text-ink-black">
+                      <p className="mt-2 break-words text-sm leading-[1.6] text-ink-black">
                         Ditolak: {produk.rejection_reason || "Admin tidak menulis alasan."}
                       </p>
                     ) : null}

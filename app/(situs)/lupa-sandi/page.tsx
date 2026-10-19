@@ -16,7 +16,7 @@ export default function HalamanLupaSandi({
     <Muncul>
     <section className="mx-auto w-full max-w-md rounded-[12px] border border-bebe bg-card p-5 sm:p-[32px]">
       <h1 className="text-2xl font-semibold tracking-tight">Lupa password</h1>
-      <p className="mt-2 text-sm leading-6 text-foggy">
+      <p className="mt-2 text-sm leading-[1.6] text-foggy">
         Masukkan email akunmu. Kami kirim tautan untuk membuat kata sandi baru.
       </p>
       <div className="mt-[24px]">

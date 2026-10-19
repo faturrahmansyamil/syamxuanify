@@ -26,10 +26,10 @@ export function TopPenjual({ toko, semua = false }: { toko: PenjualTop[]; semua?
               )}
               <span className="min-w-0 flex-1">
                 <span className="flex min-w-0 items-center gap-1">
-                  <span className="truncate text-sm font-semibold text-[#000000]">{item.nama}</span>
+                  <span className="font-display truncate text-[18px] font-extrabold text-[#141210]">{item.nama}</span>
                   {item.terverifikasi ? <BadgeCheck className="h-[16px] w-[16px] shrink-0 text-[#000000]" aria-label="Terverifikasi" /> : null}
                 </span>
-                <span className="block truncate text-xs font-medium text-[#787574]">{item.jumlah} produk</span>
+                <span className="block truncate text-xs font-semibold text-[#6b5d4b]">{item.jumlah} produk</span>
               </span>
             </Link>
           ))}

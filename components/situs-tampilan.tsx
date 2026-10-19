@@ -17,7 +17,7 @@ export async function IsiFooter() {
       <div className="grid grid-cols-3 gap-[16px] md:gap-[32px]">
         <div>
           <h2 className="text-sm font-semibold text-hof">Tentang</h2>
-          <p className="mt-3 text-sm leading-6 text-foggy">{situs.tagline}</p>
+          <p className="mt-3 text-sm leading-[1.6] text-foggy">{situs.tagline}</p>
           <Link href="/tentang" className="mt-3 block text-sm text-foggy hover:text-hof">
             Tentang {situs.nama_situs}
           </Link>
@@ -40,7 +40,7 @@ export async function IsiFooter() {
           ) : null}
         </div>
       </div>
-      <p className="mt-[32px] text-sm leading-6 text-foggy">
+      <p className="mt-[32px] text-sm leading-[1.6] text-foggy">
         Transaksi dilakukan langsung dengan penjual. {situs.nama_situs} tidak memproses pembayaran.
       </p>
     </div>
@@ -52,7 +52,7 @@ export async function BannerPengumuman() {
   if (!situs.pengumuman_aktif || !situs.pengumuman_teks) return null;
 
   return (
-    <p className="rounded-[12px] border border-bebe bg-card px-[16px] py-3 text-sm leading-6 text-hof">
+    <p className="rounded-[12px] border border-bebe bg-card px-[16px] py-3 text-sm leading-[1.6] text-hof">
       {situs.pengumuman_teks}
     </p>
   );

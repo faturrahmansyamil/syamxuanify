@@ -133,13 +133,13 @@ function IsiProduk({
         {foto.length ? <GaleriProduk foto={foto} judul={produk.judul} /> : <PlaceholderProduk kategori={produk.kategori?.slug} />}
         <div className="space-y-[16px]">
           {produk.status && produk.status !== "approved" ? (
-            <p className="rounded-[12px] bg-card px-[16px] py-3 text-sm leading-6 text-hof">
+            <p className="rounded-[12px] bg-card px-[16px] py-3 text-sm leading-[1.6] text-hof">
               Produk ini belum tampil di beranda sampai admin menyetujuinya.
             </p>
           ) : null}
           {produk.status === "approved" ? <CatatLihat id={produk.id} /> : null}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-            <h1 className="min-w-0 break-words text-[28px] font-medium leading-[1.43] sm:flex-1">{produk.judul}</h1>
+            <h1 className="min-w-0 break-words text-[32px] leading-[1.02] sm:flex-1 md:text-[44px]">{produk.judul}</h1>
             <div className="flex items-center gap-2">
               <TombolFavorit id={produk.id} slug={produk.slug} disukai={disukai} kembali={`/produk/${produk.slug}`} />
               <Bagikan judul={produk.judul} />
@@ -159,12 +159,15 @@ function IsiProduk({
             nomor={toko?.no_wa ?? ""}
             namaToko={toko?.nama_toko ?? ""}
           />
-          <p className="whitespace-pre-wrap text-sm leading-6 text-hof">
+          <p className="whitespace-pre-wrap text-[15px] leading-[1.6] text-hof">
             {produk.deskripsi || "Penjual belum menulis deskripsi."}
+          </p>
+          <p className="border-l-4 border-[#ff3b1f] pl-[12px] text-[14px] leading-[1.5] text-[#6b5d4b]">
+            Cara belinya: chat penjual, sepakati jumlah dan waktu ambil, lalu bayar langsung ke penjual.
           </p>
           {toko ? (
             <Muncul>
-            <div className="kartu p-[16px]">
+            <div className="kartu" style={{ padding: 16 }}>
               <div className="flex items-center gap-3">
                 {logo ? (
                   <img src={logo} alt="" className="h-[48px] w-[48px] rounded-full border-2 border-bebe object-cover" />
@@ -192,8 +195,8 @@ function IsiProduk({
                   <Tombol
                     href={tanya}
                     target="_blank"
-                    rel="noopener noreferrer" varian="primary" ukuran="lg">
-                    Chat
+                    rel="noopener noreferrer" varian="primary" ukuran="lg" className="border-[#141210]! bg-[#00a859]! text-white! hover:bg-[#141210]!">
+                    Chat WA
                   </Tombol>
                 ) : (
                   <span className="flex h-[44px] items-center justify-center text-sm text-foggy">WA belum ada</span>

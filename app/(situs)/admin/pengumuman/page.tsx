@@ -27,7 +27,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ tersimpan?: strin
     <form action={simpanPengumuman} className="mx-auto max-w-2xl space-y-[16px] rounded-[12px] border border-bebe bg-card p-5">
       <div>
         <h1 className="text-2xl font-semibold">Pengumuman</h1>
-        <p className="mt-2 text-sm leading-6 text-foggy">Banner opsional di atas beranda.</p>
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">Banner opsional di atas beranda.</p>
       </div>
       {params.tersimpan ? <p className="rounded-xl bg-faint px-3 py-2 text-sm font-medium text-hof">Tersimpan</p> : null}
       {params.galat ? <p className="rounded-xl bg-canvas-mist px-3 py-2 text-sm text-ink-black">Pengumuman belum tersimpan.</p> : null}

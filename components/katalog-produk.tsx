@@ -95,7 +95,7 @@ export async function KatalogProduk({
   return (
     <Muncul>
       <div className="scroll-mt-28 space-y-[16px]">
-        <h1>{dasar === "/cari" ? (kata ? kata : "Cari") : hasil.kategori.find((item) => item.slug === hasil.kategoriAktif)?.nama ?? "Semua produk"}</h1>
+        <h1 className="border-b-2 border-[#141210] pb-[12px]">{dasar === "/cari" ? (kata ? kata : "Cari") : hasil.kategori.find((item) => item.slug === hasil.kategoriAktif)?.nama ?? "Semua produk"}</h1>
         {kategoriFilter}
         {daftar}
       </div>
@@ -141,7 +141,7 @@ function Filter({
 function Kotak({ judul, children }: { judul: string; children: string }) {
   return (
     <Muncul>
-      <div className="kartu px-[20px] py-[16px]">
+      <div className="kartu" style={{ padding: "16px 20px" }}>
         <h3>{judul}</h3>
         <p className="mt-[8px] text-[14px] leading-[1.4] text-muted-gray">{children}</p>
       </div>

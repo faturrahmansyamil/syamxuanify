@@ -39,7 +39,7 @@ export function FormProduk({
     <form action={action} className="kartu space-y-[16px] p-5">
       <h2 className="text-xl font-semibold">{produk ? "Ubah produk" : "Tambah produk"}</h2>
       {produk?.status === "rejected" ? (
-        <p className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm leading-6">
+        <p className="teks-galat rounded-xl bg-canvas-mist px-3 py-2 text-sm leading-[1.6]">
           Ditolak: {produk.rejection_reason || "Admin tidak menulis alasan."} Simpan untuk mengajukan ulang.
         </p>
       ) : null}
@@ -167,7 +167,7 @@ export function FormProduk({
         </p>
       </div>
       {produk ? null : (
-        <p className="text-sm leading-6 text-foggy">
+        <p className="text-sm leading-[1.6] text-foggy">
           Produk baru berstatus menunggu. Baru tampil di beranda setelah disetujui admin.
         </p>
       )}

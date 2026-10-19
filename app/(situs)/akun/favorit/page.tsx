@@ -41,7 +41,7 @@ async function Isi() {
         </Tombol>
       </header>
       {error ? (
-        <p className="rounded-[12px] bg-card p-[16px] text-sm leading-6">
+        <p className="rounded-[12px] bg-card p-[16px] text-sm leading-[1.6]">
           Favorit belum siap. Jalankan supabase/migration-4-7.sql di SQL Editor Supabase, lalu muat ulang.
         </p>
       ) : produk.length === 0 ? (

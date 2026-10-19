@@ -35,7 +35,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ q?: string }> }) 
   if (kata) query = query.ilike("email", `%${kata}%`);
   const daftar = await query;
   if (daftar.error) {
-    return <p className="rounded-[12px] bg-card p-[16px] text-sm leading-6">Daftar pengguna belum siap. Jalankan supabase/migration-4-7.sql, lalu muat ulang.</p>;
+    return <p className="rounded-[12px] bg-card p-[16px] text-sm leading-[1.6]">Daftar pengguna belum siap. Jalankan supabase/migration-4-7.sql, lalu muat ulang.</p>;
   }
 
   return (

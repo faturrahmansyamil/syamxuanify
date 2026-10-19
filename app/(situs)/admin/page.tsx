@@ -32,7 +32,7 @@ async function Isi() {
     <div className="space-y-[24px]">
       <header>
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Ringkasan</h1>
-        <p className="mt-2 text-sm leading-6 text-foggy">Kondisi situs dan hal yang perlu dicek.</p>
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">Kondisi situs dan hal yang perlu dicek.</p>
       </header>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
         {kartu.map((item) => (

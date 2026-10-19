@@ -70,7 +70,7 @@ function KartuPenjual({ toko }: { toko: PenjualBaru }) {
             <p className="text-xs font-medium text-[#787574]">Toko yang baru disetujui</p>
           </div>
         </div>
-        {toko.deskripsi ? <p className="mt-3 line-clamp-4 text-sm font-medium leading-6 text-[#787574]">{toko.deskripsi}</p> : null}
+        {toko.deskripsi ? <p className="mt-3 line-clamp-4 text-sm font-medium leading-[1.6] text-[#787574]">{toko.deskripsi}</p> : null}
         <Tombol href={`/toko/${toko.slug}`} varian="secondary" ukuran="lg" className="mt-[16px]">
           Kunjungi toko
         </Tombol>

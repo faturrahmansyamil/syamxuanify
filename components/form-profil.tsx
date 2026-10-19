@@ -24,7 +24,7 @@ export function FormProfil({
     <form action={action} className="space-y-[16px] rounded-[12px] border border-bebe bg-card p-5">
       <div>
         <h2 className="text-xl font-semibold">Profil</h2>
-        <p className="mt-2 text-sm leading-6 text-foggy">Nama, foto, dan WhatsApp pribadi. Kosongkan foto kalau tidak diganti.</p>
+        <p className="mt-2 text-sm leading-[1.6] text-foggy">Nama, foto, dan WhatsApp pribadi. Kosongkan foto kalau tidak diganti.</p>
       </div>
       {foto ? <img src={foto} alt="" className="h-[64px] w-[64px] rounded-full object-cover" /> : null}
       <label className="block space-y-1.5 text-sm font-medium">

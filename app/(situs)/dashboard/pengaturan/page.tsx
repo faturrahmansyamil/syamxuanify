@@ -45,7 +45,7 @@ async function Isi() {
     <div className="mx-auto max-w-3xl space-y-[32px]">
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Pengaturan Toko</h1>
-        <p className="text-sm leading-6 text-foggy">Profil akun, data toko, status persetujuan, dan keamanan.</p>
+        <p className="text-sm leading-[1.6] text-foggy">Profil akun, data toko, status persetujuan, dan keamanan.</p>
       </header>
 
       <FormProfil nama={profil.nama} noWa={profil.no_wa} foto={urlGambarAman(profil.foto_url)} />
@@ -58,7 +58,7 @@ async function Isi() {
             <form action={ubahTutupToko} className="flex flex-wrap items-center justify-between gap-3 rounded-[12px] border border-bebe bg-card p-5">
               <div>
                 <h2 className="text-xl font-semibold">Tutup toko sementara</h2>
-                <p className="mt-2 text-sm leading-6 text-foggy">
+                <p className="mt-2 text-sm leading-[1.6] text-foggy">
                   {tutup ? "Toko sedang tidak muncul di katalog." : "Toko tampil di katalog."}
                 </p>
               </div>
@@ -77,7 +77,7 @@ async function Isi() {
       <Muncul urut={1}>
       <section className="space-y-3 rounded-[12px] border border-bebe bg-card p-5">
         <h2 className="text-xl font-semibold">Notifikasi</h2>
-        <p className="text-sm leading-6 text-foggy">Status toko dan produk, plus alasan kalau ditolak.</p>
+        <p className="text-sm leading-[1.6] text-foggy">Status toko dan produk, plus alasan kalau ditolak.</p>
         {hasil.toko ? <StatusToko toko={hasil.toko} /> : null}
         <ul className="space-y-3">
           {hasil.produk.map((produk) => (
@@ -111,7 +111,7 @@ async function Isi() {
 
 function StatusToko({ toko }: { toko: TokoDasbor }) {
   return (
-    <p className="rounded-lg bg-faint px-3 py-2 text-sm leading-6 text-hof">
+    <p className="rounded-lg bg-faint px-3 py-2 text-sm leading-[1.6] text-hof">
       Toko {label(toko.status)}.
       {toko.status === "rejected" && toko.rejection_reason ? ` Alasan: ${toko.rejection_reason}` : ""}
     </p>
@@ -120,7 +120,7 @@ function StatusToko({ toko }: { toko: TokoDasbor }) {
 
 function StatusProduk({ produk }: { produk: ProdukDasbor }) {
   return (
-    <p className="rounded-lg bg-faint px-3 py-2 text-sm leading-6 text-hof">
+    <p className="rounded-lg bg-faint px-3 py-2 text-sm leading-[1.6] text-hof">
       {produk.judul}: {label(produk.status)}.
       {produk.status === "rejected" && produk.rejection_reason ? ` Alasan: ${produk.rejection_reason}` : ""}
     </p>

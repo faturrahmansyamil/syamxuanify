@@ -3,14 +3,14 @@
 
 @theme {
   /* Colors */
-  --color-canvas-mist: #f2f4f5;
+  --color-canvas-mist: #fff4dc;
   --color-pure-white: #ffffff;
-  --color-ink-black: #000000;
-  --color-faint-border: #ebebeb;
-  --color-muted-gray: #787574;
+  --color-ink-black: #141210;
+  --color-faint-border: #141210;
+  --color-muted-gray: #6b5d4b;
   --color-cool-stone: #cccccc;
   --color-warm-fog: #787574;
-  --color-shop-violet: #5433eb;
+  --color-shop-violet: #ff3b1f;
   --color-wash: #ebebeb;
   --color-slate-ink: #000000;
   --color-ash-veil: #787574;
@@ -63,20 +63,20 @@
 }
 
 @theme {
-  --color-hof: #000000;
-  --color-foggy: #787574;
-  --color-bebe: #ebebeb;
+  --color-hof: #141210;
+  --color-foggy: #6b5d4b;
+  --color-bebe: #141210;
   --color-card: #ffffff;
-  --color-faint: #f2f4f5;
+  --color-faint: #fff4dc;
   --color-accent: #000000;
   --color-deco: #f2f4f5;
   --color-fill: #000000;
   --color-on-fill: #ffffff;
-  --color-garis: #ebebeb;
+  --color-garis: #141210;
   --color-eel: #000000;
   --color-langit: #f2f4f5;
   --color-grey-500: #787574;
-  --color-background: #f2f4f5;
+  --color-background: #fff4dc;
   --color-foreground: #000000;
 }
 
@@ -105,13 +105,13 @@ summary:focus-visible,
 }
 
 body {
-  background: #f2f4f5;
-  color: #000000;
-  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  background: #fff4dc;
+  color: #141210;
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 1.33;
-  letter-spacing: -0.031em;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 h1,
@@ -120,11 +120,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: inherit;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.05em;
+  font-family: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, 56px);
 }
 
 .label-kecil {
@@ -596,5 +600,166 @@ html.sedang-muat .wordmark-teks {
   }
   body:has(.bar-wa-hp) footer {
     padding-bottom: 152px;
+  }
+}
+
+/* ============================================================
+   Redesign "Lapak Kampus": krem, tinta, cabai, kunyit, daun.
+   Garis tegas 2px + bayangan keras, label harga kuning.
+   ============================================================ */
+:root {
+  --krem: #fff4dc;
+  --tinta: #141210;
+  --cabai: #ff3b1f;
+  --kunyit: #ffd60a;
+  --daun: #00a859;
+  --biru: #2d5bff;
+  --jambu: #ff5fa2;
+  --bayang-keras: 4px 4px 0 #141210;
+}
+
+.font-display {
+  font-family: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+}
+
+.kartu {
+  border: 2px solid var(--tinta);
+  border-radius: 16px;
+  box-shadow: none;
+  overflow: hidden;
+  transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+}
+
+.kartu:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--bayang-keras);
+}
+
+.kartu:hover .foto-kartu {
+  transform: scale(1.03);
+}
+
+.cari-pill {
+  border: 2px solid var(--tinta);
+  border-radius: 14px;
+  box-shadow: var(--bayang-keras);
+  min-height: 58px;
+}
+
+.cari-pill:has(input:focus-visible) {
+  outline: 3px solid var(--kunyit);
+}
+
+.input-pill {
+  border: 2px solid var(--tinta);
+  border-radius: 12px;
+}
+
+.lencana-baru {
+  border-radius: 6px;
+  background: var(--cabai);
+  border: 2px solid var(--tinta);
+  height: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.label-harga {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 5px 18px;
+  background: var(--kunyit);
+  color: var(--tinta);
+  border: 2px solid var(--tinta);
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  transform: rotate(-3deg);
+  transform-origin: left center;
+}
+
+.label-harga::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--tinta);
+}
+
+.tenda {
+  height: 18px;
+  background:
+    radial-gradient(circle at 12px 0, transparent 11px, var(--krem) 12px) 0 6px / 24px 12px repeat-x,
+    repeating-linear-gradient(90deg, var(--cabai) 0 24px, #ffffff 24px 48px);
+}
+
+.tenda-gelap {
+  height: 18px;
+  background:
+    radial-gradient(circle at 12px 0, transparent 11px, var(--tinta) 12px) 0 6px / 24px 12px repeat-x,
+    repeating-linear-gradient(90deg, var(--kunyit) 0 24px, var(--cabai) 24px 48px);
+}
+
+.angka-peringkat {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--tinta);
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+}
+
+.titik-syam,
+.judul-bagian .titik-judul {
+  background: var(--cabai);
+}
+
+.titik-denyut {
+  display: none !important;
+}
+
+.chat-penjual {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ubin-kategori {
+  position: relative;
+  display: flex;
+  min-height: 112px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border: 2px solid var(--tinta);
+  border-radius: 16px;
+  color: var(--tinta);
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+}
+
+.ubin-kategori:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--bayang-keras);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kartu:hover,
+  .ubin-kategori:hover {
+    transform: none;
   }
 }

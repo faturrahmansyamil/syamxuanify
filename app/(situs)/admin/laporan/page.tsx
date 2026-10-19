@@ -31,7 +31,7 @@ async function Isi({ searchParams }: { searchParams: Promise<{ saring?: string }
 
   if (query.error) {
     return (
-      <p className="rounded-[12px] bg-card p-[16px] text-sm leading-6">
+      <p className="rounded-[12px] bg-card p-[16px] text-sm leading-[1.6]">
         Status laporan belum siap. Jalankan supabase/migration-4-7.sql di SQL Editor Supabase, lalu muat ulang.
       </p>
     );

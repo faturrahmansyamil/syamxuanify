@@ -805,3 +805,42 @@ html.sedang-muat .wordmark-teks {
     transform: none;
   }
 }
+
+/* Foto benda nongol dari atas ubin */
+.ubin-kategori {
+  overflow: visible;
+}
+
+.ubin-foto {
+  position: absolute;
+  right: 12px;
+  top: -18px;
+  width: auto;
+  height: 84px;
+  max-width: 50%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 5px 5px rgba(20, 18, 16, 0.22)) drop-shadow(0 1px 1px rgba(20, 18, 16, 0.18));
+  transform: rotate(-4deg);
+  transition: transform 180ms ease-out;
+}
+
+.ubin-kategori:hover .ubin-foto {
+  transform: rotate(0deg) translateY(-3px);
+}
+
+/* HP: benda tetap di dalam ubin, tidak menimpa ubin di atasnya */
+@media (max-width: 639px) {
+  .ubin-foto {
+    top: 10px;
+    right: 10px;
+    height: 62px;
+    max-width: 48%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ubin-kategori:hover .ubin-foto {
+    transform: rotate(-4deg);
+  }
+}

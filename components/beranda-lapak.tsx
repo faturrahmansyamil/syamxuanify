@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { GambarIsi } from "@/components/gambar-isi";
-import { IkonKategori } from "@/components/ikon-kategori";
+import { IkonUbin } from "@/components/ikon-ubin";
 import { Tombol } from "@/components/tombol";
 import type { KategoriRingkas, ProdukPublik, TokoPilihan } from "@/lib/katalog";
 import { formatRupiah } from "@/lib/rupiah";
@@ -82,7 +82,7 @@ export function UbinKategori({ kategori }: { kategori: KategoriRingkas[] }) {
           return (
             <li key={item.slug} className={item.slug === "lainnya" ? "col-span-2 sm:col-span-1" : undefined}>
               <Link href={`/kategori/${item.slug}`} className="ubin-kategori" style={{ background: warna.bg, color: warna.teks }}>
-                <IkonKategori slug={item.slug} className="h-[26px] w-[26px]" />
+                <IkonUbin slug={item.slug} />
                 <span className="flex items-end justify-between gap-[8px]">
                   {item.nama}
                   <ArrowRight className="h-[18px] w-[18px] shrink-0" strokeWidth={2.5} aria-hidden="true" />

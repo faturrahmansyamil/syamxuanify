@@ -1,5 +1,5 @@
 import { Tombol } from "@/components/tombol";
-import { BadgeCheck } from "lucide-react";
+import { StempelVerifikasi } from "@/components/stempel-verifikasi";
 import { BarisNomor } from "@/components/baris-nomor";
 import { JudulBagian } from "@/components/judul-bagian";
 import { InisialToko } from "@/components/tampilan";
@@ -65,7 +65,7 @@ function KartuPenjual({ toko }: { toko: PenjualBaru }) {
           <div className="min-w-0">
             <p className="flex items-center gap-1 truncate text-lg font-semibold text-[#000000]">
               <span className="truncate">{toko.nama}</span>
-              {toko.terverifikasi ? <BadgeCheck className="h-[16px] w-[16px] shrink-0 text-[#000000]" aria-label="Terverifikasi" /> : null}
+              {toko.terverifikasi ? <StempelVerifikasi /> : null}
             </p>
             <p className="text-xs font-medium text-[#787574]">Toko yang baru disetujui</p>
           </div>

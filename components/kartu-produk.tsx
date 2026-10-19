@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BadgeCheck } from "lucide-react";
+import { StempelVerifikasi } from "@/components/stempel-verifikasi";
 import { AngkaNaik } from "@/components/angka-naik";
 import { Tombol } from "@/components/tombol";
 import { GambarIsi } from "@/components/gambar-isi";
@@ -128,7 +128,7 @@ export function BarisToko({
         </span>
       )}
       <span className="min-w-0 truncate">{nama}</span>
-      {terverifikasi ? <BadgeCheck className="h-[14px] w-[14px] shrink-0 text-ink-black" aria-label="Terverifikasi" /> : null}
+      {terverifikasi ? <StempelVerifikasi /> : null}
     </p>
   );
 }

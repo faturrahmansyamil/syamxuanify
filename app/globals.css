@@ -989,3 +989,41 @@ html.sedang-muat .wordmark-teks {
   font-size: 11px;
   font-weight: 800;
 }
+
+/* Foto mini bulat di pil kategori */
+.thumb-kategori {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid var(--tinta);
+  background: #ffffff;
+}
+
+.thumb-tumpuk {
+  display: inline-flex;
+}
+
+.thumb-tumpuk .thumb-kategori + .thumb-kategori {
+  margin-left: -9px;
+}
+
+/* Stempel karet terverifikasi */
+.stempel {
+  flex: none;
+  color: #d62a10;
+  opacity: 0.92;
+}
+
+.stempel-kecil {
+  width: 17px;
+  height: 17px;
+  transform: rotate(-10deg);
+}
+
+.stempel-besar {
+  height: 28px;
+  width: auto;
+  aspect-ratio: 132 / 36;
+  transform: rotate(-3deg);
+}

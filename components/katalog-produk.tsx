@@ -1,4 +1,4 @@
-import { IkonKategori } from "@/components/ikon-kategori";
+import { ThumbKategori } from "@/components/thumb-kategori";
 import { JalurChip } from "@/components/jalur-chip";
 import { EtalaseKosong } from "@/components/etalase-kosong";
 import { Tombol } from "@/components/tombol";
@@ -131,8 +131,8 @@ function Filter({
   children: string;
 }) {
   return (
-    <Tombol href={href} prefetch={true} chip varian={aktif ? "primary" : "secondary"} className="shrink-0">
-      <IkonKategori slug={slug} />
+    <Tombol href={href} prefetch={true} chip varian={aktif ? "primary" : "secondary"} className="shrink-0 pl-[6px]">
+      <ThumbKategori slug={slug} />
       {children}
     </Tombol>
   );

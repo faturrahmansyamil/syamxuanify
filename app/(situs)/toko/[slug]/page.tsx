@@ -1,4 +1,5 @@
 import { Tombol } from "@/components/tombol";
+import { StempelVerifikasi } from "@/components/stempel-verifikasi";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -69,8 +70,8 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
           <div className="min-w-0">
             <h1 className="break-words text-[38px] text-white md:text-[56px]">{toko.nama_toko}</h1>
             {toko.terverifikasi ? (
-              <span className="mt-2 inline-flex rounded-[6px] border-[1.5px] border-[#141210] bg-[#ffd60a] px-2 py-1 text-xs font-bold text-[#141210]">
-                Terverifikasi
+              <span className="mt-[10px] inline-flex rounded-[8px] bg-[#fff4dc] px-[6px] py-[3px]">
+                <StempelVerifikasi besar />
               </span>
             ) : null}
           </div>

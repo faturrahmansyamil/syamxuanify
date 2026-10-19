@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { StempelVerifikasi } from "@/components/stempel-verifikasi";
 import { AngkaNaik } from "@/components/angka-naik";
 import { Tombol } from "@/components/tombol";
 import { GambarIsi } from "@/components/gambar-isi";
@@ -73,7 +72,6 @@ export function KartuProduk({
             nama={produk.toko.nama_toko}
             slug={produk.toko.slug}
             logo={produk.toko.logo_url}
-            terverifikasi={produk.toko.terverifikasi}
           />
         ) : null}
       </div>
@@ -106,12 +104,10 @@ export function BarisToko({
   nama,
   slug,
   logo,
-  terverifikasi = false,
 }: {
   nama: string;
   slug: string;
   logo: string | null;
-  terverifikasi?: boolean;
 }) {
   const foto = fotoPenjual(slug, logo);
   const huruf = nama.trim().slice(0, 1).toUpperCase() || "S";
@@ -128,7 +124,6 @@ export function BarisToko({
         </span>
       )}
       <span className="min-w-0 truncate">{nama}</span>
-      {terverifikasi ? <StempelVerifikasi /> : null}
     </p>
   );
 }

@@ -1007,23 +1007,3 @@ html.sedang-muat .wordmark-teks {
 .thumb-tumpuk .thumb-kategori + .thumb-kategori {
   margin-left: -9px;
 }
-
-/* Stempel karet terverifikasi */
-.stempel {
-  flex: none;
-  color: #d62a10;
-  opacity: 0.92;
-}
-
-.stempel-kecil {
-  width: 17px;
-  height: 17px;
-  transform: rotate(-10deg);
-}
-
-.stempel-besar {
-  height: 28px;
-  width: auto;
-  aspect-ratio: 132 / 36;
-  transform: rotate(-3deg);
-}

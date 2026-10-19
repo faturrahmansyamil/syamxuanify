@@ -1,5 +1,4 @@
 import { Tombol } from "@/components/tombol";
-import { StempelVerifikasi } from "@/components/stempel-verifikasi";
 import { BarisNomor } from "@/components/baris-nomor";
 import { JudulBagian } from "@/components/judul-bagian";
 import { InisialToko } from "@/components/tampilan";
@@ -63,10 +62,7 @@ function KartuPenjual({ toko }: { toko: PenjualBaru }) {
             <InisialToko nama={toko.nama} className="aspect-square h-[64px] w-[64px] text-xl" />
           )}
           <div className="min-w-0">
-            <p className="flex items-center gap-1 truncate text-lg font-semibold text-[#000000]">
-              <span className="truncate">{toko.nama}</span>
-              {toko.terverifikasi ? <StempelVerifikasi /> : null}
-            </p>
+            <p className="truncate text-lg font-semibold text-[#000000]">{toko.nama}</p>
             <p className="text-xs font-medium text-[#787574]">Toko yang baru disetujui</p>
           </div>
         </div>

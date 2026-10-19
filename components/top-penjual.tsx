@@ -1,5 +1,4 @@
 import { Tombol } from "@/components/tombol";
-import { StempelVerifikasi } from "@/components/stempel-verifikasi";
 import Link from "next/link";
 import { JudulBagian } from "@/components/judul-bagian";
 import { InisialToko } from "@/components/tampilan";
@@ -25,10 +24,7 @@ export function TopPenjual({ toko, semua = false }: { toko: PenjualTop[]; semua?
                 <InisialToko nama={item.nama} className="h-[40px] w-[40px] text-sm" />
               )}
               <span className="min-w-0 flex-1">
-                <span className="flex min-w-0 items-center gap-1">
-                  <span className="font-display truncate text-[18px] font-extrabold text-[#141210]">{item.nama}</span>
-                  {item.terverifikasi ? <StempelVerifikasi /> : null}
-                </span>
+                <span className="font-display block truncate text-[18px] font-extrabold text-[#141210]">{item.nama}</span>
                 <span className="block truncate text-xs font-semibold text-[#6b5d4b]">{item.jumlah} produk</span>
               </span>
             </Link>

@@ -1,5 +1,4 @@
 import { Tombol } from "@/components/tombol";
-import { StempelVerifikasi } from "@/components/stempel-verifikasi";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -177,12 +176,7 @@ function IsiProduk({
                 )}
                 <div>
                   <p className="font-semibold">{toko.nama_toko}</p>
-                  <p className="mt-1 flex flex-wrap items-center gap-2 text-sm text-foggy">
-                    {toko.terverifikasi ? (
-                      <StempelVerifikasi besar className="h-[22px]!" />
-                    ) : null}
-                    <span>{tetangga.jumlahToko} produk</span>
-                  </p>
+                  <p className="mt-1 text-sm text-foggy">{tetangga.jumlahToko} produk</p>
                 </div>
               </div>
               <div className="mt-[16px] grid grid-cols-2 gap-2">

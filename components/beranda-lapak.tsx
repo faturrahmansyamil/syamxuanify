@@ -155,7 +155,7 @@ export function LapakBuka({ toko }: { toko: TokoPilihan[] }) {
               <div className="p-[14px]">
                 <p className="font-display text-[22px] leading-[1.05] font-extrabold text-[#141210]">{item.nama_toko}</p>
                 <p className="mt-[4px] text-[13px] font-semibold text-[#6b5d4b]">
-                  {item.jumlah} produk{item.terverifikasi ? " · terverifikasi" : ""}
+                  {item.jumlah} produk
                 </p>
                 <span className="mt-[12px] grid grid-cols-3 gap-[8px]">
                   {[0, 1, 2].map((indeks) => {

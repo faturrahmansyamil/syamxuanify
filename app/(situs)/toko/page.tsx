@@ -19,7 +19,7 @@ async function Daftar() {
   const toko = await ambilSemuaToko();
   return (
     <div>
-      <h1 className="border-b-2 border-[#141210] pb-[12px]">Semua lapak</h1>
+      <h1 className="border-b-[1.5px] border-[#141210] pb-[12px]">Semua lapak</h1>
       {toko.length === 0 ? (
         <div className="mt-[16px]">
           <EtalaseKosong judul="Belum ada toko yang buka." isi="Toko mahasiswa akan muncul di sini. Mau jadi yang pertama?" />

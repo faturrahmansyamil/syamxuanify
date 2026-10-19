@@ -27,7 +27,7 @@ export function KartuProduk({
   const chat = produk.toko ? tautanWhatsApp(produk.toko.no_wa, pesanToko(produk.toko.nama_toko)) : null;
   const foto = (
     <>
-      <Link href={`/produk/${produk.slug}`} className="relative block overflow-hidden border-b-2 border-[#141210]">
+      <Link href={`/produk/${produk.slug}`} className="relative block overflow-hidden border-b-[1.5px] border-[#141210]">
         {gambar ? (
           <span className="relative block aspect-square">
             <GambarIsi src={gambar} alt={produk.judul} sizes="(max-width: 768px) 46vw, 240px" priority={prioritas} className="foto-kartu" />
@@ -37,7 +37,12 @@ export function KartuProduk({
         )}
       </Link>
       <LencanaStatus produk={produk} />
-      <span className="label-harga">{formatRupiah(produk.harga)}</span>
+      <span className="label-harga">
+        <span className="bon">
+          <span className="bon-kecil">HARGA</span>
+          {formatRupiah(produk.harga)}
+        </span>
+      </span>
       <div className="absolute top-[12px] right-[12px] z-30 h-[32px] w-[32px]">
         <TombolFavorit id={produk.id} slug={produk.slug} disukai={disukai} kembali={kembali} />
       </div>
@@ -147,7 +152,7 @@ export function KerangkaProduk() {
       <p className="sr-only">Memuat produk</p>
       <div className="grid grid-cols-2 gap-[12px] lg:grid-cols-4" aria-hidden="true">
         {[0, 1, 2, 3].map((item) => (
-          <div key={item} className="h-[300px] rounded-[16px] border-2 border-[#141210]/15 bg-[#f6e6c4]" />
+          <div key={item} className="h-[300px] rounded-[16px] border-[1.5px] border-[#141210]/15 bg-[#f6e6c4]" />
         ))}
       </div>
     </div>

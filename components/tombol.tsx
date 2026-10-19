@@ -39,8 +39,8 @@ const UKURAN: Record<Ukuran, { kotak: string; isi: string; ikon: string }> = {
 };
 
 const WARNA: Record<Varian, string> = {
-  primary: "border-2 border-[#141210] bg-[#141210] text-[#fff4dc] hover:bg-[#ff3b1f] hover:text-[#141210]",
-  secondary: "border-2 border-[#141210] bg-white text-[#141210] hover:bg-[#ffd60a]",
+  primary: "border-[1.5px] border-[#141210] bg-[#141210] text-[#fff4dc] hover:bg-[#ff3b1f] hover:text-[#141210]",
+  secondary: "border-[1.5px] border-[#141210] bg-white text-[#141210] hover:bg-[#ffd60a]",
   ghost: "bg-transparent text-[#141210] hover:bg-[#141210]/10",
 };
 

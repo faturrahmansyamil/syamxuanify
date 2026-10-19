@@ -44,7 +44,7 @@ export function GaleriProduk({ foto, judul }: { foto: string[]; judul: string })
               aria-label={`Foto ${indeks + 1}`}
               aria-pressed={indeks === aktif}
               onClick={() => setAktif(indeks)}
-              className={`h-[64px] w-[64px] shrink-0 overflow-hidden rounded-[12px] border-2 ${
+              className={`h-[64px] w-[64px] shrink-0 overflow-hidden rounded-[12px] border-[1.5px] ${
                 indeks === aktif ? "border-hof" : "border-transparent"
               }`}
             >

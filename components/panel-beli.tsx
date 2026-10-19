@@ -70,7 +70,7 @@ export function PanelBeli({
       }}
       varian="primary"
       ukuran="lg"
-      className="w-full border-[#141210]! bg-[#00a859]! text-white! shadow-[4px_4px_0_#141210] hover:bg-[#141210]! md:w-auto"
+      className="w-full border-[#141210]! bg-[#00a859]! text-white! shadow-[0_6px_18px_rgba(20,18,16,0.14)] hover:bg-[#141210]! md:w-auto"
     >
       Chat penjual di WhatsApp
     </Tombol>
@@ -82,11 +82,20 @@ export function PanelBeli({
 
   return (
     <div className="space-y-[16px]">
-      <p className="font-display inline-block -rotate-2 border-2 border-[#141210] bg-[#ffd60a] px-[14px] py-[8px] text-[34px] leading-none font-extrabold text-[#141210]">{teksHarga}</p>
+      <div className="harga-besar">
+        <div className="bon">
+          <span className="bon-baris">
+            <span>HARGA</span>
+            <span>{varian.length > 0 && !varianAktif ? "mulai" : "Rp"}</span>
+          </span>
+          <span className="bon-total">{teksHarga}</span>
+          <span className="bon-kecil">bayar ke QRIS penjual</span>
+        </div>
+      </div>
       <div className="flex flex-wrap items-center gap-2 text-sm">
         {typeof terjual === "number" ? <span className="text-foggy">{terjual} terjual</span> : null}
         {kondisi ? (
-          <span className="rounded-[6px] border-2 border-[#141210] bg-white px-2 py-0.5 text-xs font-bold text-[#141210]">
+          <span className="rounded-[6px] border-[1.5px] border-[#141210] bg-white px-2 py-0.5 text-xs font-bold text-[#141210]">
             {kondisi === "bekas" ? "Bekas" : "Baru"}
           </span>
         ) : null}

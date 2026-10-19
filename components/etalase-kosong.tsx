@@ -10,7 +10,7 @@ export function EtalaseKosong({
   langkah?: boolean;
 }) {
   return (
-    <section className="overflow-hidden rounded-[18px] border-2 border-[#141210] bg-[#ffd60a]">
+    <section className="overflow-hidden rounded-[18px] border-[1.5px] border-[#141210] bg-[#ffd60a]">
       <div className="tenda-gelap" aria-hidden="true" />
       <div className="px-[20px] py-[24px] md:px-[32px] md:py-[32px]">
         <h2 className="text-[30px] leading-[1] text-[#141210] md:text-[40px]">{judul}</h2>
@@ -21,7 +21,7 @@ export function EtalaseKosong({
           </p>
         ) : null}
         <div className="mt-[20px]">
-          <Tombol href="/jadi-penjual" varian="primary" ukuran="lg" className="shadow-[4px_4px_0_#141210]">
+          <Tombol href="/jadi-penjual" varian="primary" ukuran="lg" className="shadow-[0_6px_18px_rgba(20,18,16,0.14)]">
             Buka toko gratis
           </Tombol>
         </div>

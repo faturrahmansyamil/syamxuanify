@@ -615,7 +615,7 @@ html.sedang-muat .wordmark-teks {
   --daun: #00a859;
   --biru: #2d5bff;
   --jambu: #ff5fa2;
-  --bayang-keras: 4px 4px 0 #141210;
+  --bayang-keras: 0 8px 22px rgba(20, 18, 16, 0.14);
 }
 
 .font-display {
@@ -623,7 +623,7 @@ html.sedang-muat .wordmark-teks {
 }
 
 .kartu {
-  border: 2px solid var(--tinta);
+  border: 1.5px solid var(--tinta);
   border-radius: 16px;
   box-shadow: none;
   overflow: hidden;
@@ -631,7 +631,7 @@ html.sedang-muat .wordmark-teks {
 }
 
 .kartu:hover {
-  transform: translate(-2px, -2px);
+  transform: translateY(-3px);
   box-shadow: var(--bayang-keras);
 }
 
@@ -640,9 +640,9 @@ html.sedang-muat .wordmark-teks {
 }
 
 .cari-pill {
-  border: 2px solid var(--tinta);
+  border: 1.5px solid var(--tinta);
   border-radius: 14px;
-  box-shadow: var(--bayang-keras);
+  box-shadow: 0 4px 14px rgba(20, 18, 16, 0.1);
   min-height: 58px;
 }
 
@@ -651,14 +651,14 @@ html.sedang-muat .wordmark-teks {
 }
 
 .input-pill {
-  border: 2px solid var(--tinta);
+  border: 1.5px solid var(--tinta);
   border-radius: 12px;
 }
 
 .lencana-baru {
   border-radius: 6px;
   background: var(--cabai);
-  border: 2px solid var(--tinta);
+  border: 1.5px solid var(--tinta);
   height: 24px;
   font-weight: 700;
   text-transform: uppercase;
@@ -669,34 +669,76 @@ html.sedang-muat .wordmark-teks {
 .label-harga {
   position: absolute;
   left: 10px;
-  bottom: 10px;
+  bottom: 8px;
   z-index: 20;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 10px 5px 18px;
-  background: var(--kunyit);
-  color: var(--tinta);
-  border: 2px solid var(--tinta);
-  font-family: var(--font-bricolage), sans-serif;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: -0.02em;
-  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
-  transform: rotate(-3deg);
-  transform-origin: left center;
+  filter: drop-shadow(0 2px 4px rgba(20, 18, 16, 0.25));
 }
 
-.label-harga::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  margin-top: -3px;
-  border-radius: 50%;
-  background: var(--tinta);
+/* Struk printer termal: kertas putih susu, gigi sobekan di bawah */
+.bon {
+  --gigi: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px 10px calc(var(--gigi) + 6px);
+  background: #fbfaf4;
+  color: #1c1a17;
+  font-family: var(--font-bon), ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(2 * var(--gigi)) 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(2 * var(--gigi)) 100%;
+}
+
+.bon-kecil {
+  padding-bottom: 3px;
+  border-bottom: 1.5px dotted #1c1a17;
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.harga-besar {
+  display: inline-block;
+  min-width: 260px;
+  filter: drop-shadow(0 4px 8px rgba(20, 18, 16, 0.16));
+}
+
+.harga-besar .bon {
+  --gigi: 8px;
+  gap: 8px;
+  padding: calc(var(--gigi) + 10px) 18px calc(var(--gigi) + 10px);
+  -webkit-mask:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(2 * var(--gigi)) 51% repeat-x,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(2 * var(--gigi)) 51% repeat-x;
+  mask:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(2 * var(--gigi)) 51% repeat-x,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(2 * var(--gigi)) 51% repeat-x;
+}
+
+.bon-baris {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1.5px dashed #1c1a17;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+}
+
+.bon-total {
+  font-size: 32px;
+  letter-spacing: -0.03em;
+}
+
+.harga-besar .bon-kecil {
+  padding: 8px 0 0;
+  border-top: 1.5px dashed #1c1a17;
+  border-bottom: 0;
+  font-size: 11px;
+  letter-spacing: 0.06em;
 }
 
 .tenda {
@@ -715,7 +757,7 @@ html.sedang-muat .wordmark-teks {
 
 .angka-peringkat {
   color: transparent;
-  -webkit-text-stroke: 2px var(--tinta);
+  -webkit-text-stroke: 1.5px var(--tinta);
   font-family: var(--font-bricolage), sans-serif;
   font-weight: 800;
 }
@@ -741,7 +783,7 @@ html.sedang-muat .wordmark-teks {
   flex-direction: column;
   justify-content: space-between;
   padding: 14px 16px;
-  border: 2px solid var(--tinta);
+  border: 1.5px solid var(--tinta);
   border-radius: 16px;
   color: var(--tinta);
   font-family: var(--font-bricolage), sans-serif;
@@ -753,7 +795,7 @@ html.sedang-muat .wordmark-teks {
 }
 
 .ubin-kategori:hover {
-  transform: translate(-2px, -2px);
+  transform: translateY(-3px);
   box-shadow: var(--bayang-keras);
 }
 

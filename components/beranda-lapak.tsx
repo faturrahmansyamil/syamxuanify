@@ -20,11 +20,11 @@ const MIRING = ["-rotate-6", "rotate-6", "-rotate-2"];
 export function HeroLapak({ produk, children }: { produk: ProdukPublik[]; children: React.ReactNode }) {
   const tumpuk = produk.filter((item) => urlGambarAman(item.gambar_url)).slice(0, 3);
   return (
-    <section className="overflow-hidden rounded-[22px] border-2 border-[#141210] bg-[#ff3b1f]">
+    <section className="overflow-hidden rounded-[22px] border-[1.5px] border-[#141210] bg-[#ff3b1f]">
       <div className="tenda" aria-hidden="true" />
       <div className="grid items-center gap-[28px] px-[18px] pt-[22px] pb-[26px] md:grid-cols-[1.15fr_0.85fr] md:px-[36px] md:pt-[32px] md:pb-[40px]">
         <div>
-          <span className="font-display inline-block -rotate-2 border-2 border-[#141210] bg-[#ffd60a] px-[10px] py-[4px] text-[13px] font-extrabold tracking-[0.02em] text-[#141210] uppercase">
+          <span className="font-display inline-block -rotate-2 border-[1.5px] border-[#141210] bg-[#ffd60a] px-[10px] py-[4px] text-[13px] font-extrabold tracking-[0.02em] text-[#141210] uppercase">
             Pasar anak kampus
           </span>
           <h1 className="mt-[14px] text-[40px] leading-[0.95] text-[#141210] md:text-[68px]">
@@ -40,10 +40,10 @@ export function HeroLapak({ produk, children }: { produk: ProdukPublik[]; childr
             {tumpuk.map((item, indeks) => (
               <div
                 key={item.id}
-                className={`absolute w-[200px] border-2 border-[#141210] bg-white p-[8px] pb-[12px] shadow-[6px_6px_0_#141210] ${MIRING[indeks]}`}
+                className={`absolute w-[200px] border-[1.5px] border-[#141210] bg-white p-[8px] pb-[12px] shadow-[0_6px_18px_rgba(20,18,16,0.14)] ${MIRING[indeks]}`}
                 style={{ left: `${[2, 44, 22][indeks]}%`, top: `${[0, 34, 150][indeks]}px`, zIndex: [1, 2, 3][indeks] }}
               >
-                <span className="relative block aspect-square overflow-hidden border-2 border-[#141210]">
+                <span className="relative block aspect-square overflow-hidden border-[1.5px] border-[#141210]">
                   <GambarIsi src={urlGambarAman(item.gambar_url)!} sizes="200px" alt="" priority={indeks === 0} />
                 </span>
                 <p className="mt-[8px] truncate text-[13px] font-bold text-[#141210]">{item.judul}</p>
@@ -59,10 +59,10 @@ export function HeroLapak({ produk, children }: { produk: ProdukPublik[]; childr
             className="group relative hidden h-[300px] items-center justify-center md:flex"
           >
             <span
-              className="font-display relative flex h-[210px] w-[320px] rotate-[-5deg] flex-col justify-center border-2 border-[#141210] bg-[#ffd60a] py-[20px] pr-[24px] pl-[64px] text-[#141210] shadow-[8px_8px_0_#141210] transition-transform duration-200 group-hover:rotate-[-2deg]"
+              className="font-display relative flex h-[210px] w-[320px] rotate-[-5deg] flex-col justify-center border-[1.5px] border-[#141210] bg-[#ffd60a] py-[20px] pr-[24px] pl-[64px] text-[#141210] shadow-[0_6px_18px_rgba(20,18,16,0.14)] transition-transform duration-200 group-hover:rotate-[-2deg]"
               style={{ clipPath: "polygon(44px 0, 100% 0, 100% 100%, 44px 100%, 0 50%)" }}
             >
-              <span className="absolute top-1/2 left-[22px] h-[16px] w-[16px] -translate-y-1/2 rounded-full border-2 border-[#141210] bg-[#ff3b1f]" />
+              <span className="absolute top-1/2 left-[22px] h-[16px] w-[16px] -translate-y-1/2 rounded-full border-[1.5px] border-[#141210] bg-[#ff3b1f]" />
               <span className="text-[15px] font-extrabold tracking-[0.04em] uppercase">Lapak masih kosong</span>
               <span className="mt-[6px] text-[34px] leading-[0.95] font-extrabold">Tempat pertama buat daganganmu</span>
             </span>
@@ -98,7 +98,7 @@ export function UbinKategori({ kategori }: { kategori: KategoriRingkas[] }) {
 
 export function JudulLapak({ judul, href, label = "Lihat semua" }: { judul: string; href?: string; label?: string }) {
   return (
-    <div className="mb-[16px] flex items-end justify-between gap-[12px] border-b-2 border-[#141210] pb-[10px]">
+    <div className="mb-[16px] flex items-end justify-between gap-[12px] border-b-[1.5px] border-[#141210] pb-[10px]">
       <h2 className="text-[28px] md:text-[36px]">{judul}</h2>
       {href ? (
         <Link href={href} className="inline-flex shrink-0 items-center gap-[6px] text-[14px] font-bold text-[#141210] underline decoration-2 underline-offset-4 hover:text-[#ff3b1f]">
@@ -122,10 +122,10 @@ export function PapanLaris({ produk }: { produk: ProdukPublik[] }) {
             <li key={item.id}>
               <Link
                 href={`/produk/${item.slug}`}
-                className="group flex items-center gap-[12px] rounded-[14px] border-2 border-[#141210] bg-white p-[10px] transition-shadow hover:shadow-[4px_4px_0_#141210]"
+                className="group flex items-center gap-[12px] rounded-[14px] border-[1.5px] border-[#141210] bg-white p-[10px] transition-shadow hover:shadow-[0_6px_18px_rgba(20,18,16,0.14)]"
               >
                 <span className="angka-peringkat w-[1.3ch]! text-[52px]!">{indeks + 1}</span>
-                <span className="relative h-[64px] w-[64px] shrink-0 overflow-hidden rounded-[10px] border-2 border-[#141210] bg-[#f6e6c4]">
+                <span className="relative h-[64px] w-[64px] shrink-0 overflow-hidden rounded-[10px] border-[1.5px] border-[#141210] bg-[#f6e6c4]">
                   {gambar ? <GambarIsi src={gambar} sizes="64px" alt="" /> : null}
                 </span>
                 <span className="min-w-0">
@@ -161,7 +161,7 @@ export function LapakBuka({ toko }: { toko: TokoPilihan[] }) {
                   {[0, 1, 2].map((indeks) => {
                     const src = item.foto[indeks];
                     return (
-                      <span key={indeks} className="relative aspect-square overflow-hidden rounded-[10px] border-2 border-[#141210] bg-[#f6e6c4]">
+                      <span key={indeks} className="relative aspect-square overflow-hidden rounded-[10px] border-[1.5px] border-[#141210] bg-[#f6e6c4]">
                         {src ? <GambarIsi src={src} alt={`Produk dari ${item.nama_toko}`} sizes="(max-width: 640px) 28vw, 120px" /> : null}
                       </span>
                     );
@@ -178,7 +178,7 @@ export function LapakBuka({ toko }: { toko: TokoPilihan[] }) {
 
 export function AjakJualan({ kosong }: { kosong: boolean }) {
   return (
-    <section className="relative overflow-hidden rounded-[22px] border-2 border-[#141210] bg-[#ffd60a] px-[20px] py-[28px] md:px-[40px] md:py-[44px]">
+    <section className="relative overflow-hidden rounded-[22px] border-[1.5px] border-[#141210] bg-[#ffd60a] px-[20px] py-[28px] md:px-[40px] md:py-[44px]">
       <div className="grid items-center gap-[20px] md:grid-cols-[1fr_auto]">
         <div>
           <h2 className="max-w-[720px] text-[34px] leading-[0.98] md:text-[52px]">
@@ -189,7 +189,7 @@ export function AjakJualan({ kosong }: { kosong: boolean }) {
           </p>
         </div>
         <div className="flex flex-wrap gap-[10px]">
-          <Tombol href="/jadi-penjual" ukuran="lg" className="shadow-[4px_4px_0_#141210]">
+          <Tombol href="/jadi-penjual" ukuran="lg" className="shadow-[0_6px_18px_rgba(20,18,16,0.14)]">
             Buka toko gratis
           </Tombol>
           <Tombol href="/syarat" varian="secondary" ukuran="lg">

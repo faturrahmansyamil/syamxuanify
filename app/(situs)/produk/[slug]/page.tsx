@@ -170,7 +170,7 @@ function IsiProduk({
             <div className="kartu" style={{ padding: 16 }}>
               <div className="flex items-center gap-3">
                 {logo ? (
-                  <img src={logo} alt="" className="h-[48px] w-[48px] rounded-full border-2 border-bebe object-cover" />
+                  <img src={logo} alt="" className="h-[48px] w-[48px] rounded-full border-[1.5px] border-bebe object-cover" />
                 ) : (
                   <InisialToko nama={toko.nama_toko} />
                 )}

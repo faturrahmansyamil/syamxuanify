@@ -22,7 +22,7 @@ export function BingkaiSitus({ children }: { children: ReactNode }) {
         Loncat ke isi
       </a>
       <div className="flex min-h-dvh flex-col md:pl-[64px]">
-        <header className="sticky top-0 z-40 border-b-2 border-[#141210] bg-[#fff4dc]">
+        <header className="sticky top-0 z-40 border-b-[1.5px] border-[#141210] bg-[#fff4dc]">
           <div className="relative mx-auto flex min-h-[60px] w-full max-w-[1200px] items-center justify-between gap-[12px] px-[16px] md:px-[24px]">
             <Merek />
             <Suspense fallback={<span className="label-kecil text-muted-gray">Memuat…</span>}>

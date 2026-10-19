@@ -46,7 +46,7 @@ export function BarPengumuman({
           href={tautan}
           className="group flex h-full w-full items-center justify-center gap-[10px] px-[48px]"
         >
-          <span className="font-display flex h-[24px] shrink-0 items-center justify-center rounded-[6px] border-2 border-[#141210] bg-[#ffd60a] px-[6px] text-[11px] font-extrabold leading-none text-[#141210]">
+          <span className="font-display flex h-[24px] shrink-0 items-center justify-center rounded-[6px] border-[1.5px] border-[#141210] bg-[#ffd60a] px-[6px] text-[11px] font-extrabold leading-none text-[#141210]">
             GRATIS
           </span>
           <span className="min-w-0">

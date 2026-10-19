@@ -57,19 +57,19 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
         </p>
       ) : null}
       <Muncul>
-      <section className="overflow-hidden rounded-[22px] border-2 border-[#141210] bg-[#2d5bff] text-white">
+      <section className="overflow-hidden rounded-[22px] border-[1.5px] border-[#141210] bg-[#2d5bff] text-white">
         <div className="tenda" aria-hidden="true" />
         <div className="p-[20px] md:p-[32px]">
         <div className="flex items-start gap-[16px]">
           {logo ? (
-            <img src={logo} alt={`Foto ${toko.nama_toko}`} className="h-[72px] w-[72px] rounded-[16px] border-2 border-[#141210] object-cover" />
+            <img src={logo} alt={`Foto ${toko.nama_toko}`} className="h-[72px] w-[72px] rounded-[16px] border-[1.5px] border-[#141210] object-cover" />
           ) : (
-            <InisialToko nama={toko.nama_toko} className="h-[72px] w-[72px] border-2 border-[#141210] bg-[#ffd60a]! text-2xl text-[#141210]!" />
+            <InisialToko nama={toko.nama_toko} className="h-[72px] w-[72px] border-[1.5px] border-[#141210] bg-[#ffd60a]! text-2xl text-[#141210]!" />
           )}
           <div className="min-w-0">
             <h1 className="break-words text-[38px] text-white md:text-[56px]">{toko.nama_toko}</h1>
             {toko.terverifikasi ? (
-              <span className="mt-2 inline-flex rounded-[6px] border-2 border-[#141210] bg-[#ffd60a] px-2 py-1 text-xs font-bold text-[#141210]">
+              <span className="mt-2 inline-flex rounded-[6px] border-[1.5px] border-[#141210] bg-[#ffd60a] px-2 py-1 text-xs font-bold text-[#141210]">
                 Terverifikasi
               </span>
             ) : null}
@@ -82,7 +82,7 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
           <Tombol
             href={whatsapp}
             target="_blank"
-            rel="noopener noreferrer" varian="primary" ukuran="lg" className="mt-[20px] border-[#141210]! bg-[#00a859]! text-white! shadow-[4px_4px_0_#141210] hover:bg-[#141210]!">
+            rel="noopener noreferrer" varian="primary" ukuran="lg" className="mt-[20px] border-[#141210]! bg-[#00a859]! text-white! shadow-[0_6px_18px_rgba(20,18,16,0.14)] hover:bg-[#141210]!">
             Chat penjual di WhatsApp
           </Tombol>
         ) : null}
@@ -94,7 +94,7 @@ async function DataToko({ params }: { params: Promise<{ slug: string }> }) {
       ) : null}
       <Muncul>
       <section className="space-y-3">
-        <h2 className="border-b-2 border-[#141210] pb-[10px] text-[30px]">Dagangan di lapak ini</h2>
+        <h2 className="border-b-[1.5px] border-[#141210] pb-[10px] text-[30px]">Dagangan di lapak ini</h2>
         {hasil.produk.length === 0 ? (
           <p className="rounded-[12px] bg-card p-[16px] text-sm text-foggy">
             Belum ada produk yang disetujui di toko ini.

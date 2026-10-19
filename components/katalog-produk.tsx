@@ -95,7 +95,7 @@ export async function KatalogProduk({
   return (
     <Muncul>
       <div className="scroll-mt-28 space-y-[16px]">
-        <h1 className="border-b-2 border-[#141210] pb-[12px]">{dasar === "/cari" ? (kata ? kata : "Cari") : hasil.kategori.find((item) => item.slug === hasil.kategoriAktif)?.nama ?? "Semua produk"}</h1>
+        <h1 className="border-b-[1.5px] border-[#141210] pb-[12px]">{dasar === "/cari" ? (kata ? kata : "Cari") : hasil.kategori.find((item) => item.slug === hasil.kategoriAktif)?.nama ?? "Semua produk"}</h1>
         {kategoriFilter}
         {daftar}
       </div>
